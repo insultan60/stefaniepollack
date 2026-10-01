@@ -47,8 +47,8 @@ export default function Connections() {
         <div className="dash-card">
           <h2 className="dash-card-title">How to connect it</h2>
           <p className="dash-lead">
-            Analytics is not retrospective. History begins the day a GA4 tag starts recording, so the sooner
-            step&nbsp;1 is done, the sooner there is anything to look at.
+            The GA4 tag is built into the site, so visits are recorded from the day it is deployed. These
+            steps connect the dashboard to read them back.
           </p>
 
           <ol className="dash-steps">
