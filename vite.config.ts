@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 import AutoImport from "unplugin-auto-import/vite";
 import { proxyIdxRequest } from "./api/_idxProxy.ts";
 import { fetchPhoto } from "./api/_photoProxy.ts";
+import { handleDashboard } from "./api/dashboard.ts";
 // import { readdyJsxRuntimeProxyPlugin } from "./vite.jsx-runtime-proxy";
 
 const base = process.env.BASE_PATH || "/";
@@ -88,6 +89,47 @@ function photoDevProxyPlugin(): Plugin {
   };
 }
 
+/** Mirrors api/dashboard.ts locally. Unlike the two above it needs no copy of
+ *  the logic: the function exports handleDashboard() with plain inputs and
+ *  outputs, and this just feeds it from a Connect request. */
+function dashboardDevPlugin(): Plugin {
+  return {
+    name: "dashboard-dev-api",
+    configureServer(server) {
+      server.middlewares.use("/api/dashboard", async (req, res) => {
+        try {
+          const query = new URLSearchParams((req.url || "").split("?")[1] || "");
+          let body: unknown;
+          if (req.method === "POST") {
+            const chunks: Buffer[] = [];
+            for await (const chunk of req) chunks.push(chunk as Buffer);
+            try {
+              body = JSON.parse(Buffer.concat(chunks).toString("utf8") || "{}");
+            } catch {
+              body = undefined;
+            }
+          }
+          const out = await handleDashboard({
+            method: req.method || "GET",
+            action: query.get("action") || "",
+            range: query.get("range") || undefined,
+            cookieHeader: req.headers.cookie,
+            body,
+          });
+          res.statusCode = out.status;
+          for (const [k, v] of Object.entries(out.headers)) res.setHeader(k, v);
+          res.end(out.body);
+        } catch (err) {
+          console.error("[dashboard-dev-api]", err);
+          res.statusCode = 500;
+          res.setHeader("Content-Type", "application/json");
+          res.end(JSON.stringify({ error: "internal" }));
+        }
+      });
+    },
+  };
+}
+
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   // Load .env.local (and friends) into process.env for this config module —
@@ -111,6 +153,7 @@ export default defineConfig(({ mode }) => {
     react(),
     idxDevProxyPlugin(),
     photoDevProxyPlugin(),
+    dashboardDevPlugin(),
     AutoImport({
       imports: [
         {
