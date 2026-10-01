@@ -7,7 +7,6 @@ import Footer from "./components/feature/Footer";
 import ScrollToTop from "./components/feature/ScrollToTop";
 import Cursor from "./components/feature/Cursor";
 import AuthModal from "./components/feature/AuthModal";
-import Analytics from "./components/feature/Analytics";
 import { LeadProvider } from "./hooks/useLead";
 
 
@@ -28,7 +27,6 @@ function Frame() {
       <ScrollToTop />
       <Cursor />
       <AuthModal />
-      <Analytics />
     </div>
   );
 }

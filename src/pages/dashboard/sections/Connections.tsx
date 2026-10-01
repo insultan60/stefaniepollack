@@ -5,16 +5,10 @@ import { useReport } from "../session";
 /**
  * The setup, in the order it has to happen.
  *
- * This site starts from nothing: there is no Tag Manager container and no GA4
- * tag in index.html, so step 1 is creating somewhere for visits to go. The
- * tag itself is installed by setting the measurement ID — see
- * src/components/feature/Analytics.tsx.
+ * The GA4 tag (G-SPWN0F006E) is already hard-coded in index.html, so what is
+ * left is the reading side: the property ID and a service account with access.
  */
 const STEPS: [string, string][] = [
-  [
-    "Create the GA4 property and its web stream",
-    "analytics.google.com → Admin → Create → Property, then add a Web data stream for www.stefaniepollack.com. Copy the stream's measurement ID (G-…) into VITE_GA4_MEASUREMENT_ID. That variable installs the tag on every page at the next deploy — this is the step that matters most, because analytics is not retrospective and every day without it is a day that cannot be recovered.",
-  ],
   [
     "Find the numeric property ID",
     "analytics.google.com → Admin → Property details. This is a number, and it is not the G- measurement ID; both exist and they are used for different things. It goes in GA4_PROPERTY_ID.",
@@ -29,7 +23,7 @@ const STEPS: [string, string][] = [
   ],
   [
     "Add the variables",
-    "Locally in .env.local; on Vercel in Project → Settings → Environment Variables. Then redeploy. Only the measurement ID is VITE_-prefixed, because the tag needs it in the browser and it is public anyway; the property ID, service account and key never leave the server.",
+    "Locally in .env.local; on Vercel in Project → Settings → Environment Variables. Then redeploy. None of them is VITE_-prefixed: the property ID, service account and key never leave the server.",
   ],
 ];
 

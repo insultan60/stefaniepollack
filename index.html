@@ -1,6 +1,27 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <!-- The one GA4 install on this site — nothing in the React code adds it
+         again, which would count every visit twice. The ID is mirrored in
+         api/dashboard.ts (MEASUREMENT_ID) for the dashboard's Connections
+         panel; change both together.
+         The config call is skipped on /dashboard, so reading the traffic is
+         not itself recorded as traffic, and on localhost, so local work does
+         not show up as visits. -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SPWN0F006E"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      if (
+        !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) &&
+        !/^\/dashboard(\/|$)/.test(location.pathname)
+      ) {
+        gtag('config', 'G-SPWN0F006E');
+      }
+    </script>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

@@ -465,17 +465,10 @@ function has(name: string): boolean {
   return Boolean(process.env[name]?.trim());
 }
 
-/** The GA4 stream the site's tag sends to. Same default as
- *  src/components/feature/Analytics.tsx, which installs it — keep the two in
- *  step. An override is validated, because the numeric property ID pasted
- *  into the wrong box is the usual mistake, and that override is ignored by
- *  the tag too, so reporting it would misstate what is running. */
-const DEFAULT_MEASUREMENT_ID = "G-SPWN0F006E";
-
-function measurementId(): string {
-  const v = process.env.VITE_GA4_MEASUREMENT_ID?.trim() ?? "";
-  return /^G-[A-Z0-9]+$/i.test(v) ? v : DEFAULT_MEASUREMENT_ID;
-}
+/** The GA4 stream the site's tag sends to. The tag is hard-coded in
+ *  index.html, so this mirrors it rather than reading a setting — keep the
+ *  two in step. */
+const MEASUREMENT_ID = "G-SPWN0F006E";
 
 /** Google's error bodies are JSON for developers. The failures that actually
  *  happen get a sentence naming the exact thing to do. */
@@ -504,27 +497,16 @@ function explain(source: "ga4" | "gsc", error?: string): string | undefined {
  * reading side can be wired perfectly and still show zeros forever if nothing
  * is recording, and that failure is invisible unless the two are shown apart.
  *
- * The tag is built into the site with a fixed ID (see measurementId), so it
- * is always reported as installed; VITE_GA4_MEASUREMENT_ID only overrides it.
+ * The tag is hard-coded in index.html, so it is always reported as installed;
+ * there is no setting that could leave it off.
  */
 function collectionStatus(): SourceStatus {
-  const id = measurementId();
-  const raw = process.env.VITE_GA4_MEASUREMENT_ID?.trim();
-  const badOverride = Boolean(raw) && raw !== id;
   return {
     key: "collection",
     title: "Tracking tag",
     state: "live",
-    provides: `The GA4 tag for stream ${id} loads on every public page of the site.`,
-    vars: [
-      {
-        name: "VITE_GA4_MEASUREMENT_ID",
-        set: true,
-        what: badOverride
-          ? `"${raw}" is not a measurement ID, so it is ignored and ${id} is used. An override should look like G-XXXXXXXXXX — the numeric property ID goes in GA4_PROPERTY_ID instead.`
-          : `Optional. The tag is built in with ${id}; set this only to send to a different GA4 stream.`,
-      },
-    ],
+    provides: `The GA4 tag for stream ${MEASUREMENT_ID} loads on every public page of the site.`,
+    vars: [],
   };
 }
 
