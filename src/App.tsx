@@ -10,11 +10,7 @@ import AuthModal from "./components/feature/AuthModal";
 import Analytics from "./components/feature/Analytics";
 import { LeadProvider } from "./hooks/useLead";
 
-/**
- * The site's chrome, minus /dashboard. The dashboard is a private admin page
- * with its own navigation: the public header and footer would be noise there,
- * and the analytics tag would record every look at the traffic AS traffic.
- */
+
 function Frame() {
   const { pathname } = useLocation();
 
