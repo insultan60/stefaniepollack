@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import type { RouteObject } from "react-router-dom";
 import NotFound from "../pages/NotFound";
 import Home from "../pages/home/page";
@@ -14,6 +15,9 @@ import PropertyDetail from "../pages/listings/slug/page";
 import Blog from "../pages/blog/page";
 import BlogArticle from "../pages/blog/slug/page";
 import Account from "../pages/account/page";
+
+// Private analytics, in its own chunk so ordinary visitors never download it.
+const DashboardApp = lazy(() => import("../pages/dashboard/DashboardApp"));
 
 const routes: RouteObject[] = [
   {
@@ -71,6 +75,14 @@ const routes: RouteObject[] = [
   {
     path: "/account",
     element: <Account />,
+  },
+  {
+    path: "/dashboard/*",
+    element: (
+      <Suspense fallback={null}>
+        <DashboardApp />
+      </Suspense>
+    ),
   },
   {
     path: "*",
