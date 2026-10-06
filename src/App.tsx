@@ -33,8 +33,7 @@ function Frame() {
   );
 }
 
-/** `location` is set only when the page is prerendered to static HTML at
- *  build time (src/entry-server.tsx); in the browser the URL bar drives routing. */
+
 function App({ location }: { location?: string }) {
   return (
     <I18nextProvider i18n={i18n}>
