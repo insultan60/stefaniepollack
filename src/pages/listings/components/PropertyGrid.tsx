@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { lazy, useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BedDouble, Bath, Ruler, Search, LayoutGrid, Map as MapIcon, ChevronDown, Heart, User, LogOut, Bookmark, X } from "lucide-react";
 import { useIdxListings } from "@/hooks/useIdxListings";
@@ -7,9 +7,12 @@ import { PHOTO_FALLBACK } from "@/lib/media";
 import { useLead } from "@/hooks/useLead";
 import { addFavorite, removeFavorite } from "@/lib/favorites";
 import { useSavedFavorites } from "@/hooks/useSavedFavorites";
-import PropertyMap from "./PropertyMap";
+import ClientOnly from "@/components/feature/ClientOnly";
 import SaveSearchButton from "./SaveSearchButton";
 import FullMlsLink from "./FullMlsLink";
+
+// Leaflet needs `window`, so the map loads in the browser only — see ClientOnly.
+const PropertyMap = lazy(() => import("./PropertyMap"));
 
 export type ListedProperty = AvailableProperty | SoldProperty;
 
@@ -573,7 +576,9 @@ export default function PropertyGrid() {
 
             <div className={mobileView === "map" ? "lg:col-span-5" : `lg:col-span-2 ${mobileView === "list" ? "hidden lg:block" : ""}`}>
               <div className="lg:sticky lg:top-28">
-                <PropertyMap tab={activeTab} properties={properties} />
+                <ClientOnly>
+                  <PropertyMap tab={activeTab} properties={properties} />
+                </ClientOnly>
               </div>
             </div>
           </div>

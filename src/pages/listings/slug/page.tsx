@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useMemo, useState } from "react";
+import { lazy, useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Heart,
@@ -23,8 +23,11 @@ import { useLead } from "@/hooks/useLead";
 import { addFavorite, removeFavorite } from "@/lib/favorites";
 import { useSavedFavorites } from "@/hooks/useSavedFavorites";
 import { PropertyCard } from "../components/PropertyGrid";
-import PropertyLocationMap from "./PropertyLocationMap";
+import ClientOnly from "@/components/feature/ClientOnly";
 import NotFound from "../../NotFound";
+
+// Leaflet needs `window`, so the map loads in the browser only — see ClientOnly.
+const PropertyLocationMap = lazy(() => import("./PropertyLocationMap"));
 
 type PropertyMatch = { property: AvailableProperty | SoldProperty; isSold: boolean };
 const FEATURE_TABS = [
@@ -344,7 +347,9 @@ export default function PropertyDetail() {
                   </button>
                 </div>
                 <p className="text-sm text-foreground-500 mb-4">{property.address}, {property.city}</p>
-                <PropertyLocationMap lat={property.lat} lng={property.lng} label={property.address} />
+                <ClientOnly>
+                  <PropertyLocationMap lat={property.lat} lng={property.lng} label={property.address} />
+                </ClientOnly>
               </section>
 
               {/* History */}

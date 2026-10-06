@@ -1,4 +1,4 @@
-import { BrowserRouter, useLocation } from "react-router-dom";
+import { BrowserRouter, StaticRouter, useLocation } from "react-router-dom";
 import { AppRoutes } from "./router";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./i18n";
@@ -8,10 +8,12 @@ import ScrollToTop from "./components/feature/ScrollToTop";
 import Cursor from "./components/feature/Cursor";
 import AuthModal from "./components/feature/AuthModal";
 import { LeadProvider } from "./hooks/useLead";
+import { useRouteMeta } from "./hooks/useRouteMeta";
 
 
 function Frame() {
   const { pathname } = useLocation();
+  useRouteMeta(pathname);
 
   if (pathname === "/dashboard" || pathname.startsWith("/dashboard/")) {
     return <AppRoutes />;
@@ -31,13 +33,21 @@ function Frame() {
   );
 }
 
-function App() {
+/** `location` is set only when the page is prerendered to static HTML at
+ *  build time (src/entry-server.tsx); in the browser the URL bar drives routing. */
+function App({ location }: { location?: string }) {
   return (
     <I18nextProvider i18n={i18n}>
       <LeadProvider>
-        <BrowserRouter basename={__BASE_PATH__}>
-          <Frame />
-        </BrowserRouter>
+        {location === undefined ? (
+          <BrowserRouter basename={__BASE_PATH__}>
+            <Frame />
+          </BrowserRouter>
+        ) : (
+          <StaticRouter location={location} basename={__BASE_PATH__}>
+            <Frame />
+          </StaticRouter>
+        )}
       </LeadProvider>
     </I18nextProvider>
   );

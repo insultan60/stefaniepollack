@@ -1,16 +1,9 @@
+import { lazy } from "react";
 import { motion } from "framer-motion";
-import { MapContainer, TileLayer, Marker } from "react-leaflet";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
+import ClientOnly from "@/components/feature/ClientOnly";
 
-const CENTER: [number, number] = [34.14, -118.3936];
-
-const pinIcon = L.divIcon({
-  className: "",
-  html: `<div class="px-3 py-1.5 rounded-full bg-foreground-950 text-background-50 text-xs font-semibold shadow-lg border-2 border-background-50 whitespace-nowrap">Stefanie Pollack</div>`,
-  iconSize: undefined,
-  iconAnchor: [55, 14],
-});
+// Leaflet needs `window`, so the map loads in the browser only — see ClientOnly.
+const OfficeMapCanvas = lazy(() => import("./OfficeMapCanvas"));
 
 export default function OfficeMap() {
   return (
@@ -42,13 +35,9 @@ export default function OfficeMap() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="relative rounded-xl overflow-hidden border border-background-200 h-[360px] md:h-[440px]"
           >
-            <MapContainer center={CENTER} zoom={13} scrollWheelZoom={false} className="w-full h-full">
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
-              <Marker position={CENTER} icon={pinIcon} />
-            </MapContainer>
+            <ClientOnly>
+              <OfficeMapCanvas />
+            </ClientOnly>
           </motion.div>
         </div>
       </div>

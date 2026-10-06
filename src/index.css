@@ -224,3 +224,17 @@
     display: none;
   }
 }
+/* ------------------------------------------------------------------
+   Crawler-safe scroll reveals.
+   Most sections fade in with framer-motion's whileInView, which starts them
+   at an inline `opacity: 0` and only animates once they scroll into view.
+   Crawlers (Screaming Frog, Lighthouse, search engines) render the page
+   without scrolling, so everything below the fold stayed invisible to them.
+   index.html adds .no-reveal to <html> for those user agents, and this shows
+   the content in its final state straight away. Real visitors are unaffected.
+   ------------------------------------------------------------------ */
+.no-reveal [style*="opacity:0"],
+.no-reveal [style*="opacity: 0"] {
+  opacity: 1 !important;
+  transform: none !important;
+}

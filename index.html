@@ -23,6 +23,15 @@
       }
     </script>
     <meta charset="UTF-8" />
+    <!-- Crawlers render without scrolling, so scroll-triggered fade-ins would
+         leave most of each page invisible to them. Flag them here, before
+         anything paints; the matching rule is "Crawler-safe scroll reveals"
+         in src/index.css. -->
+    <script>
+      if (navigator.webdriver || /bot|crawl|spider|slurp|screaming frog|lighthouse|headlesschrome|inspectiontool|bingpreview|facebookexternalhit/i.test(navigator.userAgent)) {
+        document.documentElement.classList.add('no-reveal');
+      }
+    </script>
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
