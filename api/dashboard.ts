@@ -317,7 +317,10 @@ function isoDaysAgo(n: number): string {
 }
 
 async function gscQuery(body: Record<string, unknown>): Promise<{ rows?: GscApiRow[] }> {
-  const site = process.env.GSC_SITE_URL;
+  // Quotes copied over from .env.local into a host's settings screen become
+  // part of the value there, and Search Console answers a quoted site name
+  // with a bare 400 "invalid argument" rather than anything naming the cause.
+  const site = process.env.GSC_SITE_URL?.trim().replace(/^(["'])(.*)\1$/, "$2").trim();
   if (!site) throw new Error("GSC_SITE_URL is not set");
   const token = await accessToken(GSC_SCOPE);
 
