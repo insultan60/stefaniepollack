@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Clock, ArrowLeft } from "lucide-react";
+import { Clock, ArrowLeft, ArrowRight } from "lucide-react";
 import { articles } from "@/mocks/home";
+import { articleContent, type ArticleBlock } from "@/mocks/articleContent";
 import NotFound from "../../NotFound";
 
 export default function BlogArticle() {
@@ -9,6 +10,13 @@ export default function BlogArticle() {
   const article = articles.find((a) => a.href === `/blog/${slug}`);
 
   if (!article) return <NotFound />;
+
+  const body = articleContent[article.href];
+  // `articles` is newest first, so "Previous" is the newer post and "Next"
+  // the older one — the same convention the old Squarespace blog used.
+  const index = articles.indexOf(article);
+  const previous = articles[index - 1];
+  const next = articles[index + 1];
 
   return (
     <div className="w-full">
@@ -52,23 +60,118 @@ export default function BlogArticle() {
               Back to Journal
             </a>
 
-            <p className="text-lg text-foreground-700 leading-relaxed">{article.excerpt}</p>
+            {body ? (
+              <div className="space-y-6">
+                {body.map((block, i) => (
+                  <Block key={i} block={block} />
+                ))}
+              </div>
+            ) : (
+              <>
+                <p className="text-lg text-foreground-700 leading-relaxed">{article.excerpt}</p>
 
-            <div className="mt-10 p-6 rounded-xl bg-accent-100 border border-background-200/60">
-              <p className="text-sm text-foreground-600 leading-relaxed">
-                The full article is on its way — check back soon, or reach out
-                directly if you have questions in the meantime.
-              </p>
-              <a
-                href="/contact"
-                className="inline-flex mt-4 text-sm font-medium text-primary-700 hover:text-primary-800 transition-colors"
-              >
-                Get in touch &rarr;
-              </a>
-            </div>
+                <div className="mt-10 p-6 rounded-xl bg-accent-100 border border-background-200/60">
+                  <p className="text-sm text-foreground-600 leading-relaxed">
+                    The full article is on its way — check back soon, or reach out
+                    directly if you have questions in the meantime.
+                  </p>
+                  <a
+                    href="/contact"
+                    className="inline-flex mt-4 text-sm font-medium text-primary-700 hover:text-primary-800 transition-colors"
+                  >
+                    Get in touch &rarr;
+                  </a>
+                </div>
+              </>
+            )}
+
+            {(previous || next) && (
+              <nav className="mt-16 pt-8 border-t border-background-200 grid grid-cols-1 sm:grid-cols-2 gap-6" aria-label="More articles">
+                {previous ? (
+                  <a href={previous.href} className="group">
+                    <span className="flex items-center gap-1.5 text-xs font-semibold tracking-[0.15em] uppercase text-primary-600 mb-2">
+                      <ArrowLeft className="w-3.5 h-3.5" strokeWidth={1.5} />
+                      Previous
+                    </span>
+                    <span className="font-heading text-lg text-foreground-950 group-hover:text-primary-700 transition-colors leading-snug">
+                      {previous.title}
+                    </span>
+                  </a>
+                ) : (
+                  <span />
+                )}
+                {next && (
+                  <a href={next.href} className="group sm:text-right">
+                    <span className="flex items-center sm:justify-end gap-1.5 text-xs font-semibold tracking-[0.15em] uppercase text-primary-600 mb-2">
+                      Next
+                      <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.5} />
+                    </span>
+                    <span className="font-heading text-lg text-foreground-950 group-hover:text-primary-700 transition-colors leading-snug">
+                      {next.title}
+                    </span>
+                  </a>
+                )}
+              </nav>
+            )}
           </motion.div>
         </div>
       </section>
     </div>
   );
+}
+
+function Block({ block }: { block: ArticleBlock }) {
+  switch (block.type) {
+    case "h2":
+      return <h2 className="font-heading text-2xl md:text-3xl text-foreground-950 leading-snug pt-6">{block.text}</h2>;
+    case "h3":
+      return <h3 className="font-heading text-xl md:text-2xl text-foreground-950 leading-snug pt-2">{block.text}</h3>;
+    case "ul":
+      return (
+        <ul className="list-disc pl-6 space-y-2 text-base md:text-lg text-foreground-700 leading-relaxed marker:text-primary-600">
+          {block.items.map((item, i) => (
+            <li key={i}>{item}</li>
+          ))}
+        </ul>
+      );
+    case "signature":
+      return (
+        <div className="pt-4">
+          <p className="font-heading text-xl text-foreground-950">Stefanie Pollack</p>
+          <p className="text-sm text-foreground-600 mt-1">REALTOR® + Community Connector</p>
+          <p className="text-sm text-foreground-600">Compass | DRE# 01815614</p>
+        </div>
+      );
+    case "faq":
+      return (
+        <section className="mt-10 pt-10 border-t border-background-200">
+          <h2 className="font-heading text-2xl md:text-3xl text-foreground-950 leading-snug mb-8">{block.title}</h2>
+          <div className="space-y-7">
+            {block.items.map((item) => (
+              <div key={item.q}>
+                <h3 className="font-heading text-lg md:text-xl text-foreground-950 mb-2">{item.q}</h3>
+                <p className="text-base text-foreground-700 leading-relaxed">{item.a}</p>
+              </div>
+            ))}
+          </div>
+          {/* FAQ structured data, so search engines can show these as rich results. */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: block.items.map((item) => ({
+                  "@type": "Question",
+                  name: item.q,
+                  acceptedAnswer: { "@type": "Answer", text: item.a },
+                })),
+              }).replace(/</g, "\\u003c"),
+            }}
+          />
+        </section>
+      );
+    default:
+      return <p className="text-base md:text-lg text-foreground-700 leading-relaxed whitespace-pre-line">{block.text}</p>;
+  }
 }

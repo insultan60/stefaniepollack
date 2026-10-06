@@ -364,6 +364,16 @@ export const stats = [
 
 export const articles = [
   {
+    id: 5,
+    title: "The Best Things to Do in Studio City Before Summer Ends",
+    excerpt: "From Fryman Canyon hikes and the Sunday farmers market to Tujunga Village and Ventura Boulevard's newest restaurants — a local's guide to making the most of the last weeks of summer in Studio City.",
+    image: "/images/stefanie/lifestyle-1.jpg",
+    href: "/blog/the-best-things-to-do-in-studio-city-before-summer-ends",
+    category: "Local Guide",
+    date: "Aug 2026",
+    readTime: "9 min read",
+  },
+  {
     id: 1,
     title: "4 Practical Steps to Make 2026 Your Vision Year in Studio City Real Estate",
     excerpt: "Start the new year with clarity and purpose. These four actionable strategies will help buyers and sellers position themselves for success in Studio City's competitive market.",
@@ -381,7 +391,7 @@ export const articles = [
     href: "/blog/is-january-a-good-time-to-buy-or-sell-a-home-in-studio-city",
     category: "Market Updates",
     date: "Jan 8, 2026",
-    readTime: "7 min read",
+    readTime: "3 min read",
   },
   {
     id: 3,
@@ -391,7 +401,7 @@ export const articles = [
     href: "/blog/the-moms-effect-impact-garage-a-community-day-of-giving-in-studio-city",
     category: "Community",
     date: "Dec 10, 2025",
-    readTime: "4 min read",
+    readTime: "2 min read",
   },
   {
     id: 4,
