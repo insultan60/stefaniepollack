@@ -1,6 +1,9 @@
 {
   "outputDirectory": "out",
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/blog/best-holiday-activities-in-studio-city-your-ultimate-local-guide", "destination": "/blog", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/((?!api/).*)", "destination": "/spa.html" }
   ],

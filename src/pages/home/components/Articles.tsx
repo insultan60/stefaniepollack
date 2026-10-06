@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Clock } from "lucide-react";
 import { articles } from "@/mocks/home";
+import { photoFocus } from "@/lib/photoFocus";
 
 function ArticleCard({
   article,
@@ -24,6 +25,7 @@ function ArticleCard({
             src={article.image}
             alt={article.title}
             className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+            style={{ objectPosition: photoFocus(article.image) }}
           />
         </div>
 

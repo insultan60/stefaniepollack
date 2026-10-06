@@ -403,14 +403,4 @@ export const articles = [
     date: "Dec 10, 2025",
     readTime: "2 min read",
   },
-  {
-    id: 4,
-    title: "Best Holiday Activities in Studio City: Your Ultimate Local Guide",
-    excerpt: "Discover the best holiday activities in Studio City, from festive light displays and seasonal events to family-friendly outings, shopping, dining, and winter experiences in the heart of the San Fernando Valley.",
-    image: "https://images.squarespace-cdn.com/content/v1/62857f9467398e0fd622fe08/1763836039986-WE544CGHNF66S5Z03QD1/Untitled+%282500+x+1500+px%29+%281%29.jpg?format=750w",
-    href: "/blog/best-holiday-activities-in-studio-city-your-ultimate-local-guide",
-    category: "Local Guide",
-    date: "Nov 28, 2025",
-    readTime: "6 min read",
-  },
 ];

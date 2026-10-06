@@ -25,6 +25,7 @@ import { useSavedFavorites } from "@/hooks/useSavedFavorites";
 import { PropertyCard } from "../components/PropertyGrid";
 import ClientOnly from "@/components/feature/ClientOnly";
 import NotFound from "../../NotFound";
+import { photoFocus } from "@/lib/photoFocus";
 
 // Leaflet needs `window`, so the map loads in the browser only — see ClientOnly.
 const PropertyLocationMap = lazy(() => import("./PropertyLocationMap"));
@@ -379,6 +380,7 @@ export default function PropertyDetail() {
                   src="/images/stefanie/headshot.jpg"
                   alt="Stefanie Pollack"
                   className="w-20 h-20 rounded-full object-cover"
+                  style={{ objectPosition: photoFocus("/images/stefanie/headshot.jpg") }}
                 />
                 <p className="mt-4 font-heading text-lg text-foreground-950">Stefanie Pollack</p>
                 <p className="text-xs text-foreground-500 tracking-wide uppercase mt-1">

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { photoFocus } from "@/lib/photoFocus";
 
 export default function Bio() {
   return (
@@ -18,6 +19,7 @@ export default function Bio() {
                 src="/images/stefanie/headshot.jpg"
                 alt="Stefanie Pollack, Studio City Realtor"
                 className="w-full h-full object-cover"
+                style={{ objectPosition: photoFocus("/images/stefanie/headshot.jpg") }}
               />
             </div>
             <div className="absolute -bottom-4 -right-4 w-full h-full border border-primary-300 rounded-lg -z-10 hidden lg:block" />

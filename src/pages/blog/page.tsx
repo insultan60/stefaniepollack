@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Clock } from "lucide-react";
 import PageHero from "@/components/feature/PageHero";
 import { articles } from "@/mocks/home";
+import { photoFocus } from "@/lib/photoFocus";
 
 export default function Blog() {
   return (
@@ -33,6 +34,7 @@ export default function Blog() {
                       src={article.image}
                       alt={article.title}
                       className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+            style={{ objectPosition: photoFocus(article.image) }}
                     />
                   </div>
                   <div className="flex items-center gap-2 mb-3">

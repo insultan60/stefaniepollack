@@ -20,8 +20,17 @@ export default function BlogArticle() {
 
   return (
     <div className="w-full">
-      <section className="relative w-full h-[45vh] min-h-[360px] max-h-[520px] overflow-hidden">
-        <img src={article.image} alt={article.title} className="w-full h-full object-cover" />
+      <section className="relative w-full h-[55vh] min-h-[360px] max-h-[600px] overflow-hidden bg-foreground-950">
+        {/* The whole photo is always shown (object-contain) so Stefanie is never
+            cropped out of it; a blurred, scaled-up copy fills the band on either
+            side instead of leaving bars. Same approach as PageHero. */}
+        <img
+          src={article.image}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover scale-125 blur-2xl"
+        />
+        <img src={article.image} alt={article.title} className="absolute inset-0 w-full h-full object-contain" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6 pt-20">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>

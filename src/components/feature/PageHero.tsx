@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { photoFocus } from "@/lib/photoFocus";
 
 export default function PageHero({
   eyebrow,
@@ -50,6 +51,7 @@ export default function PageHero({
           src={image}
           alt={imageAlt}
           className="relative w-full h-full object-cover md:object-contain"
+          style={{ objectPosition: photoFocus(image) }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/55" />
       </div>

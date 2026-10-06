@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { photoFocus } from "@/lib/photoFocus";
 
 export default function Intro() {
   return (
@@ -65,6 +66,7 @@ export default function Intro() {
                 src="/images/stefanie/portrait-3.jpg"
                 alt="Stefanie Pollack, Studio City listing agent"
                 className="w-full h-full object-cover"
+                style={{ objectPosition: photoFocus("/images/stefanie/portrait-3.jpg") }}
               />
             </div>
             <div className="absolute -bottom-4 -right-4 w-full h-full border border-primary-300 rounded-lg -z-10 hidden lg:block" />

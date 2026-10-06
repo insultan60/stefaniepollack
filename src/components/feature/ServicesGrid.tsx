@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
+import { photoFocus } from "@/lib/photoFocus";
 
 export default function ServicesGrid({
   eyebrow,
@@ -51,7 +52,7 @@ export default function ServicesGrid({
               className="lg:col-span-2 lg:sticky lg:top-28"
             >
               <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
-                <img src={image} alt={imageAlt} className="w-full h-full object-cover" />
+                <img src={image} alt={imageAlt} className="w-full h-full object-cover" style={{ objectPosition: photoFocus(image) }} />
               </div>
             </motion.div>
 
