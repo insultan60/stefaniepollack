@@ -21,8 +21,19 @@ const outDir = join(root, "out");
 const serverDir = join(root, "out-server");
 
 const template = await readFile(join(outDir, "index.html"), "utf8");
-// The empty shell, for every route that isn't prerendered.
-await writeFile(join(outDir, "spa.html"), template);
+// The empty shell, for the routes vercel.json rewrites to it: /account, the
+// dashboard, and a /listings/<slug> with no prerendered page (a listing added
+// since the last deploy, or a mistyped address). It must not carry the
+// homepage's canonical and title the way index.html does - that told crawlers
+// each of those URLs was a copy of the homepage. No canonical, and noindex: a
+// real listing gets its own prerendered page with its own tags.
+await writeFile(
+  join(outDir, "spa.html"),
+  template
+    .replace(/\s*<link rel="canonical"[^>]*>/, "")
+    .replace(/\s*<meta property="og:url"[^>]*>/, "")
+    .replace("</head>", '<meta name="robots" content="noindex"></head>'),
+);
 
 // Locally the IDX key lives in .env.local; on Vercel it's already in the
 // environment. Only fill in what isn't set.

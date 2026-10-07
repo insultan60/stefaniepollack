@@ -26,13 +26,13 @@ const footerLinks = {
     { label: "Neighborhoods", href: "/neighborhoods" },
     { label: "Philanthropy", href: "/philanthropy" },
     { label: "Home Valuation", href: "/sellers" },
-    { label: "Sold Properties", href: "/listings" },
+    { label: "Sold Properties", href: "/listings?tab=sold" },
     { label: "Blog", href: "/blog" },
   ],
   contact: [
     { Icon: Mail as LucideIcon, label: EMAIL, href: EMAIL_HREF },
     { Icon: Phone as LucideIcon, label: PHONE_DISPLAY, href: PHONE_HREF },
-    { Icon: MapPin as LucideIcon, label: LOCATION, href: "#" },
+    { Icon: MapPin as LucideIcon, label: LOCATION, href: "https://www.google.com/maps/search/?api=1&query=Compass+12001+Ventura+Pl+Suite+100+Studio+City+CA+91604" },
   ],
   socials: [
     { Icon: Instagram as LucideIcon, label: "Instagram", url: "https://www.instagram.com/stefanieismyrealtor/" },
@@ -159,6 +159,7 @@ export default function Footer() {
                     <li key={link.label}>
                       <a
                         href={link.href}
+                        {...(link.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                         className="flex items-start gap-3 text-[15px] text-background-200 hover:text-primary-200 transition-colors duration-200 group"
                       >
                         <span className="w-4 h-4 flex items-center justify-center flex-shrink-0 mt-1 text-primary-300 group-hover:text-primary-200 transition-colors duration-200">

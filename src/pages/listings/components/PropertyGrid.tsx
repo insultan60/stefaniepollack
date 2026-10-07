@@ -310,6 +310,13 @@ export default function PropertyGrid() {
   const [minBeds, setMinBeds] = useState(0);
   const [minBaths, setMinBaths] = useState(0);
   const [typeIdx, setTypeIdx] = useState(0);
+
+  // /listings?tab=sold (the footer's "Sold Properties") opens on the Sold tab.
+  // Read after mount rather than in the initial state, so the first render
+  // matches the prerendered HTML, which always shows Available.
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get("tab") === "sold") setActiveTab("sold");
+  }, []);
   const [sort, setSort] = useState(SORT_OPTIONS[0].value);
   const [fullSearchUrl, setFullSearchUrl] = useState<string | null>(null);
 
