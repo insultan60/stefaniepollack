@@ -23,16 +23,16 @@ export default function CTASection() {
           className="max-w-3xl mx-auto text-center"
         >
           <p className="text-white/60 text-xs font-medium tracking-[0.3em] uppercase mb-6">
-            Your Journey Begins Here
+            Ready to Start
           </p>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-white leading-tight">
-            Your New Home
+            Ready to Buy or Sell
             <br />
-            <span className="italic font-normal">Awaits</span>
+            <span className="italic font-normal">in Los Angeles?</span>
           </h2>
           <p className="mt-6 text-white/70 text-base md:text-lg leading-relaxed max-w-xl mx-auto">
-            Let Stefanie guide you through every step of finding or selling your
-            perfect property in the San Fernando Valley.
+            Work with a Los Angeles real estate agent who knows Studio City and the
+            Valley. Start with a short conversation about what you want.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a

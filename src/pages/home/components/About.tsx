@@ -33,33 +33,34 @@ export default function About() {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           >
             <p className="text-xs font-medium tracking-[0.25em] uppercase text-primary-600 mb-4">
-              About Stefanie
+              Distinctive Properties. Real Results.
             </p>
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-foreground-950 leading-tight">
-              Distinctive Properties.
-              <br />
-              <span className="italic font-normal">Real Results.</span>
+              Meet Stefanie Pollack,{" "}
+              <span className="italic font-normal">Your Los Angeles Real Estate Agent</span>
             </h2>
             <div className="mt-8 space-y-4 text-foreground-700 leading-relaxed">
               <p>
-                With over 20 years of experience in the San Fernando Valley, Stefanie Pollack
-                has built a reputation as one of Studio City&apos;s most trusted real estate
-                advisors. Her data-driven expertise, combined with genuine community connections,
-                creates a seamless and personalized experience for every client.
+                Stefanie has worked in the San Fernando Valley for more than 20 years. She has
+                helped over 800 families and closed more than $500M in sales.
               </p>
               <p>
-                Whether you are buying your first home, selling a cherished property, or
-                investing in luxury real estate, Stefanie&apos;s deep market knowledge and
-                unwavering dedication ensure you achieve your goals with confidence.
+                She grew up in Studio City and is now raising her family there. That local
+                knowledge shapes her advice on pricing, timing, and which areas fit each client.
+              </p>
+              <p>
+                As a Los Angeles Realtor with the Compass real estate brokerage, she works with
+                first-time buyers, sellers, and luxury clients. She is listed on RealTrends
+                Verified and named a Los Angeles Magazine Real Estate All-Star.
               </p>
             </div>
 
             <div className="mt-10 flex flex-wrap items-center gap-6">
               <a
-                href="/about"
+                href="/schedule"
                 className="px-6 py-3 bg-foreground-950 text-background-50 text-sm font-medium tracking-wide uppercase rounded-md hover:bg-foreground-800 transition-colors duration-300 whitespace-nowrap"
               >
-                Learn More
+                Meet with Stefanie
               </a>
               <a
                 href="/about#testimonials"

@@ -108,13 +108,13 @@ export default function FeaturedProperties() {
               Portfolio
             </p>
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-foreground-950 mb-6">
-              {activeTab === "available" ? "Available" : "Sold"}{" "}
-              <span className="italic font-normal">Properties</span>
+              {activeTab === "available" ? "Homes for Sale" : "Recently Sold Homes"}{" "}
+              <span className="italic font-normal">in Los Angeles</span>
             </h2>
             <p className="text-sm md:text-base text-foreground-600 max-w-2xl mx-auto">
               {activeTab === "available"
-                ? "Discover exceptional homes and investment opportunities in Los Angeles' most sought-after neighborhoods."
-                : "A look at deals successfully navigated with strategy, discipline, and strong outcomes."}
+                ? "See current homes for sale in Los Angeles and the San Fernando Valley, from condos to luxury homes. Each listing links to full photos, details, and a way to book a showing."
+                : "See homes Stefanie has sold across Los Angeles and the San Fernando Valley. Each sale shows how she prices, markets, and negotiates for her clients."}
             </p>
           </motion.div>
 

@@ -11,19 +11,19 @@ const cards: {
 }[] = [
   {
     icon: Home,
-    title: "Buy a Home",
+    title: "Buy a Home in Los Angeles",
     description:
-      "Find the right home at the right price, with a certified negotiator reading the market on your side.",
+      "Good homes can move fast, so you need a plan before you start touring. Stefanie helps you set a budget, spot fair pricing, and write offers that sellers take seriously. As a certified negotiator, she works to protect your price and your terms.",
     cta: "Start Home Search",
     href: "/listings",
     variant: "outline",
   },
   {
     icon: Tag,
-    title: "Sell a Home",
+    title: "Sell Your Home in Los Angeles",
     description:
-      "Price it right, position it well, and let a certified negotiation expert handle the offers.",
-    cta: "Get Home Value",
+      "Pricing is the first big decision, and it shapes every offer you get. Stefanie studies recent nearby sales, plans the marketing, and handles each offer through closing.",
+    cta: "Get Your Home Value",
     href: "/sellers",
     variant: "filled",
   },
@@ -31,7 +31,7 @@ const cards: {
     icon: CalendarCheck,
     title: "Schedule a Consultation",
     description:
-      "From market analysis to personalized strategy, every step of your journey starts with a conversation.",
+      "Not sure where to start? Book a short meeting. You will leave with a clear view of the market and a plan that fits your timeline.",
     cta: "Book a Meeting",
     href: "/schedule",
     variant: "outline",
@@ -55,12 +55,11 @@ export default function BuyerSellerCTA() {
               How Can We Help
             </p>
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-foreground-950">
-              Start Your Real Estate
-              {" "}
-              <span className="italic font-normal">Journey</span>
+              Buy or Sell a Home{" "}
+              <span className="italic font-normal">in Los Angeles</span>
             </h2>
-            <p className="mt-4 text-sm text-foreground-600 max-w-lg mx-auto">
-              Whether you are buying, selling, or exploring the market, we are here to guide you every step of the way.
+            <p className="mt-4 text-sm md:text-base text-foreground-600 max-w-2xl mx-auto leading-relaxed">
+              Stefanie Pollack is a Los Angeles real estate agent who helps buyers and sellers across Studio City, the San Fernando Valley, and Beverly Hills. She has 20+ years of experience and grew up in Studio City. Tell her what you want, and she will build a plan around it.
             </p>
           </motion.div>
 

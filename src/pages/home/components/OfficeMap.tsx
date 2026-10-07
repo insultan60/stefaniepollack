@@ -21,10 +21,13 @@ export default function OfficeMap() {
               Find Us
             </p>
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-foreground-950 mb-6">
-              Visit the <span className="italic font-normal">Office</span>
+              Visit the Office <span className="italic font-normal">in Studio City</span>
             </h2>
             <p className="text-sm md:text-base text-foreground-600 max-w-2xl mx-auto">
-              Studio City, CA 91604
+              Stefanie&apos;s office is in Studio City, CA 91604. Call{" "}
+              <a href="tel:+18186256171" className="text-foreground-900 underline underline-offset-4 hover:text-primary-700">(818) 625-6171</a>{" "}
+              or email{" "}
+              <a href="mailto:stefanie@stefaniepollack.com" className="text-foreground-900 underline underline-offset-4 hover:text-primary-700">stefanie@stefaniepollack.com</a>.
             </p>
           </motion.div>
 

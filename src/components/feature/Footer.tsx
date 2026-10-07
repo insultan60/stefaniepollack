@@ -82,8 +82,8 @@ export default function Footer() {
                 />
               </a>
               <p className="mt-5 text-[15px] text-background-500 leading-relaxed max-w-xs">
-                Connecting people with homes and community. Over 20 years of
-                experience in Studio City and the San Fernando Valley.
+                Connecting people with homes and community. 20+ years of
+                experience in Los Angeles, Studio City, and the San Fernando Valley.
               </p>
               <div className="flex items-center gap-2.5 mt-6">
                 {footerLinks.socials.map((social) => {

@@ -33,12 +33,12 @@ export default function Newsletter() {
             Stay Informed
           </p>
           <h2 className="font-heading text-3xl md:text-4xl text-foreground-950">
-            Sign Up for{" "}
-            <span className="italic font-normal">Exclusive</span> Off-Market Listings
+            Sign Up for Off-Market Listings{" "}
+            <span className="italic font-normal">in Los Angeles</span>
           </h2>
           <p className="mt-4 text-foreground-600 leading-relaxed">
-            Be the first to know about properties before they hit the market.
-            Join Stefanie&apos;s exclusive network of buyers and sellers.
+            Be the first to hear about homes before they hit the market.
+            Join Stefanie&apos;s list of buyers and sellers.
           </p>
 
           <form onSubmit={handleSubmit} className="mt-8" data-readdy-form>

@@ -25,6 +25,9 @@ export default function Testimonials() {
               <br />
               <span className="italic font-normal">Real Stories.</span>
             </h2>
+            <p className="mt-5 text-sm md:text-base text-foreground-600">
+              Reviews from buyers and sellers across Los Angeles and the San Fernando Valley.
+            </p>
           </motion.div>
 
           {/* Quote */}

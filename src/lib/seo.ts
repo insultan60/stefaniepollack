@@ -15,9 +15,9 @@ export interface PageMeta {
 
 const PAGES: Record<string, PageMeta> = {
   "/": {
-    title: "Stefanie Pollack | Studio City Real Estate Agent | Pollack Homes",
+    title: "Los Angeles Real Estate Agent | Stefanie Pollack | Compass",
     description:
-      "Stefanie Pollack is a top-rated Studio City real estate agent with 20+ years of experience. Specializing in luxury homes, buyer representation, and seller marketing in the San Fernando Valley.",
+      "Stefanie Pollack is a Los Angeles real estate agent based in Studio City with 20+ years of experience. Buy or sell in LA, the Valley, and Beverly Hills.",
   },
   "/about": {
     title: "About Stefanie Pollack | Studio City Compass Realtor",

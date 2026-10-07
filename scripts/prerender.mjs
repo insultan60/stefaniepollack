@@ -133,7 +133,7 @@ for (const { path, meta } of pages) {
           addressCountry: "US",
         },
         geo: { "@type": "GeoCoordinates", latitude: 34.1396, longitude: -118.3875 },
-        areaServed: ["Studio City", "Sherman Oaks", "Valley Village", "Laurel Canyon", "Hollywood Hills", "San Fernando Valley"],
+        areaServed: ["Los Angeles", "Studio City", "Sherman Oaks", "Encino", "Beverly Hills", "Valley Village", "San Fernando Valley"],
         parentOrganization: { "@type": "Organization", name: "Compass" },
         identifier: "DRE #01815614",
       };

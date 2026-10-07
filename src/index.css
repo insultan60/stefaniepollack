@@ -3,6 +3,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Sections that slide in from the side (framer-motion x: ±40) sit 40px past
+   the edge until they scroll into view, which made every page ~16px wider than
+   a phone screen: a sideways wobble, and the right edge of popups cut off.
+   clip, not hidden, so no scroll container is created and sticky elements
+   keep working. */
+html,
+body {
+  overflow-x: clip;
+}
+
 @layer base {
   :root {
     /* Background scale — warm off-white to white */

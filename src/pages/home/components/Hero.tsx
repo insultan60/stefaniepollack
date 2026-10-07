@@ -22,22 +22,23 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-          className="max-w-4xl"
+          className="max-w-5xl"
         >
           <p className="text-white/70 text-xs md:text-sm font-medium tracking-[0.3em] uppercase mb-6">
             Los Angeles Luxury Real Estate
           </p>
-          {/* Two lines, not three: "with Homes & Community" reads as one phrase
-              and the client asked for it to hold together on a single line.
-              The base size steps down to 3xl so it still fits without wrapping
-              on a narrow phone — every breakpoint above is unchanged. */}
-          <h1 className="font-heading-h1 text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-white font-medium leading-[1.1] tracking-tight">
-            Connecting People
+          {/* The H1 carries the search phrase ("Los Angeles real estate
+              agent"); the old headline lives on as the line beneath it. One
+              step smaller than before at lg so the longer line stays on one
+              row inside max-w-5xl. */}
+          <h1 className="font-heading-h1 text-[1.6rem] sm:text-5xl lg:text-6xl text-white font-medium leading-[1.1] tracking-tight">
+            Los Angeles Real Estate Agent{" "}
             <br />
-            <span className="italic font-normal">
-              with Homes <span className="amp">&amp;</span> Community
-            </span>
+            <span className="italic font-normal">Based in Studio City</span>
           </h1>
+          <p className="mt-6 font-heading text-base sm:text-lg md:text-2xl text-white/85 italic">
+            Connecting People with <span className="whitespace-nowrap">Homes <span className="amp">&amp;</span> Community</span>
+          </p>
         </motion.div>
 
         <motion.div

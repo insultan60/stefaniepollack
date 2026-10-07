@@ -4,7 +4,9 @@ import About from "./components/About";
 import Articles from "./components/Articles";
 import Stats from "./components/Stats";
 import FeaturedProperties from "./components/FeaturedProperties";
+import Neighborhoods from "./components/Neighborhoods";
 import Testimonials from "./components/Testimonials";
+import HowItWorks from "./components/HowItWorks";
 import OfficeMap from "./components/OfficeMap";
 import CTASection from "./components/CTASection";
 import Newsletter from "./components/Newsletter";
@@ -15,10 +17,12 @@ export default function Home() {
       <Hero />
       <BuyerSellerCTA />
       <About />
-      <Articles />
       <Stats />
       <FeaturedProperties />
+      <Neighborhoods />
       <Testimonials />
+      <HowItWorks />
+      <Articles />
       <OfficeMap />
       <CTASection />
       <Newsletter />

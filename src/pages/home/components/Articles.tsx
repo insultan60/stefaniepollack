@@ -76,11 +76,15 @@ export default function Articles() {
             className="text-center mb-14 md:mb-20"
           >
             <p className="text-xs font-medium tracking-[0.25em] uppercase text-primary-600 mb-4">
-              Featured
+              Insights
             </p>
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-foreground-950">
-              Latest <span className="italic font-normal">Articles</span>
+              Los Angeles &amp; Studio City{" "}
+              <span className="italic font-normal">Real Estate Insights</span>
             </h2>
+            <p className="mt-4 text-sm md:text-base text-foreground-600 max-w-2xl mx-auto">
+              Local guides, market updates, and community news from Stefanie.
+            </p>
           </motion.div>
 
           {/* Horizontal Scroll Articles */}
@@ -88,6 +92,15 @@ export default function Articles() {
             {articles.map((article, index) => (
               <ArticleCard key={article.id} article={article} index={index} />
             ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <a
+              href="/blog"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-foreground-300 text-foreground-800 text-sm font-medium tracking-wide uppercase rounded-md hover:bg-foreground-950 hover:text-background-50 hover:border-foreground-950 transition-all duration-300 whitespace-nowrap"
+            >
+              View All Articles
+            </a>
           </div>
         </div>
       </div>
