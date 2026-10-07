@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Plus } from "lucide-react";
+import { HOME_FAQS as faqs } from "@/lib/homeFaqs";
 
 const steps = [
   {
@@ -16,37 +17,12 @@ const steps = [
   },
 ];
 
-const faqs = [
-  {
-    q: "How do I choose between Los Angeles real estate agents?",
-    a: "Start with local sales that match your home type and price range. Ask how each agent prices, markets, and negotiates, then read recent client reviews. Meet at least two agents before you decide.",
-  },
-  {
-    q: "What makes a top real estate agent in Los Angeles?",
-    a: "Look for steady sales in your area, clear communication, and strong negotiation. Awards help, but results on homes like yours matter more. Ask any agent for recent examples.",
-  },
-  {
-    q: "Is Studio City part of Los Angeles?",
-    a: "Yes. Studio City is a neighborhood in the City of Los Angeles, in the San Fernando Valley. Stefanie is based there and works across the wider Los Angeles area.",
-  },
-  {
-    q: "What does a certified negotiator do for me?",
-    a: "A certified negotiator has trained in negotiation methods. Stefanie uses that training to push for a better price, cleaner terms, and fair repair requests.",
-  },
-  {
-    q: "How long does selling a house in Los Angeles take?",
-    a: "It depends on price, condition, and the neighborhood. Stefanie reviews nearby sales and gives you a realistic range in your first meeting.",
-  },
-  {
-    q: "Does Stefanie work with first-time buyers?",
-    a: "Yes. She helps first-time buyers set a budget, understand how offers and escrow work, and avoid common mistakes. She also works with move-up buyers, sellers, and investors.",
-  },
-];
 
 /* "How it works" steps plus the homepage FAQ. Answers sit in native
    <details>, so every answer is in the HTML (readable by crawlers and AI
-   fetchers) while staying collapsed for visitors. The FAQPage JSON-LD mirrors
-   the same list. */
+   fetchers) while staying collapsed for visitors. The matching FAQPage
+   structured data is part of the homepage schema in scripts/prerender.mjs,
+   built from the same HOME_FAQS list. */
 export default function HowItWorks() {
   return (
     <section className="w-full bg-background-50 py-20 md:py-28 lg:py-36">
@@ -105,20 +81,6 @@ export default function HowItWorks() {
           </div>
         </div>
       </div>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: faqs.map((f) => ({
-              "@type": "Question",
-              name: f.q,
-              acceptedAnswer: { "@type": "Answer", text: f.a },
-            })),
-          }).replace(/</g, "\\u003c"),
-        }}
-      />
     </section>
   );
 }

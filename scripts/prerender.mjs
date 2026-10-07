@@ -107,39 +107,112 @@ for (const { path, meta } of pages) {
     const body = server.render(path);
 
     let html = template.replace('<div id="root"></div>', `<div id="root">${body}</div>`);
-    // Structured data for the homepage: Stefanie as a RealEstateAgent (a
-    // LocalBusiness type), which Google's Rich Results Test recognises and can
-    // use for business details in search. Every value here is already
-    // published on the site (footer contact details, the Compass Studio City
-    // office in the blog, the geo meta in index.html).
+    // Homepage structured data, supplied by the client's SEO: one @graph
+    // linking the site, the page, the business (RealEstateAgent, a
+    // LocalBusiness type), Stefanie as a Person, and the FAQ. The FAQ answers
+    // come from src/lib/homeFaqs.ts - the same list the page shows - so the
+    // markup can never disagree with the visible text.
     if (path === "/") {
-      const agent = {
+      const site = server.SITE_URL;
+      const social = [
+        "https://www.instagram.com/stefanieismyrealtor/",
+        "https://www.facebook.com/StefIsMyRealtor/",
+        "https://www.linkedin.com/in/stefaniedanhi/",
+        "https://www.youtube.com/channel/UC8QpQcHqoM_Lh3eLQXURNJA",
+      ];
+      const schema = {
         "@context": "https://schema.org",
-        "@type": "RealEstateAgent",
-        name: "Stefanie Pollack",
-        alternateName: "Pollack & Associates",
-        description: meta.description,
-        url: `${server.SITE_URL}/`,
-        logo: `${server.SITE_URL}/images/logo-pollack.webp`,
-        image: `${server.SITE_URL}/images/stefanie/headshot.jpg`,
-        telephone: "+1-818-625-6171",
-        email: "stefanie@stefaniepollack.com",
-        address: {
-          "@type": "PostalAddress",
-          streetAddress: "12001 Ventura Pl, Suite 100",
-          addressLocality: "Studio City",
-          addressRegion: "CA",
-          postalCode: "91604",
-          addressCountry: "US",
-        },
-        geo: { "@type": "GeoCoordinates", latitude: 34.1396, longitude: -118.3875 },
-        areaServed: ["Los Angeles", "Studio City", "Sherman Oaks", "Encino", "Beverly Hills", "Valley Village", "San Fernando Valley"],
-        parentOrganization: { "@type": "Organization", name: "Compass" },
-        identifier: "DRE #01815614",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": `${site}/#website`,
+            url: `${site}/`,
+            name: "Stefanie Pollack | Los Angeles Real Estate",
+            inLanguage: "en-US",
+            publisher: { "@id": `${site}/#agent` },
+          },
+          {
+            "@type": "WebPage",
+            "@id": `${site}/#webpage`,
+            url: `${site}/`,
+            name: meta.title,
+            description: meta.description,
+            isPartOf: { "@id": `${site}/#website` },
+            about: { "@id": `${site}/#agent` },
+            primaryImageOfPage: { "@type": "ImageObject", url: `${site}/images/hero-poster.jpg` },
+            inLanguage: "en-US",
+          },
+          {
+            "@type": "RealEstateAgent",
+            "@id": `${site}/#agent`,
+            name: "Stefanie Pollack",
+            alternateName: "Pollack & Associates",
+            description:
+              "Stefanie Pollack is a Los Angeles real estate agent based in Studio City. She helps buyers and sellers in Studio City, the San Fernando Valley, Encino, Sherman Oaks, and Beverly Hills.",
+            url: `${site}/`,
+            logo: `${site}/images/logo-pollack.webp`,
+            image: `${site}/images/hero-poster.jpg`,
+            slogan: "Connecting People with Homes & Community",
+            telephone: "+1-818-625-6171",
+            email: "stefanie@stefaniepollack.com",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Studio City",
+              addressRegion: "CA",
+              postalCode: "91604",
+              addressCountry: "US",
+            },
+            geo: { "@type": "GeoCoordinates", latitude: 34.1396, longitude: -118.3875 },
+            areaServed: [
+              { "@type": "City", name: "Los Angeles" },
+              { "@type": "City", name: "Studio City" },
+              { "@type": "City", name: "Sherman Oaks" },
+              { "@type": "City", name: "Encino" },
+              { "@type": "City", name: "Beverly Hills" },
+              { "@type": "Place", name: "San Fernando Valley" },
+            ],
+            parentOrganization: { "@type": "Organization", name: "Compass", url: "https://www.compass.com" },
+            identifier: { "@type": "PropertyValue", name: "California DRE License", value: "01815614" },
+            knowsAbout: [
+              "Los Angeles real estate",
+              "Studio City real estate",
+              "San Fernando Valley real estate",
+              "Luxury homes",
+              "Home buying",
+              "Home selling",
+            ],
+            award: ["RealTrends Verified", "Los Angeles Magazine Real Estate All-Stars"],
+            founder: { "@id": `${site}/#stefanie` },
+            sameAs: social,
+          },
+          {
+            "@type": "Person",
+            "@id": `${site}/#stefanie`,
+            name: "Stefanie Pollack",
+            jobTitle: "Real Estate Agent",
+            image:
+              "https://images.squarespace-cdn.com/content/v1/62857f9467398e0fd622fe08/2fbd0c54-a64e-441c-854d-7fb5bdd2036e/081_09.2821_Stefanie-Pollack_Nicole-Goddard-Photography_423A3937+EDITED.jpg?format=800w",
+            url: `${site}/about`,
+            worksFor: { "@id": `${site}/#agent` },
+            email: "stefanie@stefaniepollack.com",
+            telephone: "+1-818-625-6171",
+            homeLocation: { "@type": "Place", name: "Studio City, CA" },
+            sameAs: social,
+          },
+          {
+            "@type": "FAQPage",
+            "@id": `${site}/#faq`,
+            mainEntity: server.HOME_FAQS.map((f) => ({
+              "@type": "Question",
+              name: f.q,
+              acceptedAnswer: { "@type": "Answer", text: f.a },
+            })),
+          },
+        ],
       };
       html = html.replace(
         "</head>",
-        `<script type="application/ld+json">${JSON.stringify(agent).replace(/</g, "\\u003c")}</script></head>`,
+        `<script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script></head>`,
       );
     }
 
