@@ -24,7 +24,46 @@ const template = await readFile(join(outDir, "index.html"), "utf8");
 // The empty shell, for every route that isn't prerendered.
 await writeFile(join(outDir, "spa.html"), template);
 
+// Locally the IDX key lives in .env.local; on Vercel it's already in the
+// environment. Only fill in what isn't set.
+try {
+  for (const line of (await readFile(join(root, ".env.local"), "utf8")).split(/\r?\n/)) {
+    const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*?)\s*$/);
+    if (m && process.env[m[1]] === undefined) process.env[m[1]] = m[2].replace(/^["']|["']$/g, "");
+  }
+} catch {
+  // no .env.local — fine on Vercel
+}
+
 const server = await import(pathToFileURL(join(serverDir, "entry-server.js")).href);
+
+// Real listings, so /, /listings and each listing's own page carry the homes
+// in their HTML instead of "Loading listings…". See src/lib/listingsSeed.ts.
+const listings = await server.loadListings();
+const listingsScript = listings
+  ? `<script>window.__LISTINGS__=${JSON.stringify(listings).replace(/</g, "\\u003c")}</script>`
+  : "";
+
+const pages = server.PRERENDER_PATHS.map((path) => ({ path, meta: server.getPageMeta(path) }));
+if (listings) {
+  const all = [
+    ...listings.available.map((p) => ({ p, label: `${p.price} · For Sale` })),
+    ...listings.sold.map((p) => ({ p, label: `Sold ${p.dateSold}` })),
+  ];
+  const seen = new Set();
+  for (const { p, label } of all) {
+    if (!p.slug || seen.has(p.slug)) continue;
+    seen.add(p.slug);
+    pages.push({
+      path: `/listings/${p.slug}`,
+      meta: {
+        title: `${p.address}, ${p.city} | Stefanie Pollack`,
+        description: `${p.address}, ${p.city} — ${p.beds} bed, ${p.baths} bath, ${p.sqft} sq ft. ${label}. Listed by Stefanie Pollack, Studio City Compass Realtor.`,
+      },
+    });
+  }
+  console.log(`listings: ${listings.available.length} for sale, ${listings.sold.length} sold`);
+}
 
 const escapeAttr = (s) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 const escapeText = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
@@ -35,13 +74,17 @@ function setAttr(html, pattern, value) {
 }
 
 let failed = 0;
-for (const path of server.PRERENDER_PATHS) {
+for (const { path, meta } of pages) {
   try {
-    const meta = server.getPageMeta(path);
     const url = server.canonicalUrl(path);
     const body = server.render(path);
 
     let html = template.replace('<div id="root"></div>', `<div id="root">${body}</div>`);
+    // Only pages that show listings (via useIdxListings) need the snapshot;
+    // the rest would just download ~90 KB they never read.
+    if (path === "/" || path === "/listings" || path.startsWith("/listings/")) {
+      html = html.replace("</head>", `${listingsScript}</head>`);
+    }
     html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeText(meta.title)}</title>`);
     html = setAttr(html, /(<meta name="description" content=")[^"]*(")/, meta.description);
     html = setAttr(html, /(<meta property="og:title" content=")[^"]*(")/, meta.title);
@@ -60,6 +103,31 @@ for (const path of server.PRERENDER_PATHS) {
     console.error(`prerender failed for ${path}:`, err);
   }
 }
+
+// sitemap.xml and robots.txt, generated from the same page list so they can
+// never drift from what's actually published. URLs are the canonical form
+// (no trailing slash) — a trailing-slash URL 308-redirects (vercel.json
+// "trailingSlash": false), and sitemap entries that redirect aren't indexed.
+const sitemap =
+  '<?xml version="1.0" encoding="UTF-8"?>\n' +
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+  pages.map(({ path }) => `  <url><loc>${server.canonicalUrl(path)}</loc></url>\n`).join("") +
+  "</urlset>\n";
+await writeFile(join(outDir, "sitemap.xml"), sitemap);
+await writeFile(
+  join(outDir, "robots.txt"),
+  [
+    "User-agent: *",
+    "Allow: /",
+    "Disallow: /dashboard",
+    "Disallow: /account",
+    "Disallow: /api/",
+    "",
+    `Sitemap: ${server.SITE_URL}/sitemap.xml`,
+    "",
+  ].join("\n"),
+);
+console.log(`wrote sitemap.xml (${pages.length} URLs) and robots.txt`);
 
 await rm(serverDir, { recursive: true, force: true });
 

@@ -263,8 +263,17 @@ function idxUrl(path: string): string {
  *  account with 0 featured listings, or a lead-email search with no match.
  *  A naive res.json() throws on that empty body, so read as text first and
  *  treat "no body" as "no result" instead of an error. */
+/** Set only during the build-time prerender (src/entry-server.tsx), where
+ *  there is no /api/idx to call: requests go straight to the IDX proxy logic
+ *  in Node instead. In the browser this stays null. */
+let serverFetch: ((path: string) => Promise<Response>) | null = null;
+
+export function setServerIdxFetch(fn: ((path: string) => Promise<Response>) | null) {
+  serverFetch = fn;
+}
+
 async function idxFetch<T>(path: string, init?: FetchInit): Promise<T | null> {
-  const res = await fetch(idxUrl(path), init);
+  const res = serverFetch ? await serverFetch(path) : await fetch(idxUrl(path), init);
   if (res.status === 204) return null;
   if (!res.ok) throw new Error(`IDX request failed: ${path} (${res.status})`);
   const text = await res.text();
