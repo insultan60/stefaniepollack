@@ -5,7 +5,10 @@
     { "source": "/blog/best-holiday-activities-in-studio-city-your-ultimate-local-guide", "destination": "/blog", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/((?!api/).*)", "destination": "/spa.html" }
+    { "source": "/account", "destination": "/spa.html" },
+    { "source": "/dashboard", "destination": "/spa.html" },
+    { "source": "/dashboard/(.*)", "destination": "/spa.html" },
+    { "source": "/listings/:slug", "destination": "/spa.html" }
   ],
   "headers": [
     {

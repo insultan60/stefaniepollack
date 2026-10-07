@@ -40,9 +40,25 @@ const server = await import(pathToFileURL(join(serverDir, "entry-server.js")).hr
 // Real listings, so /, /listings and each listing's own page carry the homes
 // in their HTML instead of "Loading listings…". See src/lib/listingsSeed.ts.
 const listings = await server.loadListings();
-const listingsScript = listings
-  ? `<script>window.__LISTINGS__=${JSON.stringify(listings).replace(/</g, "\\u003c")}</script>`
-  : "";
+
+/* The snapshot written into each page, trimmed to what that page draws.
+   Cards and the map use only the basic fields; the heavy ones (photo gallery,
+   description, feature tables, price history) are needed only on a listing's
+   own page. The full feed was ~90 KB per page, and it is placed at the END of
+   <body>, after the content: AI fetchers and scrapers read a page from the
+   top and often stop after a fixed amount, and with the data in <head> they
+   ran out before reaching any text ("only the metadata came through").
+   Trimming the client copy is safe for hydration because the trimmed fields
+   are never rendered on the pages that get the trimmed copy. */
+const DETAIL_ONLY = ["gallery", "remarks", "features", "history"];
+const card = (p) => Object.fromEntries(Object.entries(p).filter(([k]) => !DETAIL_ONLY.includes(k)));
+function listingsScriptFor(path) {
+  if (!listings) return "";
+  const detailSlug = path.startsWith("/listings/") ? path.slice("/listings/".length) : null;
+  const shape = (p) => (p.slug === detailSlug ? p : card(p));
+  const data = { available: listings.available.map(shape), sold: listings.sold.map(shape) };
+  return `<script>window.__LISTINGS__=${JSON.stringify(data).replace(/</g, "\\u003c")}</script>`;
+}
 
 const pages = server.PRERENDER_PATHS.map((path) => ({ path, meta: server.getPageMeta(path) }));
 if (listings) {
@@ -80,10 +96,47 @@ for (const { path, meta } of pages) {
     const body = server.render(path);
 
     let html = template.replace('<div id="root"></div>', `<div id="root">${body}</div>`);
-    // Only pages that show listings (via useIdxListings) need the snapshot;
-    // the rest would just download ~90 KB they never read.
+    // Structured data for the homepage: Stefanie as a RealEstateAgent (a
+    // LocalBusiness type), which Google's Rich Results Test recognises and can
+    // use for business details in search. Every value here is already
+    // published on the site (footer contact details, the Compass Studio City
+    // office in the blog, the geo meta in index.html).
+    if (path === "/") {
+      const agent = {
+        "@context": "https://schema.org",
+        "@type": "RealEstateAgent",
+        name: "Stefanie Pollack",
+        alternateName: "Pollack & Associates",
+        description: meta.description,
+        url: `${server.SITE_URL}/`,
+        logo: `${server.SITE_URL}/images/logo-pollack.webp`,
+        image: `${server.SITE_URL}/images/stefanie/headshot.jpg`,
+        telephone: "+1-818-625-6171",
+        email: "stefanie@stefaniepollack.com",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "12001 Ventura Pl, Suite 100",
+          addressLocality: "Studio City",
+          addressRegion: "CA",
+          postalCode: "91604",
+          addressCountry: "US",
+        },
+        geo: { "@type": "GeoCoordinates", latitude: 34.1396, longitude: -118.3875 },
+        areaServed: ["Studio City", "Sherman Oaks", "Valley Village", "Laurel Canyon", "Hollywood Hills", "San Fernando Valley"],
+        parentOrganization: { "@type": "Organization", name: "Compass" },
+        identifier: "DRE #01815614",
+      };
+      html = html.replace(
+        "</head>",
+        `<script type="application/ld+json">${JSON.stringify(agent).replace(/</g, "\\u003c")}</script></head>`,
+      );
+    }
+
+    // Only pages that show listings (via useIdxListings) need the snapshot.
+    // Classic inline script at the end of <body>: it still runs before the
+    // app's deferred module script, so the data is there when React starts.
     if (path === "/" || path === "/listings" || path.startsWith("/listings/")) {
-      html = html.replace("</head>", `${listingsScript}</head>`);
+      html = html.replace("</body>", `${listingsScriptFor(path)}</body>`);
     }
     html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeText(meta.title)}</title>`);
     html = setAttr(html, /(<meta name="description" content=")[^"]*(")/, meta.description);
@@ -128,6 +181,23 @@ await writeFile(
   ].join("\n"),
 );
 console.log(`wrote sitemap.xml (${pages.length} URLs) and robots.txt`);
+
+// 404.html: Vercel serves this, with a real 404 status, for any address that
+// isn't a file here and isn't rewritten in vercel.json. Before it existed,
+// every unknown URL got the empty shell with a 200 and the homepage's title —
+// to Google and to scrapers, an empty duplicate of the homepage.
+try {
+  let html = template.replace('<div id="root"></div>', `<div id="root">${server.render("/404")}</div>`);
+  html = html.replace(/<title>[\s\S]*?<\/title>/, "<title>Page Not Found | Stefanie Pollack</title>");
+  html = html.replace(/\s*<link rel="canonical"[^>]*>/, "");
+  html = html.replace(/\s*<meta property="og:url"[^>]*>/, "");
+  html = html.replace("</head>", '<meta name="robots" content="noindex"></head>');
+  await writeFile(join(outDir, "404.html"), html);
+  console.log("prerendered 404.html");
+} catch (err) {
+  failed++;
+  console.error("prerender failed for 404.html:", err);
+}
 
 await rm(serverDir, { recursive: true, force: true });
 

@@ -3,7 +3,11 @@ import HeroVideo from "./HeroVideo";
 
 export default function Hero() {
   return (
-    <section className="relative w-full h-screen min-h-[600px] overflow-hidden">
+    <section className="relative w-full h-screen min-h-[600px] max-h-[1100px] overflow-hidden">
+      {/* max-h: Google renders pages in a viewport stretched to the page's full
+          height, so an uncapped h-screen became thousands of pixels tall and its
+          centred headline fell far below Google's screenshot. 1100px is taller
+          than almost any real screen, so visitors still get a full-screen hero. */}
       {/* Background video (poster-only on mobile / reduced-motion / data-saver) */}
       <div className="absolute inset-0">
         <HeroVideo />
