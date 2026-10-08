@@ -207,6 +207,8 @@ export function PropertyCard({
   initialSaved = false,
   onToggleSaved,
   href,
+  alt,
+  cityLabel,
 }: {
   property: ListedProperty;
   isSold: boolean;
@@ -217,6 +219,11 @@ export function PropertyCard({
   /** Overrides the default link to this site's own listing page — used for a
    *  saved MLS listing that has no page here, which links to IDX's instead. */
   href?: string;
+  /** Image alt text; defaults to the street address. */
+  alt?: string;
+  /** Replaces the feed's "City, ST" line — the neighborhood pages show
+   *  "Studio City, CA 91604" even where the feed says "Los Angeles". */
+  cityLabel?: string;
 }) {
   const price = isSold ? (property as SoldProperty).soldPrice : (property as AvailableProperty).price;
   const { leadId, requireLead } = useLead();
@@ -255,7 +262,7 @@ export function PropertyCard({
       <div className="relative aspect-[3/4] overflow-hidden rounded-xl mb-5">
         <img
           src={property.image}
-          alt={property.address}
+          alt={alt ?? property.address}
           referrerPolicy="no-referrer"
           onError={(e) => (e.currentTarget.src = PHOTO_FALLBACK)}
           className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
@@ -278,7 +285,7 @@ export function PropertyCard({
         )}
       </div>
       <p className="text-[11px] font-medium tracking-[0.2em] uppercase text-foreground-500 mb-2">
-        {property.city}
+        {cityLabel ?? property.city}
       </p>
       <p className="text-2xl md:text-3xl font-heading text-primary-700 mb-1">{price}</p>
       <p className="text-base font-medium text-foreground-950 mb-3 group-hover:text-primary-700 transition-colors">

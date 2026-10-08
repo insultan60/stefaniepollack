@@ -69,6 +69,10 @@ type BaseProperty = {
   slug: string;
   address: string;
   city: string;
+  /** Five-digit ZIP. The neighborhood pages filter on it: the feed labels
+   *  some 91604 (Studio City) homes "Los Angeles", so the city name alone
+   *  would drop them. */
+  zip?: string;
   beds: number;
   baths: number;
   sqft: string;
@@ -215,6 +219,7 @@ function baseFields(listing: RawIdxListing, sold: boolean, price: number): BaseP
     slug: listing.detailsUrlSlug.toLowerCase(),
     address: listing.address,
     city: cityState(listing),
+    zip: String(listing.zipcode || "").slice(0, 5),
     beds: listing.bedrooms,
     baths: listing.totalBaths,
     sqft: listing.sqFt,

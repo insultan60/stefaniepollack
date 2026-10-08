@@ -15,17 +15,22 @@ export default function Intro() {
             Local Knowledge
           </p>
           <h2 className="font-heading text-3xl md:text-4xl text-foreground-950">
-            Every Neighborhood,
-            <br />
-            <span className="italic font-normal">Every Detail.</span>
+            Find the Right <span className="italic font-normal">Los Angeles Neighborhood</span>
           </h2>
-          <p className="mt-6 text-foreground-600 leading-relaxed">
-            Growing up — and now raising a family — in Studio City, Stefanie has a
-            deep appreciation for what each neighborhood in the San Fernando Valley
-            has to offer. Whether a home is in the hills or the flats, she uses her
-            local knowledge and negotiation experience to help buyers and sellers
-            understand the real advantages of each area.
-          </p>
+          <div className="mt-6 space-y-4 text-foreground-600 leading-relaxed">
+            <p>
+              Stefanie Pollack is a Studio City real estate agent who works across Los Angeles and
+              the San Fernando Valley. She grew up in Studio City and is now raising her family there.
+            </p>
+            <p>
+              Each neighborhood has its own prices, pace, and style. Stefanie uses local sales and 20+
+              years of experience to show you the real pros and cons of each area.
+            </p>
+            <p>
+              Hillside and flat streets can feel very different, even a few blocks apart. She helps you
+              compare them before you make an offer.
+            </p>
+          </div>
         </motion.div>
       </div>
     </section>

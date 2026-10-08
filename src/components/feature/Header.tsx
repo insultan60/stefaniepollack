@@ -1,14 +1,28 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 import { useLead } from "@/hooks/useLead";
+import { areas } from "@/mocks/areas";
 
-const navLinks = [
+type NavLink = { label: string; href: string; children?: { label: string; href: string }[] };
+
+/* Testimonials left the menu (the About page still has them, and every area
+   page shows local reviews); Neighborhoods took its place, with each area
+   page in a dropdown. */
+const navLinks: NavLink[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Listings", href: "/listings" },
+  {
+    label: "Neighborhoods",
+    href: "/neighborhoods",
+    children: [
+      { label: "All Neighborhoods", href: "/neighborhoods" },
+      ...areas.map((a) => ({ label: a.name, href: `/neighborhoods/${a.slug}` })),
+    ],
+  },
   { label: "Blog", href: "/blog" },
-  { label: "Testimonials", href: "/about#testimonials" },
   { label: "Buyers", href: "/buyers" },
   { label: "Sellers", href: "/sellers" },
   { label: "Resources", href: "/resources" },
@@ -23,7 +37,9 @@ export default function Header() {
   // blog article hero, the listing-detail gallery) that the header overlays
   // transparently, same as the homepage. The Listings grid is the one page
   // with no hero — keep it solid & legible from the moment it loads.
-  const solid = scrolled || pathname === "/listings";
+  // Also solid while the mobile menu is open: the menu is a light panel, and
+  // the white logo and close icon disappeared against it.
+  const solid = scrolled || mobileOpen || pathname === "/listings";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -67,24 +83,48 @@ export default function Header() {
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-8 xl:gap-10">
-              {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className={`relative text-sm font-medium tracking-wide uppercase transition-colors duration-300 group whitespace-nowrap ${
-                    solid
-                      ? "text-foreground-800 hover:text-foreground-950"
-                      : "text-white/90 hover:text-white"
-                  }`}
-                >
-                  {link.label}
-                  <span
-                    className={`absolute -bottom-1 left-0 h-px w-0 group-hover:w-full transition-all duration-300 ${
-                      solid ? "bg-foreground-950" : "bg-white"
+              {navLinks.map((link) => {
+                const item = (
+                  <a
+                    href={link.href}
+                    className={`relative inline-flex items-center gap-1 text-sm font-medium tracking-wide uppercase transition-colors duration-300 group whitespace-nowrap ${
+                      solid
+                        ? "text-foreground-800 hover:text-foreground-950"
+                        : "text-white/90 hover:text-white"
                     }`}
-                  />
-                </a>
-              ))}
+                  >
+                    {link.label}
+                    {link.children && <ChevronDown className="w-3.5 h-3.5" strokeWidth={1.75} />}
+                    <span
+                      className={`absolute -bottom-1 left-0 h-px w-0 group-hover:w-full transition-all duration-300 ${
+                        solid ? "bg-foreground-950" : "bg-white"
+                      }`}
+                    />
+                  </a>
+                );
+                if (!link.children) return <div key={link.label}>{item}</div>;
+                // Opens on hover and on keyboard focus (focus-within); the
+                // pt-4 bridge keeps it open while the pointer crosses the gap.
+                return (
+                  <div key={link.label} className="relative group/menu">
+                    {item}
+                    <div className="absolute left-1/2 -translate-x-1/2 top-full pt-4 invisible opacity-0 translate-y-1 group-hover/menu:visible group-hover/menu:opacity-100 group-hover/menu:translate-y-0 group-focus-within/menu:visible group-focus-within/menu:opacity-100 group-focus-within/menu:translate-y-0 transition-all duration-200">
+                      <ul className="min-w-[220px] py-2 bg-background-50 rounded-xl border border-background-200 shadow-xl">
+                        {link.children.map((child) => (
+                          <li key={child.href}>
+                            <a
+                              href={child.href}
+                              className="block px-5 py-2.5 text-sm text-foreground-800 hover:bg-background-100 hover:text-foreground-950 transition-colors whitespace-nowrap"
+                            >
+                              {child.label}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                );
+              })}
             </nav>
 
             {/* Desktop CTA */}
@@ -170,19 +210,42 @@ export default function Header() {
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-40 bg-background-50"
           >
-            <div className="flex flex-col items-center justify-center h-full gap-8 px-6">
+            <div className="flex flex-col items-center justify-center h-full gap-6 px-6">
               {navLinks.map((link, i) => (
-                <motion.a
-                  key={link.label}
-                  href={link.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.08, duration: 0.4 }}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-2xl md:text-3xl font-heading font-medium text-foreground-950 hover:text-primary-600 transition-colors"
-                >
-                  {link.label}
-                </motion.a>
+                <div key={link.label} className="flex flex-col items-center">
+                  <motion.a
+                    href={link.href}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.08, duration: 0.4 }}
+                    onClick={() => setMobileOpen(false)}
+                    className="text-2xl md:text-3xl font-heading font-medium text-foreground-950 hover:text-primary-600 transition-colors"
+                  >
+                    {link.label}
+                  </motion.a>
+                  {/* Sub-pages (the area pages) as a small row under their parent. */}
+                  {link.children && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.08, duration: 0.4 }}
+                      className="mt-2 flex flex-wrap justify-center gap-x-5 gap-y-1"
+                    >
+                      {link.children
+                        .filter((c) => c.href !== link.href)
+                        .map((c) => (
+                          <a
+                            key={c.href}
+                            href={c.href}
+                            onClick={() => setMobileOpen(false)}
+                            className="text-xs font-medium tracking-wide uppercase text-foreground-600 hover:text-primary-600"
+                          >
+                            {c.label}
+                          </a>
+                        ))}
+                    </motion.div>
+                  )}
+                </div>
               ))}
               {leadId ? (
                 <motion.a

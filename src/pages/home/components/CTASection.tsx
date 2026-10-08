@@ -1,6 +1,18 @@
 import { motion } from "framer-motion";
 
-export default function CTASection() {
+/* Shared closing call to action. The homepage copy is the default; the
+   neighborhood pages pass their own heading and text. */
+export default function CTASection({
+  eyebrow = "Ready to Start",
+  title = "Ready to Buy or Sell",
+  italicTitle = "in Los Angeles?",
+  text = "Work with a Los Angeles real estate agent who knows Studio City and the Valley. Start with a short conversation about what you want.",
+}: {
+  eyebrow?: string;
+  title?: string;
+  italicTitle?: string;
+  text?: string;
+} = {}) {
   return (
     <section className="relative w-full py-28 md:py-36 lg:py-44 overflow-hidden">
       {/* Background */}
@@ -23,16 +35,15 @@ export default function CTASection() {
           className="max-w-3xl mx-auto text-center"
         >
           <p className="text-white/60 text-xs font-medium tracking-[0.3em] uppercase mb-6">
-            Ready to Start
+            {eyebrow}
           </p>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-white leading-tight">
-            Ready to Buy or Sell
+            {title}{" "}
             <br />
-            <span className="italic font-normal">in Los Angeles?</span>
+            <span className="italic font-normal">{italicTitle}</span>
           </h2>
           <p className="mt-6 text-white/70 text-base md:text-lg leading-relaxed max-w-xl mx-auto">
-            Work with a Los Angeles real estate agent who knows Studio City and the
-            Valley. Start with a short conversation about what you want.
+            {text}
           </p>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a

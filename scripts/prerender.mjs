@@ -219,7 +219,7 @@ for (const { path, meta } of pages) {
     // Only pages that show listings (via useIdxListings) need the snapshot.
     // Classic inline script at the end of <body>: it still runs before the
     // app's deferred module script, so the data is there when React starts.
-    if (path === "/" || path === "/listings" || path.startsWith("/listings/")) {
+    if (path === "/" || path === "/listings" || path.startsWith("/listings/") || path.startsWith("/neighborhoods/")) {
       html = html.replace("</body>", `${listingsScriptFor(path)}</body>`);
     }
     html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeText(meta.title)}</title>`);

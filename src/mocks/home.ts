@@ -324,37 +324,6 @@ export const allTestimonials = [
   },
 ];
 
-export const neighborhoods = [
-  {
-    id: 1,
-    name: "Studio City",
-    description: "The heart of the San Fernando Valley",
-    image: "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=600&h=400&fit=crop",
-    listings: 24,
-  },
-  {
-    id: 2,
-    name: "Sherman Oaks",
-    description: "Upscale living with village charm",
-    image: "https://images.unsplash.com/photo-1513584685915-8d50d7547c3e?w=600&h=400&fit=crop",
-    listings: 18,
-  },
-  {
-    id: 3,
-    name: "Beverly Hills",
-    description: "Iconic luxury and timeless elegance",
-    image: "https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=600&h=400&fit=crop",
-    listings: 12,
-  },
-  {
-    id: 4,
-    name: "Encino",
-    description: "Suburban tranquility meets sophistication",
-    image: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&h=400&fit=crop",
-    listings: 15,
-  },
-];
-
 export const stats = [
   { id: 1, value: "20+", label: "Years of Experience" },
   { id: 2, value: "$500M+", label: "In Sales" },

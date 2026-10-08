@@ -8,6 +8,7 @@ export default function PageHero({
   subtitle,
   image,
   imageAlt,
+  children,
 }: {
   eyebrow: string;
   title: string;
@@ -15,6 +16,8 @@ export default function PageHero({
   subtitle?: string;
   image: string;
   imageAlt: string;
+  /** Optional buttons under the subtitle. */
+  children?: React.ReactNode;
 }) {
   /* The band is shaped to the photos themselves (all 1800x1200, i.e. 3:2)
      rather than to a slice of viewport height. A fixed-height band is always
@@ -28,7 +31,11 @@ export default function PageHero({
      ultrawide monitors. In both of those the ratio no longer matches
      exactly, which is what the blurred layer below is for. */
   return (
-    <section className="relative w-full aspect-[3/2] min-h-[520px] max-h-[1750px] overflow-hidden">
+    // A hero with buttons (the neighborhood pages) holds more than the 520px
+    // band can fit on a phone, so it gets a taller minimum.
+    <section
+      className={`relative w-full aspect-[3/2] ${children ? "min-h-[720px] md:min-h-[640px]" : "min-h-[520px]"} max-h-[1750px] overflow-hidden`}
+    >
       <div className="absolute inset-0 bg-foreground-950">
         {/* Blurred, scaled-up copy of the same photo, as a backstop for the
             min-h/max-h cases above (and sub-pixel rounding): any sliver the
@@ -78,6 +85,9 @@ export default function PageHero({
             <p className="mt-5 text-white/75 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
               {subtitle}
             </p>
+          )}
+          {children && (
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">{children}</div>
           )}
         </motion.div>
       </div>

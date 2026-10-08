@@ -6,6 +6,7 @@ import About from "../pages/about/page";
 import Buyers from "../pages/buyers/page";
 import Sellers from "../pages/sellers/page";
 import Neighborhoods from "../pages/neighborhoods/page";
+import AreaPage from "../pages/neighborhoods/area/page";
 import Philanthropy from "../pages/philanthropy/page";
 import Resources from "../pages/resources/page";
 import Contact from "../pages/contact/page";
@@ -39,6 +40,10 @@ const routes: RouteObject[] = [
   {
     path: "/neighborhoods",
     element: <Neighborhoods />,
+  },
+  {
+    path: "/neighborhoods/:slug",
+    element: <AreaPage />,
   },
   {
     path: "/philanthropy",

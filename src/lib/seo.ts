@@ -1,4 +1,5 @@
 import { articles } from "@/mocks/home";
+import { areas } from "@/mocks/areas";
 
 /** Per-page <title>, description and canonical URL.
  *  Used twice: scripts/prerender.mjs bakes them into each page's static HTML
@@ -35,9 +36,9 @@ const PAGES: Record<string, PageMeta> = {
       "Selling your home in Studio City? Get expert pricing, Compass marketing and skilled negotiation from Stefanie Pollack to sell for top dollar.",
   },
   "/neighborhoods": {
-    title: "Studio City & Valley Neighborhood Guides | Stefanie Pollack",
+    title: "Los Angeles Neighborhood Guides | Stefanie Pollack",
     description:
-      "Local knowledge for every corner of Studio City and the surrounding San Fernando Valley communities — homes, lifestyle and what makes each neighborhood unique.",
+      "Compare Studio City, Sherman Oaks, Encino, and Beverly Hills with Stefanie Pollack, a Los Angeles real estate agent who grew up in Studio City.",
   },
   "/philanthropy": {
     title: "Philanthropy & Community | Stefanie Pollack",
@@ -69,6 +70,10 @@ const PAGES: Record<string, PageMeta> = {
     description: "Market updates, local guides, and community stories from Stefanie Pollack in Studio City.",
   },
 };
+
+for (const area of areas) {
+  PAGES[`/neighborhoods/${area.slug}`] = area.meta;
+}
 
 for (const a of articles) {
   PAGES[a.href] = { title: `${a.title} | Stefanie Pollack`, description: a.excerpt };
