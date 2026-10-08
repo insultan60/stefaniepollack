@@ -1,6 +1,9 @@
 /** Full body text for blog articles, keyed by the article's `href` in
  *  mocks/home.ts. An article without an entry here shows its excerpt and a
- *  "full article is on its way" note instead. */
+ *  "full article is on its way" note instead.
+ *
+ *  Paragraphs and list items can carry inline links written as
+ *  [anchor text](url) — see renderInline in pages/blog/slug/page.tsx. */
 
 export type ArticleBlock =
   | { type: "p"; text: string }
@@ -109,6 +112,45 @@ export const articleContent: Record<string, ArticleBlock[]> = {
         { q: "Is Studio City a good place to live?", a: "For buyers who value neighborhood character, restaurants, local businesses, outdoor recreation and proximity to other parts of Los Angeles, Studio City offers a distinctive combination of city convenience and residential living. As with any neighborhood, the right area depends on your lifestyle, budget and priorities." },
       ],
     },
+  ],
+
+  "/blog/4-practical-steps-to-make-2026-your-vision-year-in-studio-city-real-estate": [
+    { type: "p", text: "If you have been thinking about buying or selling in Studio City, 2026 could be your year." },
+    { type: "p", text: "The Studio City real estate market continues to evolve, and the homeowners and buyers who feel most confident are the ones who prepare early. Whether you are planning to buy or sell a home in Studio City, having a clear strategy and understanding the local market can make all the difference in your results." },
+    { type: "p", text: "Here are four practical steps to help you make 2026 your vision year in Studio City real estate." },
+
+    { type: "h2", text: "1. Define Your Lifestyle Goals" },
+    { type: "p", text: "Before looking at listings or home values, start with your lifestyle." },
+    { type: "p", text: "Are you looking for:" },
+    { type: "ul", items: ["More square footage", "Outdoor space for entertaining", "A move-in ready property", "A quieter street", "A home closer to shops, dining, and everyday conveniences"] },
+    { type: "p", text: "Studio City offers a wide range of housing options, from updated traditional homes to modern new construction properties. Clarifying what matters most to you helps narrow your focus and avoid overwhelm." },
+
+    { type: "h2", text: "2. Understand Your Buying Power or Home Equity" },
+    { type: "p", text: "If you are buying in Studio City, the first step is understanding your purchasing power. A trusted local lender can help you determine your budget and what your monthly payment could look like." },
+    { type: "p", text: "If you are selling, knowing your current Studio City home value is essential. Property values can vary based on lot size, condition, upgrades, and recent comparable sales." },
+    { type: "p", text: "Understanding:" },
+    { type: "ul", items: ["Current market value", "Estimated equity", "Closing costs", "Property taxes", "Financing options"] },
+    { type: "p", text: "puts you in a position of confidence instead of uncertainty." },
+
+    { type: "h2", text: "3. Watch Studio City Market Trends" },
+    { type: "p", text: "National real estate headlines do not always reflect what is happening locally. Studio City operates as its own micro-market within the wider [Los Angeles real estate market](https://andrewliberty.com/)." },
+    { type: "p", text: "Key indicators to monitor include:" },
+    { type: "ul", items: ["Median home price in Studio City", "Average days on market", "Current inventory levels", "Price per square foot trends", "Buyer demand in specific price ranges"] },
+    { type: "p", text: "Understanding local data helps you time your move strategically and position yourself competitively." },
+
+    { type: "h2", text: "4. Create a 90-Day Real Estate Plan" },
+    { type: "p", text: "Turning your vision into action requires a clear timeline." },
+    { type: "p", text: "For sellers in Studio City, that might include:" },
+    { type: "ul", items: ["Identifying strategic home improvements", "Preparing the home for professional photography", "Creating a targeted marketing plan", "Pricing based on neighborhood-specific data"] },
+    { type: "p", text: "For buyers, your plan may include:" },
+    { type: "ul", items: ["Loan pre-approval", "Touring different areas of Studio City", "Defining non-negotiables", "Preparing a competitive offer strategy"] },
+    { type: "p", text: "Breaking your goals into a focused 90-day plan makes the process feel manageable and organized." },
+
+    { type: "h2", text: "Make 2026 Your Year in Studio City Real Estate" },
+    { type: "p", text: "There is no perfect market. There is only the right strategy for your goals. If you are considering buying or selling in Studio City in 2026, starting the conversation early gives you clarity. Even if your move is months away, understanding your options today sets you up for better results tomorrow." },
+    { type: "p", text: "As your community connector and local real estate resource, I am here to help you navigate every step with confidence." },
+    { type: "p", text: "Let’s make 2026 your vision year in Studio City." },
+    { type: "signature" },
   ],
 
   "/blog/is-january-a-good-time-to-buy-or-sell-a-home-in-studio-city": [

@@ -129,6 +129,36 @@ export default function BlogArticle() {
   );
 }
 
+/* Inline links in article text, written as [anchor text](url). Site paths
+   ("/listings") stay in the tab; other sites open in a new one. Outside links
+   are deliberately left followable (no rel="nofollow"): the ones in these
+   posts are editorial links the client chose to give. */
+const LINK = /\[([^\]]+)\]\(([^)\s]+)\)/g;
+function renderInline(text: string) {
+  const parts: React.ReactNode[] = [];
+  let last = 0;
+  for (const m of text.matchAll(LINK)) {
+    const [whole, label, href] = m;
+    const at = m.index ?? 0;
+    if (at > last) parts.push(text.slice(last, at));
+    const external = /^https?:\/\//.test(href);
+    parts.push(
+      <a
+        key={at}
+        href={href}
+        {...(external ? { target: "_blank", rel: "noopener" } : {})}
+        className="text-primary-700 underline underline-offset-4 decoration-primary-300 hover:decoration-primary-700 transition-colors"
+      >
+        {label}
+      </a>,
+    );
+    last = at + whole.length;
+  }
+  if (last === 0) return text;
+  if (last < text.length) parts.push(text.slice(last));
+  return parts;
+}
+
 function Block({ block }: { block: ArticleBlock }) {
   switch (block.type) {
     case "h2":
@@ -139,7 +169,7 @@ function Block({ block }: { block: ArticleBlock }) {
       return (
         <ul className="list-disc pl-6 space-y-2 text-base md:text-lg text-foreground-700 leading-relaxed marker:text-primary-600">
           {block.items.map((item, i) => (
-            <li key={i}>{item}</li>
+            <li key={i}>{renderInline(item)}</li>
           ))}
         </ul>
       );
@@ -181,6 +211,6 @@ function Block({ block }: { block: ArticleBlock }) {
         </section>
       );
     default:
-      return <p className="text-base md:text-lg text-foreground-700 leading-relaxed whitespace-pre-line">{block.text}</p>;
+      return <p className="text-base md:text-lg text-foreground-700 leading-relaxed whitespace-pre-line">{renderInline(block.text)}</p>;
   }
 }
