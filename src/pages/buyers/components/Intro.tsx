@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { photoFocus } from "@/lib/photoFocus";
+import ProofStrip from "@/components/feature/ProofStrip";
 
 export default function Intro() {
   return (
@@ -16,7 +17,7 @@ export default function Intro() {
             <div className="relative aspect-[4/5] overflow-hidden rounded-lg">
               <img
                 src="/images/stefanie/lifestyle-4.jpg"
-                alt="Stefanie Pollack with buyer clients"
+                alt="Stefanie Pollack, Los Angeles buyer's agent"
                 className="w-full h-full object-cover"
                 style={{ objectPosition: photoFocus("/images/stefanie/lifestyle-4.jpg") }}
               />
@@ -35,28 +36,18 @@ export default function Intro() {
               For Buyers
             </p>
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-foreground-950 leading-tight">
-              Wondering Where
-              <br />
-              <span className="italic font-normal">You&apos;ll Land Next?</span>
+              A Los Angeles Buyer&apos;s Agent{" "}
+              <span className="italic font-normal">Who Does the Heavy Lifting</span>
             </h2>
             <div className="mt-8 space-y-4 text-foreground-700 leading-relaxed">
               <p>
-                You&apos;re on the hunt for the right home, and looking for an agent
-                to help make it happen. Your standards are high — but your time and
-                energy are anything but unlimited. Between running a household, a
-                job, and everything else on your plate, you need someone doing the
-                heavy lifting on your behalf.
+                Buying a home in Los Angeles takes time most people do not have. A buyer&apos;s agent
+                handles the legwork so you can focus on homes that fit.
               </p>
               <p>
-                You&apos;ve saved your favorite listings and you&apos;re ready to
-                kick the search into high gear. Now all you need is an expert
-                Realtor to guide you through the process step by step, from
-                pre-approval to closing — someone thorough and knowledgeable enough
-                to help you avoid unpleasant surprises after you move in.
-              </p>
-              <p>
-                When you&apos;re making a decision this big, the Realtor you choose
-                should be ready to go to work for your family.
+                Stefanie Pollack has 20+ years of experience across Los Angeles and the San Fernando
+                Valley. She helps you set a budget, find homes (including some off-market), write strong
+                offers, and close without surprises.
               </p>
             </div>
             <div className="mt-10">
@@ -64,11 +55,12 @@ export default function Intro() {
                 href="/contact"
                 className="inline-flex px-6 py-3 bg-foreground-950 text-background-50 text-sm font-medium tracking-wide uppercase rounded-md hover:bg-foreground-800 transition-colors duration-300 whitespace-nowrap"
               >
-                Start Your Search
+                Start Your Home Search
               </a>
             </div>
           </motion.div>
         </div>
+        <ProofStrip />
       </div>
     </section>
   );

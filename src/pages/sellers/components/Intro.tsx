@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { photoFocus } from "@/lib/photoFocus";
+import ProofStrip from "@/components/feature/ProofStrip";
+import { HOMEBOT_URL } from "@/lib/homebot";
 
 export default function Intro() {
   return (
@@ -17,33 +19,23 @@ export default function Intro() {
               For Sellers
             </p>
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-foreground-950 leading-tight">
-              Ready For
-              <br />
-              <span className="italic font-normal">Closing Day?</span>
+              A Los Angeles Listing Agent{" "}
+              <span className="italic font-normal">Who Gets You to Closing Day</span>
             </h2>
             <div className="mt-8 space-y-4 text-foreground-700 leading-relaxed">
               <p>
-                You don&apos;t have the time or energy to add &ldquo;get the home
-                ready to sell&rdquo; to your already full plate. What you&apos;d
-                love is to fast-forward straight to closing day. My team and I
-                know the key to getting multiple strong offers, fast: on-point
-                pricing, standout staging, savvy digital marketing, and stellar
-                negotiation.
+                Preparing a home for sale is a lot to add to a busy life. Stefanie Pollack takes it on, so
+                you can move from listing to closing day with less stress.
               </p>
               <p>
-                I&apos;m obsessed with over-delivering for my clients — working
-                hard to bring the right buyers to the table and vetting every
-                offer carefully, while helping you avoid unpleasant surprises
-                once you&apos;re in escrow.
-              </p>
-              <p>
-                When you&apos;re making a decision this big, you deserve a
-                Realtor who&apos;s ready to go to work for your family.
+                With 20+ years of experience across Los Angeles and the San Fernando Valley, she prices
+                your home from recent sales, prepares it to show well, markets it to serious buyers, and
+                vets every offer before you decide.
               </p>
             </div>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <a
-                href="https://get.homebot.ai/?id=a4aeb5dc-a3b8-4fb8-8003-7d0485c61c9e"
+                href={HOMEBOT_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-foreground-950 text-background-50 text-sm font-medium tracking-wide uppercase rounded-md hover:bg-foreground-800 transition-colors duration-300 whitespace-nowrap"
@@ -64,7 +56,7 @@ export default function Intro() {
             <div className="relative aspect-[4/5] overflow-hidden rounded-lg">
               <img
                 src="/images/stefanie/portrait-3.jpg"
-                alt="Stefanie Pollack, Studio City listing agent"
+                alt="Stefanie Pollack, Los Angeles listing agent"
                 className="w-full h-full object-cover"
                 style={{ objectPosition: photoFocus("/images/stefanie/portrait-3.jpg") }}
               />
@@ -72,6 +64,7 @@ export default function Intro() {
             <div className="absolute -bottom-4 -right-4 w-full h-full border border-primary-300 rounded-lg -z-10 hidden lg:block" />
           </motion.div>
         </div>
+        <ProofStrip />
       </div>
     </section>
   );

@@ -108,18 +108,18 @@ for (const { path, meta } of pages) {
 
     let html = template.replace('<div id="root"></div>', `<div id="root">${body}</div>`);
     // Homepage structured data, supplied by the client's SEO: one @graph
-    // linking the site, the page, the business (RealEstateAgent, a
-    // LocalBusiness type), Stefanie as a Person, and the FAQ. The FAQ answers
+    // linking the site, the page, the business (RealEstateAgent and
+    // LocalBusiness), Stefanie as a Person, and the FAQ. The FAQ answers
     // come from src/lib/homeFaqs.ts - the same list the page shows - so the
     // markup can never disagree with the visible text.
     if (path === "/") {
       const site = server.SITE_URL;
-      const social = [
-        "https://www.instagram.com/stefanieismyrealtor/",
-        "https://www.facebook.com/StefIsMyRealtor/",
-        "https://www.linkedin.com/in/stefaniedanhi/",
-        "https://www.youtube.com/channel/UC8QpQcHqoM_Lh3eLQXURNJA",
-      ];
+      const photo =
+        "https://images.squarespace-cdn.com/content/v1/62857f9467398e0fd622fe08/2fbd0c54-a64e-441c-854d-7fb5bdd2036e/081_09.2821_Stefanie-Pollack_Nicole-Goddard-Photography_423A3937+EDITED.jpg?format=800w";
+      const instagram = "https://www.instagram.com/stefanieismyrealtor/";
+      const facebook = "https://www.facebook.com/StefIsMyRealtor/";
+      const linkedin = "https://www.linkedin.com/in/stefaniedanhi/";
+      const youtube = "https://www.youtube.com/channel/UC8QpQcHqoM_Lh3eLQXURNJA";
       const schema = {
         "@context": "https://schema.org",
         "@graph": [
@@ -127,9 +127,9 @@ for (const { path, meta } of pages) {
             "@type": "WebSite",
             "@id": `${site}/#website`,
             url: `${site}/`,
-            name: "Stefanie Pollack | Los Angeles Real Estate",
+            name: "Stefanie Pollack | Los Angeles Real Estate Agent",
+            publisher: { "@id": `${site}/#business` },
             inLanguage: "en-US",
-            publisher: { "@id": `${site}/#agent` },
           },
           {
             "@type": "WebPage",
@@ -138,25 +138,24 @@ for (const { path, meta } of pages) {
             name: meta.title,
             description: meta.description,
             isPartOf: { "@id": `${site}/#website` },
-            about: { "@id": `${site}/#agent` },
+            about: { "@id": `${site}/#business` },
             primaryImageOfPage: { "@type": "ImageObject", url: `${site}/images/hero-poster.jpg` },
-            inLanguage: "en-US",
           },
           {
-            "@type": "RealEstateAgent",
-            "@id": `${site}/#agent`,
-            name: "Stefanie Pollack",
-            alternateName: "Pollack & Associates",
-            description:
-              "Stefanie Pollack is a Los Angeles real estate agent based in Studio City. She helps buyers and sellers in Studio City, the San Fernando Valley, Encino, Sherman Oaks, and Beverly Hills.",
+            "@type": ["RealEstateAgent", "LocalBusiness"],
+            "@id": `${site}/#business`,
+            name: "Stefanie Pollack | Compass",
+            alternateName: "Pollack Homes",
             url: `${site}/`,
             logo: `${site}/images/logo-pollack.webp`,
-            image: `${site}/images/hero-poster.jpg`,
-            slogan: "Connecting People with Homes & Community",
+            image: photo,
+            description:
+              "Los Angeles real estate agent based in Studio City helping buyers and sellers across Studio City, the San Fernando Valley, and Beverly Hills.",
             telephone: "+1-818-625-6171",
             email: "stefanie@stefaniepollack.com",
             address: {
               "@type": "PostalAddress",
+              streetAddress: "12001 Ventura Pl, Suite 100",
               addressLocality: "Studio City",
               addressRegion: "CA",
               postalCode: "91604",
@@ -165,39 +164,42 @@ for (const { path, meta } of pages) {
             geo: { "@type": "GeoCoordinates", latitude: 34.1396, longitude: -118.3875 },
             areaServed: [
               { "@type": "City", name: "Los Angeles" },
-              { "@type": "City", name: "Studio City" },
-              { "@type": "City", name: "Sherman Oaks" },
-              { "@type": "City", name: "Encino" },
+              { "@type": "Place", name: "Studio City" },
+              { "@type": "Place", name: "Sherman Oaks" },
+              { "@type": "Place", name: "Encino" },
               { "@type": "City", name: "Beverly Hills" },
               { "@type": "Place", name: "San Fernando Valley" },
             ],
-            parentOrganization: { "@type": "Organization", name: "Compass", url: "https://www.compass.com" },
-            identifier: { "@type": "PropertyValue", name: "California DRE License", value: "01815614" },
-            knowsAbout: [
-              "Los Angeles real estate",
-              "Studio City real estate",
-              "San Fernando Valley real estate",
-              "Luxury homes",
-              "Home buying",
-              "Home selling",
-            ],
-            award: ["RealTrends Verified", "Los Angeles Magazine Real Estate All-Stars"],
+            parentOrganization: { "@type": "Organization", name: "Compass", legalName: "Compass California, Inc." },
             founder: { "@id": `${site}/#stefanie` },
-            sameAs: social,
+            employee: { "@id": `${site}/#stefanie` },
+            sameAs: [instagram, facebook, linkedin, youtube],
           },
           {
             "@type": "Person",
             "@id": `${site}/#stefanie`,
             name: "Stefanie Pollack",
             jobTitle: "Real Estate Agent",
-            image:
-              "https://images.squarespace-cdn.com/content/v1/62857f9467398e0fd622fe08/2fbd0c54-a64e-441c-854d-7fb5bdd2036e/081_09.2821_Stefanie-Pollack_Nicole-Goddard-Photography_423A3937+EDITED.jpg?format=800w",
             url: `${site}/about`,
-            worksFor: { "@id": `${site}/#agent` },
-            email: "stefanie@stefaniepollack.com",
+            image: photo,
             telephone: "+1-818-625-6171",
-            homeLocation: { "@type": "Place", name: "Studio City, CA" },
-            sameAs: social,
+            email: "stefanie@stefaniepollack.com",
+            worksFor: { "@id": `${site}/#business` },
+            hasCredential: {
+              "@type": "EducationalOccupationalCredential",
+              credentialCategory: "Real estate license",
+              recognizedBy: { "@type": "Organization", name: "California Department of Real Estate" },
+              identifier: "01815614",
+            },
+            award: ["RealTrends Verified", "Los Angeles Magazine Real Estate All-Star"],
+            knowsAbout: [
+              "Los Angeles real estate",
+              "Studio City real estate",
+              "Luxury real estate",
+              "Home buying",
+              "Home selling",
+            ],
+            sameAs: [linkedin, instagram, facebook, youtube],
           },
           {
             "@type": "FAQPage",
@@ -207,6 +209,54 @@ for (const { path, meta } of pages) {
               name: f.q,
               acceptedAnswer: { "@type": "Answer", text: f.a },
             })),
+          },
+        ],
+      };
+      html = html.replace(
+        "</head>",
+        `<script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script></head>`,
+      );
+    }
+
+    // Neighborhood pages: a breadcrumb back to /neighborhoods and the agent
+    // tied to the area as the page's subject, built from the same data the
+    // page renders (src/mocks/areas.ts). No FAQPage here: FaqList already
+    // emits one in the page body, and Google flags a second as a duplicate.
+    const area = server.AREAS.find((a) => path === `/neighborhoods/${a.slug}`);
+    if (area) {
+      const site = server.SITE_URL;
+      const schema = {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": `${url}#webpage`,
+            url,
+            name: meta.title,
+            description: meta.description,
+            isPartOf: { "@id": `${site}/#website` },
+            about: { "@id": `${site}/#business` },
+            primaryImageOfPage: { "@type": "ImageObject", url: `${site}${area.hero.image}` },
+            breadcrumb: { "@id": `${url}#breadcrumb` },
+            inLanguage: "en-US",
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": `${url}#breadcrumb`,
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: `${site}/` },
+              { "@type": "ListItem", position: 2, name: "Neighborhoods", item: `${site}/neighborhoods` },
+              { "@type": "ListItem", position: 3, name: area.name, item: url },
+            ],
+          },
+          {
+            "@type": ["RealEstateAgent", "LocalBusiness"],
+            "@id": `${site}/#business`,
+            name: "Stefanie Pollack | Compass",
+            url: `${site}/`,
+            telephone: "+1-818-625-6171",
+            address: { "@type": "PostalAddress", addressLocality: "Studio City", addressRegion: "CA", postalCode: "91604", addressCountry: "US" },
+            areaServed: { "@type": "Place", name: `${area.name}, CA` },
           },
         ],
       };

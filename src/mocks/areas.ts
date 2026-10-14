@@ -3,9 +3,11 @@
  *  (MLS figures, the negotiation credential's name, award years) is left out
  *  rather than guessed — add it here once the client supplies it.
  *
- *  Encino and Beverly Hills have no page yet. Link them through areaHref(),
- *  which falls back to /listings until a page exists, so nothing points at a
- *  404. */
+ *  Every area card links through areaHref(), which falls back to /listings
+ *  for any area without a page here, so nothing points at a 404.
+ *
+ *  All four pages follow the client briefs. Beverly Hills has no reviews
+ *  block until a Beverly Hills or Westside review is on file. */
 
 export type AreaBlock =
   | { kind: "p"; text: string }
@@ -280,6 +282,7 @@ export const areas: Area[] = [
           { kind: "p", text: "Schools are one of the first things buyers ask about. Most of the neighborhood is served by the Los Angeles Unified School District, but assignments depend on the exact address, and magnet and private options are also available. Stefanie helps you verify the school assignment for any home before you make an offer, and you should confirm it with the district too." },
           { kind: "h3", text: "Parks and Outdoor Time" },
           { kind: "p", text: "Families and dog owners use local parks such as Van Nuys Sherman Oaks Park, and the hillside streets lead toward trails in the Santa Monica Mountains." },
+          { kind: "link", label: "Read the local guide to things to do in Sherman Oaks", href: "/blog/things-to-do-in-sherman-oaks" },
         ],
       },
     ],
@@ -311,6 +314,273 @@ export const areas: Area[] = [
       text: "Whether you are eyeing a condo off Ventura Boulevard or a house in the hills, start with a short conversation about your goals and timing. Stefanie, your real estate agent in Sherman Oaks and a neighbor from Studio City, will tell you what is realistic.",
     },
   },
+
+  {
+    slug: "encino",
+    name: "Encino",
+    meta: {
+      title: "Encino Real Estate Agent | Homes for Sale",
+      description:
+        "Stefanie Pollack is an Encino real estate agent helping buyers and sellers with homes, condos, and luxury estates. Local Valley experience.",
+    },
+    hero: {
+      eyebrow: "Encino, California",
+      title: "Encino",
+      italicTitle: "Real Estate Agent",
+      subtitle:
+        "Stefanie Pollack helps buyers and sellers across Encino, from condos and ranch-style homes to hillside estates. She works the Valley every day and knows which streets, lots, and views hold their value.",
+      image: "/images/neighborhoods/encino-hero.jpg",
+      imageAlt: "The Encino Commons arch over Ventura Boulevard in Encino",
+      listingsButton: "View Encino Listings",
+    },
+    intro: {
+      h2: "An Encino Real Estate Agent Who Works the Valley Every Day",
+      paragraphs: [
+        "Stefanie Pollack is a real estate agent in Encino, CA with more than 20 years of Los Angeles experience. She is based in nearby Studio City, so Ventura Boulevard, Balboa, and the canyon roads are part of her normal week.",
+        "Encino, California real estate is not one market. You will find wide lots on the flats, condos close to the boulevard, and homes in the hills with long views across the Valley. Two homes a mile apart can sit in very different price ranges, so she starts by showing what your street and property type are actually worth.",
+      ],
+      trust: ["20+ Years Experience", "$500M+ in Sales", "800+ Families Helped", "Compass Agent"],
+    },
+    listings: {
+      zips: ["91316", "91436"],
+      cityLabelZip: "",
+      available: {
+        h2: "Encino Real Estate for Sale",
+        text: "Browse the houses, condos, and townhomes now for sale in Encino, with open house dates where they are available. Stefanie can arrange private tours and tell you about homes before they reach the big portals.",
+        button: "View All Encino Listings",
+      },
+      sold: {
+        h2: "Recently Sold in Encino",
+        text: "Sold prices show what buyers really paid, and that is often different from the asking price. Look at sales of similar homes on nearby streets, not the Encino average.",
+        button: "View Sold Encino Homes",
+      },
+      empty: "Stefanie has no Encino homes on the market right now. Open the full search, or join the list below to hear about new Encino listings first.",
+      alerts: "Get new Encino real estate listings and off-market news by email.",
+      altNoun: "Encino property",
+    },
+    sections: [
+      {
+        id: "buying",
+        h2: "Buying a Home in Encino",
+        blocks: [
+          { kind: "p", text: "Most people shopping for real estate for sale in Encino, CA are balancing three things: the type of home, the location, and the amount of land. Stefanie helps you decide where you can be flexible before you start touring, so you spend weekends on homes that fit." },
+          { kind: "h3", text: "Houses for Sale in Encino, CA" },
+          { kind: "p", text: "Many houses on the Encino flats sit on wide, flat lots with room for a pool and a yard. Homes in the hills trade that for views and privacy, but they often come with slopes, retaining walls, and narrower roads. Stefanie pulls recent sales on your target streets and checks City of Los Angeles hillside and permit rules before you plan a remodel." },
+          { kind: "h3", text: "Encino Condos and Townhomes" },
+          { kind: "p", text: "Condos and townhomes suit buyers who want less upkeep, a lock-and-leave setup, or a lower entry price than a house. Compare monthly dues and what they cover, the building's reserves, rental rules, and parking before you compare prices. Stefanie reviews those documents with you so there are no surprises at closing." },
+          { kind: "h3", text: "What Does It Cost to Buy in Encino?" },
+          { kind: "p", text: "Prices here vary a lot by street, lot size, and condition, so a single number rarely helps. Condos, townhomes, and older or smaller houses usually sit at the lower end. Stefanie shows you what your budget can buy, and what it cannot, before the first showing." },
+          { kind: "button", label: "Start Your Encino Home Search", href: "/listings" },
+        ],
+      },
+      {
+        id: "luxury",
+        h2: "Encino Luxury Real Estate",
+        tint: true,
+        blocks: [
+          { kind: "p", text: "Encino luxury real estate is about more than a big house. Buyers weigh gated entry, guest houses, pools and tennis courts, views, and how much of a lot is truly usable. A luxury real estate agent in Encino, CA should know the difference between a large lot and a flat, buildable one." },
+          { kind: "p", text: "Some of the best homes sell quietly before a public listing ever appears. Stefanie uses her network and Compass's private listing options to find them for buyers and to market them for sellers." },
+          { kind: "p", text: "If you are selling a high-end home, she plans around privacy as well as price. That can mean a private preview for select buyers, professional photography and video, and a comparison against truly similar estates." },
+          { kind: "button", label: "Talk With Stefanie About a Luxury Home", href: "/contact" },
+        ],
+      },
+      {
+        id: "selling",
+        h2: "Selling Your Home in Encino",
+        blocks: [
+          { kind: "p", text: "Many real estate agents in Encino, CA will price a home from a neighborhood average. Stefanie prices yours against recent sales of homes with a similar lot, size, condition, and street, because a house on the flats and a hillside home attract different buyers." },
+          { kind: "p", text: "From there she plans the preparation, photography, marketing, and showings, and she handles offers and negotiation through closing. She will also talk with you about listing publicly, sharing the home privately first, or doing both." },
+          { kind: "button", label: "Get Your Encino Home Value", href: "/sellers" },
+        ],
+      },
+      {
+        id: "market",
+        h2: "Encino Real Estate Market",
+        tint: true,
+        blocks: [
+          { kind: "p", text: "The Encino real estate market moves by street and property type, and a few high-priced sales can lift an average quickly. That is why Stefanie compares your home to close matches and not to a citywide figure." },
+          { kind: "link", label: "Contact Stefanie for a current read on where Encino stands", href: "/contact" },
+        ],
+      },
+      {
+        id: "living",
+        h2: "Encino Neighborhoods, ZIP Codes, Schools, and Parks",
+        blocks: [
+          { kind: "h3", text: "Encino Neighborhoods and ZIP Codes" },
+          { kind: "p", text: "Encino sits in the San Fernando Valley and is part of the City of Los Angeles. Its ZIP codes are 91316 and 91436, so a search for Encino 91316 real estate will show only part of the picture." },
+          { kind: "p", text: "The area south of Ventura Boulevard climbs into the Santa Monica Mountains, where Encino Hills real estate offers views and larger lots. Pockets such as Royal Oaks each have their own feel and price range, and Stefanie can walk you through them." },
+          { kind: "h3", text: "Schools in Encino" },
+          { kind: "p", text: "Most Encino homes are served by the Los Angeles Unified School District, and the school assigned to a home depends on its address. Charter and magnet options may also be available. Check the exact address with the district before you make an offer." },
+          { kind: "h3", text: "Parks and Outdoor Time" },
+          { kind: "p", text: "Los Encinos State Historic Park is a short outing with an old ranch house and a pond, and the Sepulveda Basin Recreation Area offers trails, sports fields, and open space nearby. Many residents also use the hiking routes in the hills above Ventura Boulevard. Dining and shopping along the boulevard fill in the rest of daily life." },
+        ],
+      },
+    ],
+    why: {
+      h2: "Why Choose Stefanie Among Encino Real Estate Agents",
+      paragraphs: [
+        "Stefanie Pollack is a Compass agent who has guided more than 800 families through buying and selling in Los Angeles. Compass is a national real estate brokerage, and its tools and private listing options give her clients extra reach.",
+      ],
+      points: [
+        { title: "Valley knowledge", text: "She lives and works in the neighborhoods around Encino, so she knows how streets, schools, and commute routes affect value." },
+        { title: "Street-level pricing", text: "Your offer or list price comes from matching sales, not a citywide number." },
+        { title: "Independent recognition", text: "RealTrends Verified and Los Angeles Magazine Real Estate All-Stars." },
+      ],
+      reviewsH3: "What Clients Say",
+      // Jon D. is an Encino client; the brief asks for Encino or West Valley
+      // reviews only, never ones borrowed from other neighborhoods.
+      reviewAuthors: ["Jon D."],
+    },
+    faqH2: "Encino Real Estate FAQs",
+    faqs: [
+      { q: "How do I choose among real estate agents in Encino, CA?", a: "Ask for recent sales in your price range and property type, and how the agent handles competing offers. If you search for the best real estate agent in Encino or the top real estate agents in Encino, compare reviews and recognition such as RealTrends Verified, and talk with more than one agent." },
+      { q: "Is Encino part of Los Angeles?", a: "Yes. Encino is a neighborhood in the City of Los Angeles, in the San Fernando Valley, so city rules for permits, zoning, and transfer taxes apply." },
+      { q: "What extra taxes or fees should I expect when buying or selling in the City of Los Angeles?", a: "Buyers and sellers pay the usual escrow, title, and loan costs, and sellers pay transfer taxes. Higher-priced sales can also trigger the city's transfer tax measure, known as Measure ULA. Stefanie can explain the numbers for your price range before you list or make an offer." },
+      { q: "Can I see Encino homes before they are listed?", a: "Sometimes. Some homes sell privately through agent networks and Compass's private listing options. Tell Stefanie what you want and she will watch for matches." },
+      { q: "What should I do first to sell a house in Encino?", a: "Start with a price opinion built from matching sales. Then decide whether to list publicly, share the home privately first, or do both. A short call can cover all three." },
+    ],
+    nearby: ["Studio City", "Sherman Oaks", "Beverly Hills"],
+    cta: {
+      title: "Ready to Buy or Sell",
+      italicTitle: "in Encino?",
+      text: "Whether you are starting a search or already have a street in mind, a short call is the best first step. Stefanie, your Encino real estate agent, will tell you what the numbers say and what to do next.",
+    },
+  },
+
+  {
+    slug: "beverly-hills",
+    name: "Beverly Hills",
+    meta: {
+      title: "Beverly Hills Real Estate Agent | Homes & Condos",
+      description:
+        "Stefanie Pollack is a Beverly Hills real estate agent for buyers and sellers of homes, condos, and estates. Compare Beverly Hills with the Valley.",
+    },
+    hero: {
+      eyebrow: "Beverly Hills, California",
+      title: "Beverly Hills",
+      italicTitle: "Real Estate Agent",
+      subtitle:
+        "Stefanie Pollack helps buyers and sellers across Beverly Hills, from condos and townhomes to estates. She brings the view of a Valley agent who knows how both sides of the hills compare.",
+      image: "/images/neighborhoods/beverly-hills-hero.jpg",
+      imageAlt: "A Beverly Hills street lined with tall palm trees",
+      listingsButton: "View Beverly Hills Listings",
+    },
+    intro: {
+      h2: "A Beverly Hills Real Estate Agent With a Valley and Westside View",
+      paragraphs: [
+        "Stefanie Pollack is a Beverly Hills real estate agent with more than 20 years of Los Angeles experience, based in Studio City. Many of her clients are choosing between the Valley and the Westside, and she can compare both from experience.",
+        "Beverly Hills runs its own schools, police, and permitting, and prices shift sharply between the flats, the hills, and the condo buildings. Whether you want a Beverly Hills realtor for a first Westside purchase or a high-end sale, she starts by showing what a specific street and property type is really worth.",
+      ],
+      trust: ["20+ Years Experience", "$500M+ in Sales", "800+ Families Helped", "Compass Agent"],
+    },
+    listings: {
+      // Filtered by ZIP. Some 90210 addresses are in the City of Los Angeles,
+      // and the feed's postal city reads "Beverly Hills" for them too, so the
+      // page cannot tell them apart; the ZIP section below says so instead.
+      zips: ["90210", "90211", "90212"],
+      cityLabelZip: "",
+      available: {
+        h2: "Beverly Hills Homes for Sale",
+        text: "Houses, condos, and townhomes now on the market in Beverly Hills are below, with open house dates shown where available. Stefanie can arrange private showings and point you to homes that are not yet public.",
+        button: "View All Beverly Hills Listings",
+      },
+      sold: {
+        h2: "Recently Sold in Beverly Hills",
+        text: "Recent sales show what buyers actually paid, and in this market the gap between asking and closing price can be large. Compare sales of similar homes on similar streets, not the city as a whole.",
+        button: "View Sold Beverly Hills Homes",
+      },
+      empty: "Stefanie has no Beverly Hills homes on the market right now. Open the full search, or join the list below to hear about new Beverly Hills listings and off-market homes first.",
+      alerts: "Get new Beverly Hills listings and off-market news in your inbox.",
+      altNoun: "Beverly Hills property",
+    },
+    sections: [
+      {
+        id: "buying",
+        h2: "Buying a Home in Beverly Hills",
+        blocks: [
+          { kind: "p", text: "Buying here is shaped by three choices: the type of property, the part of the city, and how much privacy and space you want. Stefanie helps you sort those out before you tour, so your time goes to homes that truly fit." },
+          { kind: "h3", text: "Houses for Sale in Beverly Hills, CA" },
+          { kind: "p", text: "Start with the setting. The flats offer walkable access to dining and shopping, while the canyons and hills trade that for views, privacy, and larger lots, plus more upkeep and trickier access. Stefanie checks recent sales on your target streets, and reviews the city's own permit rules before any remodel, since they differ from Los Angeles." },
+          { kind: "h3", text: "Beverly Hills Condos and Townhomes" },
+          { kind: "p", text: "Condos here range from small buildings to full-service high-rises, and townhomes give you more room and a house-like layout. Beyond price, Stefanie compares what the monthly dues buy, such as services, security, and parking, and reviews the building's finances and rules. For townhomes she also confirms how the property is owned and who maintains the exterior." },
+          { kind: "h3", text: "What Does It Cost to Buy in Beverly Hills?" },
+          { kind: "p", text: "Many people search for the cheapest house in Beverly Hills, and the honest answer is that entry prices are high and move with the market. The lowest-priced options are usually condos, townhomes, and smaller or older houses, and what you give up in space or condition depends on the street. Stefanie shows you what your budget can realistically buy, and what it cannot, before you start touring." },
+          { kind: "button", label: "Start Your Beverly Hills Home Search", href: "/listings" },
+        ],
+      },
+      {
+        id: "luxury",
+        h2: "Beverly Hills Luxury Real Estate",
+        tint: true,
+        blocks: [
+          { kind: "p", text: "At the top of the market, the questions change. Buyers of Beverly Hills mansions and estates care about privacy, security, lot size and usable land, views, and how much work the property needs. Many of the best opportunities are never listed publicly, so Stefanie uses her network and Compass's private listing options to find and present them." },
+          { kind: "p", text: "Sellers of high-end homes need a different plan too: careful pricing against truly comparable estates, professional photography and video, and discreet marketing when privacy matters. Stefanie works with luxury buyers and sellers who want a clear, honest comparison with other markets, including the Valley." },
+          { kind: "button", label: "Talk With Stefanie About a Luxury Home", href: "/contact" },
+        ],
+      },
+      {
+        id: "selling",
+        h2: "Selling in Beverly Hills",
+        blocks: [
+          { kind: "p", text: "What you compare against decides your price. A hillside estate, a house on the flats, and a condo each attract a different buyer pool, so Stefanie prices yours against sales that truly match, then plans preparation, marketing, and offers through closing." },
+          { kind: "p", text: "She also helps you decide whether to list publicly, share the home privately first, or do both. That choice matters most for higher-priced homes and for owners who value discretion." },
+          { kind: "button", label: "Get Your Beverly Hills Home Value", href: "/sellers" },
+        ],
+      },
+      {
+        id: "market",
+        h2: "Beverly Hills Real Estate Market",
+        tint: true,
+        blocks: [
+          { kind: "p", text: "The Beverly Hills median home price can swing from quarter to quarter, because a few very high sales move the average. For that reason, Stefanie studies sales by street and property type." },
+          { kind: "link", label: "Contact Stefanie for a current read on the market", href: "/contact" },
+        ],
+      },
+      {
+        id: "living",
+        h2: "Beverly Hills ZIP Codes, Schools, and Parks",
+        blocks: [
+          { kind: "h3", text: "Beverly Hills ZIP Codes" },
+          { kind: "p", text: "The Beverly Hills ZIP codes are 90210, 90211, and 90212. Here is what catches many buyers off guard: a 90210 mailing address does not always mean the home is in the City of Beverly Hills. Some 90210 homes, including some hillside estates, sit in the City of Los Angeles. That changes the school district, city services, and building rules. Stefanie confirms which city a home is in before you fall in love with it, whether you are looking at a house in Beverly Hills 90210 or any other address." },
+          { kind: "h3", text: "Schools in Beverly Hills" },
+          { kind: "p", text: "Beverly Hills has its own school district, separate from the Los Angeles Unified School District. Because attendance follows the city line, check which school serves an exact address, whether you are comparing middle schools, elementary schools, or preschools. Private schools in the area add more options." },
+          { kind: "h3", text: "Parks and Outdoor Time" },
+          { kind: "p", text: "Beverly Hills parks and gardens are part of daily life here, from Beverly Gardens Park along Santa Monica Boulevard to Roxbury Park and Greystone Mansion and Gardens. Hiking and canyon trails are close by, and Coldwater Canyon, which links the Valley with Beverly Hills, is one of the routes many Studio City and Sherman Oaks residents already know." },
+          { kind: "link", label: "Read the local guide to things to do in Beverly Hills", href: "/blog/things-to-do-in-beverly-hills" },
+        ],
+      },
+    ],
+    why: {
+      h2: "Why Choose Stefanie Among Beverly Hills Real Estate Agents",
+      paragraphs: [
+        "Compass agent Stefanie Pollack has guided more than 800 families through buying and selling in Los Angeles.",
+      ],
+      points: [
+        { title: "A two-market view", text: "She works the Valley and the Westside, so she can tell you honestly what you gain and give up by choosing one over the other." },
+        { title: "Street-level pricing", text: "Your offer or list price is built on matching sales, not a citywide number." },
+        { title: "Independent recognition", text: "RealTrends Verified and Los Angeles Magazine Real Estate All-Stars." },
+      ],
+      reviewsH3: "What Clients Say",
+      // Left empty on purpose: the brief says to leave the reviews out until a
+      // Beverly Hills or Westside review exists, not to borrow another area's.
+      reviewAuthors: [],
+    },
+    faqH2: "Beverly Hills Real Estate FAQs",
+    faqs: [
+      { q: "How do I choose among real estate agents in Beverly Hills, CA?", a: "Look for recent sales in your price range and property type, and ask how the agent finds off-market homes and handles competing offers. Whether you want the best realtor in Beverly Hills or a broker or buyer's agent you trust, check reviews and recognition such as RealTrends Verified." },
+      { q: "Is Beverly Hills in LA?", a: "No, not as a city. Beverly Hills is its own city, surrounded by the City of Los Angeles, with its own city government, police, fire department, and school district. Many people say it is in Los Angeles because it sits within Los Angeles County and the Los Angeles area." },
+      { q: "What are the ZIP codes for Beverly Hills?", a: "Beverly Hills uses 90210, 90211, and 90212. Some 90210 addresses are in the City of Los Angeles, so check the exact address." },
+      { q: "What is the cheapest way to buy in Beverly Hills?", a: "Condos and townhomes are usually the lowest-priced options, followed by smaller or older houses. Prices change often, so Stefanie reviews current MLS data with you and shows what your budget can and cannot buy." },
+      { q: "Are there condos and townhomes for sale in Beverly Hills?", a: "Yes, in a range of building types. Browse them in the listings above, and look closely at monthly dues and what they include, since that changes what you can afford." },
+      { q: "What should I do first to sell a house in Beverly Hills?", a: "Decide how visible you want the sale to be: a public listing, private marketing, or both. Then get a price opinion built from matching sales. Stefanie can cover both in one short call." },
+    ],
+    nearby: ["Studio City", "Sherman Oaks", "Encino"],
+    cta: {
+      title: "Ready to Buy or Sell",
+      italicTitle: "in Beverly Hills?",
+      text: "Whether you are weighing the Valley against the Westside or already have an address in mind, start with a short call. Stefanie, your Beverly Hills real estate agent, will tell you what the numbers say.",
+    },
+  },
 ];
 
 /** Every neighborhood card on the site, in the order the client asked for
@@ -333,14 +603,16 @@ export const areaCards = [
   {
     name: "Encino",
     tagline: "Suburban calm with a polished feel",
-    image: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&h=600&fit=crop",
-    alt: "Modern living room in an Encino home",
+    // Public domain (JGKlein, Wikimedia Commons): Encino Commons, Ventura Blvd.
+    image: "/images/neighborhoods/encino.jpg",
+    alt: "The Encino Commons arch over Ventura Boulevard in Encino",
   },
   {
     name: "Beverly Hills",
     tagline: "Iconic luxury on the Westside",
-    image: "https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=800&h=600&fit=crop",
-    alt: "Bedroom in a Beverly Hills home",
+    // Unsplash License (Lesli Whitecotton, unsplash.com/photos/2cFzLSweHN8).
+    image: "/images/neighborhoods/beverly-hills.jpg",
+    alt: "A Beverly Hills street lined with tall palm trees",
   },
 ];
 

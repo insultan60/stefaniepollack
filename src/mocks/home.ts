@@ -229,7 +229,7 @@ export const testimonials = [
     quote:
       "STOP looking for another agent — you simply cannot find one better than Stefanie. We had the pleasure of working with Stefanie as our Studio City realtor when searching for a new home for my in-laws. From the moment we found her online, we were impressed with her professionalism and expertise.",
     author: "Brian S.",
-    location: "Los Angeles, CA",
+    location: "Buyer, Studio City",
   },
   {
     id: 2,
@@ -249,7 +249,7 @@ export const testimonials = [
     id: 4,
     quote:
       "I am very grateful to Stefanie, and her support team, for her hard work and dedication to getting my dad the outcome that he envisioned for himself. Stefanie came up with a successful strategic plan that generated at least 10 strong offers.",
-    author: "Melissa Schwarm",
+    author: "Melissa S.",
     location: "Seller, Studio City",
   },
 ];
@@ -278,7 +278,7 @@ export const allTestimonials = [
     quote:
       "Stefanie is an amazing realtor! She took the time to explain what it would take to sell our house for the price we wanted, then had us stage it so it looked like a model home. She did open houses every weekend until we found our buyer and was an excellent negotiator the whole way through.",
     author: "Leanne S.",
-    location: "Sherman Oaks, CA",
+    location: "Seller, Sherman Oaks",
   },
   {
     id: 8,
@@ -299,7 +299,7 @@ export const allTestimonials = [
     quote:
       "From start to finish she was knowledgeable, very organized, and completely on top of everything. Being first time home buyers, we asked a ton of questions — Stefanie answered every single one with intelligence, professionalism, and patience. She helped us find our dream home.",
     author: "Denise K.",
-    location: "North Hollywood, CA",
+    location: "First-time buyer, North Hollywood",
   },
   {
     id: 11,
@@ -312,8 +312,8 @@ export const allTestimonials = [
     id: 12,
     quote:
       "Stefanie helped us find our dream home in Valley Village after patiently helping us navigate through neighborhoods, school districts, and all the other considerations. She was incredibly responsive and always there for our needs, including finding the best ways to present our offers.",
-    author: "Eric Held",
-    location: "Valley Village, CA",
+    author: "Eric H.",
+    location: "Buyer, Valley Village",
   },
   {
     id: 13,
@@ -332,6 +332,26 @@ export const stats = [
 ];
 
 export const articles = [
+  {
+    id: 7,
+    title: "Things to Do in Beverly Hills: A Valley Local's Guide",
+    excerpt: "Greystone Mansion's free gardens, the Beverly Hills sign at Beverly Gardens Park, the Sunday farmers market, Roxbury Park, The Wallis and a walk down Rodeo Drive. A guide from just over the hill.",
+    image: "/images/neighborhoods/beverly-hills-hero.jpg",
+    href: "/blog/things-to-do-in-beverly-hills",
+    category: "Local Guide",
+    date: "Oct 2026",
+    readTime: "6 min read",
+  },
+  {
+    id: 6,
+    title: "Things to Do in Sherman Oaks: A Local's Guide",
+    excerpt: "Hillside trails at Dixie Canyon and Longridge Park, the Saturday farmers market, Castle Park, the Van Nuys Sherman Oaks pool and Ventura Boulevard. A neighbor's guide to getting to know Sherman Oaks.",
+    image: "/images/blog/sherman-oaks-la-reina.jpg",
+    href: "/blog/things-to-do-in-sherman-oaks",
+    category: "Local Guide",
+    date: "Oct 2026",
+    readTime: "6 min read",
+  },
   {
     id: 5,
     title: "The Best Things to Do in Studio City Before Summer Ends",

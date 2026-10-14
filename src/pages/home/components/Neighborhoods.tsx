@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { MapPin, ArrowRight } from "lucide-react";
+import { areaHref } from "@/mocks/areas";
 
 const areas = [
   {
@@ -66,7 +67,7 @@ export default function Neighborhoods() {
                 <h3 className="font-heading text-xl md:text-2xl text-foreground-950">{area.name}</h3>
                 <p className="mt-3 text-sm text-foreground-600 leading-relaxed flex-grow">{area.description}</p>
                 <a
-                  href="/neighborhoods"
+                  href={areaHref(area.name)}
                   className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-foreground-800 hover:text-primary-700 transition-colors"
                 >
                   {area.cta}

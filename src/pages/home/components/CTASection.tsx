@@ -1,26 +1,37 @@
 import { motion } from "framer-motion";
+import { photoFocus } from "@/lib/photoFocus";
 
 /* Shared closing call to action. The homepage copy is the default; the
-   neighborhood pages pass their own heading and text. */
+   neighborhood, buyers and sellers pages pass their own heading and text, and
+   the buyers and sellers pages their own background photo and first button. */
 export default function CTASection({
   eyebrow = "Ready to Start",
   title = "Ready to Buy or Sell",
   italicTitle = "in Los Angeles?",
   text = "Work with a Los Angeles real estate agent who knows Studio City and the Valley. Start with a short conversation about what you want.",
+  image = "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&h=800&fit=crop&q=80",
+  imageAlt = "Luxury home interior",
+  primary = { label: "Schedule a Meeting", href: "/schedule" },
+  secondary = { label: "Get in Touch", href: "/contact" },
 }: {
   eyebrow?: string;
   title?: string;
   italicTitle?: string;
   text?: string;
+  image?: string;
+  imageAlt?: string;
+  primary?: { label: string; href: string; external?: boolean };
+  secondary?: { label: string; href: string };
 } = {}) {
   return (
     <section className="relative w-full py-28 md:py-36 lg:py-44 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&h=800&fit=crop&q=80"
-          alt="Luxury home interior"
+          src={image}
+          alt={imageAlt}
           className="w-full h-full object-cover"
+          style={{ objectPosition: photoFocus(image) }}
         />
         <div className="absolute inset-0 bg-foreground-950/60" />
       </div>
@@ -47,16 +58,17 @@ export default function CTASection({
           </p>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="/schedule"
+              href={primary.href}
+              {...(primary.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               className="px-8 py-3.5 bg-white text-foreground-950 text-sm font-medium tracking-wide uppercase rounded-md hover:bg-primary-100 transition-all duration-300 whitespace-nowrap"
             >
-              Schedule a Meeting
+              {primary.label}
             </a>
             <a
-              href="/contact"
+              href={secondary.href}
               className="px-8 py-3.5 bg-transparent text-white text-sm font-medium tracking-wide uppercase rounded-md border border-white/40 hover:bg-white/10 transition-all duration-300 whitespace-nowrap"
             >
-              Get in Touch
+              {secondary.label}
             </a>
           </div>
         </motion.div>

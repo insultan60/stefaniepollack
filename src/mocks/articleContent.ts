@@ -14,6 +14,114 @@ export type ArticleBlock =
   | { type: "faq"; title: string; items: { q: string; a: string }[] };
 
 export const articleContent: Record<string, ArticleBlock[]> = {
+  "/blog/things-to-do-in-beverly-hills": [
+    { type: "p", text: "Beverly Hills is only a drive over Coldwater Canyon from Studio City, where I live and work, and a lot of my clients spend time on both sides of the hills before they decide where to buy." },
+    { type: "p", text: "Beyond the famous shopping, Beverly Hills is a city of parks, gardens and quiet residential streets. Whether you live here, are visiting, or are weighing Beverly Hills against the Valley, here are some of my favorite ways to spend a day." },
+
+    { type: "h2", text: "1. Walk the Gardens at Greystone Mansion" },
+    { type: "p", text: "Greystone Mansion & Gardens, at 905 Loma Vista Drive, is one of the best free outings in the city. The mansion was built in 1928 for the son of an oil baron, and it sits on 18.5 acres of city-owned parkland." },
+    { type: "p", text: "You can stroll the formal gardens with their fountain and the pool and courtyard area, and admission to the grounds and parking are free. The park occasionally closes for filming or events, so check before you go." },
+
+    { type: "h2", text: "2. Find the Beverly Hills Sign at Beverly Gardens Park" },
+    { type: "p", text: "Beverly Gardens Park stretches nearly two miles along Santa Monica Boulevard. It's home to the famous Beverly Hills sign and lily pond, along with a cactus and succulent garden, rose garden, fountains and a long walking promenade." },
+    { type: "p", text: "It's a perfect place for a morning walk, and the classic spot for a Beverly Hills photo." },
+
+    { type: "h2", text: "3. Spend Sunday Morning at the Farmers Market" },
+    { type: "p", text: "The Beverly Hills Farmers Market runs every Sunday from 9:00 a.m. to 1:00 p.m. on the 9300 block of Civic Center Drive, between Third Street and Santa Monica Boulevard." },
+    { type: "p", text: "Expect seasonal produce, flowers, prepared food and a relaxed neighborhood crowd. Hours can change, so check before you go." },
+
+    { type: "h2", text: "4. Bring the Family to Roxbury Park" },
+    { type: "p", text: "Roxbury Park, at 471 South Roxbury Drive, covers 11 acres with two playgrounds, tennis and basketball courts, sand volleyball, lawn bowling, picnic areas and plenty of open lawn." },
+    { type: "p", text: "It's one of the parks families ask me about most when they're thinking about the streets south of Wilshire." },
+
+    { type: "h2", text: "5. See a Show at The Wallis" },
+    { type: "p", text: "The Wallis Annenberg Center for the Performing Arts, at 9390 North Santa Monica Boulevard, brings theater, dance and music to the heart of the city. Its lobby is the restored 1933 Beverly Hills Post Office, which makes the building worth a look even before the show starts." },
+
+    { type: "h2", text: "6. Tour Virginia Robinson Gardens" },
+    { type: "p", text: "Built in 1911, the Virginia Robinson estate was the first estate in Beverly Hills, and its gardens are a peaceful step back in time. Visits are by guided tour and reservation only, so book ahead." },
+
+    { type: "h2", text: "7. Window-Shop Rodeo Drive" },
+    { type: "p", text: "No list would be complete without Rodeo Drive and the Golden Triangle. Even if you're not shopping, it's fun to walk, and the nearby streets are full of restaurants and cafés for a long lunch." },
+
+    { type: "h2", text: "8. Drive Home Over Coldwater Canyon" },
+    { type: "p", text: "Coldwater Canyon is the route many of my Studio City and Sherman Oaks clients already know. It's the quickest way to feel how close the Valley and Beverly Hills really are, and why so many buyers look at both." },
+
+    { type: "h2", text: "Thinking About Living in Beverly Hills?" },
+    { type: "p", text: "Beverly Hills is its own city, with its own schools and rules, and some 90210 addresses are actually in the City of Los Angeles. If you're weighing Beverly Hills against the Valley, I'm always happy to help you compare what each side offers." },
+    { type: "p", text: "Learn more on my [Beverly Hills neighborhood page](/neighborhoods/beverly-hills), or [reach out](/contact) for a short conversation about your plans." },
+    { type: "signature" },
+
+    {
+      type: "faq",
+      title: "Frequently Asked Questions About Things to Do in Beverly Hills",
+      items: [
+        { q: "What are the best free things to do in Beverly Hills?", a: "Greystone Mansion & Gardens has free admission to the grounds and parking, Beverly Gardens Park and the Beverly Hills sign are free to visit, and window-shopping Rodeo Drive costs nothing. The Sunday farmers market is free to browse." },
+        { q: "Where is the Beverly Hills sign?", a: "The Beverly Hills sign is in Beverly Gardens Park, along Santa Monica Boulevard, next to the park's lily pond." },
+        { q: "When is the Beverly Hills Farmers Market?", a: "The Beverly Hills Farmers Market runs Sundays from 9:00 a.m. to 1:00 p.m. on the 9300 block of Civic Center Drive, between Third Street and Santa Monica Boulevard. Hours can change, so check before you go." },
+        { q: "What parks are in Beverly Hills?", a: "Popular Beverly Hills parks include Beverly Gardens Park, Roxbury Park, and Greystone Mansion & Gardens. Virginia Robinson Gardens is open for guided tours by reservation." },
+        { q: "Is Beverly Hills part of Los Angeles?", a: "No. Beverly Hills is its own city, surrounded by the City of Los Angeles. Some homes with a 90210 ZIP code are in the City of Los Angeles, so check the exact address." },
+      ],
+    },
+  ],
+  "/blog/things-to-do-in-sherman-oaks": [
+    { type: "p", text: "Sherman Oaks sits right next door to Studio City, where I live and work, so it's a neighborhood I spend a lot of time in, both with clients and on my own weekends." },
+    { type: "p", text: "It has a personality of its own. Ventura Boulevard gives it a village feel, the hills to the south bring trails and views, and the flats to the north are full of parks, shopping and everyday conveniences. Whether you live here, are visiting, or are thinking about buying a home in Sherman Oaks, here are some of my favorite ways to spend a day." },
+
+    { type: "h2", text: "1. Hike Dixie Canyon Park" },
+    { type: "p", text: "Dixie Canyon Park is one of the neighborhood's hidden gems: a 20-acre preserve of California black walnut and coast live oak, less than a mile south of Ventura Boulevard. The trailhead is at the top of Dixie Canyon Place." },
+    { type: "p", text: "The loop is short, a little over half a mile, with some shade and a narrow dirt path. It's the kind of quick nature break you can fit into a busy morning." },
+    { type: "p", text: "My tip: wear real shoes. The trail is small, but it's steep in places and can be overgrown." },
+
+    { type: "h2", text: "2. Catch the View From Longridge Park" },
+    { type: "p", text: "Between Dixie Canyon Park and Coldwater Canyon Park, Longridge Park climbs quickly and rewards you almost right away with views across the canyons and the Valley." },
+    { type: "p", text: "On a clear day, look back to the north and you can see all the way to the Santa Susana and San Gabriel Mountains. It's a great reminder of how close the Santa Monica Mountains are to everyday life in Sherman Oaks." },
+
+    { type: "h2", text: "3. Shop the Saturday Farmers Market" },
+    { type: "p", text: "The Sherman Oaks farmers market runs on Saturday mornings, from 8:00 a.m. to 1:00 p.m., on Sepulveda Boulevard at Camarillo Street, just north of the Sherman Oaks Galleria." },
+    { type: "p", text: "Expect seasonal fruit and vegetables, baked goods, flowers and more. It's a relaxed way to start a weekend, and a good way to meet neighbors. Hours can change, so check before you go." },
+
+    { type: "h2", text: "4. Bring the Kids to Sherman Oaks Castle Park" },
+    { type: "p", text: "Sherman Oaks Castle Park, at 4989 Sepulveda Boulevard, has been a Valley favorite for years. There are three 18-hole miniature golf courses, batting cages and an arcade." },
+    { type: "p", text: "It's an easy win for birthdays, a rainy-day plan, or a friendly family competition." },
+
+    { type: "h2", text: "5. Swim, Play and Picnic at Van Nuys Sherman Oaks Park" },
+    { type: "p", text: "Van Nuys Sherman Oaks Park, at 14201 Huston Street, is the neighborhood's big recreation hub. You'll find baseball, basketball and tennis, with lights for evening play, plus an outdoor heated pool." },
+    { type: "p", text: "For families and dog owners on the flats, it's one of the most-used parks in the area, and buyers often ask me about the streets around it." },
+
+    { type: "h2", text: "6. Spend an Afternoon on Ventura Boulevard" },
+    { type: "p", text: "Ventura Boulevard is the heart of Sherman Oaks. Restaurants, cafés, boutiques and longtime local businesses line the street, and it's at its best when you park the car and walk a few blocks." },
+    { type: "p", text: "Look for the La Reina Theater sign at 14626 Ventura Boulevard. The former movie theater was designed by S. Charles Lee in 1937, and its marquee is still one of the boulevard's best-known landmarks." },
+    { type: "p", text: "Each stretch feels a little different, so try a section you don't usually visit. You'll likely find a new favorite spot." },
+
+    { type: "h2", text: "7. Shop the Galleria and Westfield Fashion Square" },
+    { type: "p", text: "Sherman Oaks has two well-known shopping centers. The Sherman Oaks Galleria sits at Ventura and Sepulveda boulevards, and Westfield Fashion Square is on Riverside Drive." },
+    { type: "p", text: "Between them, you can run errands, eat and shop without leaving the neighborhood, which is a big plus for anyone who wants convenience close to home." },
+
+    { type: "h2", text: "8. Head to the Sepulveda Basin" },
+    { type: "p", text: "Just north of Sherman Oaks, the Sepulveda Basin Recreation Area is a large open space with Lake Balboa, walking and biking paths, sports fields and the Japanese Garden." },
+    { type: "p", text: "It's a short drive from most of the neighborhood, and a great choice when you want wide-open space without heading into the hills." },
+
+    { type: "h2", text: "9. Take a Drive Along Mulholland" },
+    { type: "p", text: "The hills above Sherman Oaks lead up to Mulholland Drive. A slow drive along the ridge at sunset is one of the simplest ways to see why people love living in the Valley." },
+
+    { type: "h2", text: "Thinking About Living in Sherman Oaks?" },
+    { type: "p", text: "Sherman Oaks isn't one market. The condos and flat-lot homes north of Ventura Boulevard and the hillside homes to the south live and sell very differently. If you're curious about a particular street or building, I'm always happy to be a local resource." },
+    { type: "p", text: "Learn more on my [Sherman Oaks neighborhood page](/neighborhoods/sherman-oaks), or [reach out](/contact) for a short conversation about your plans." },
+    { type: "p", text: "Cover photo: La Reina Theater, Sherman Oaks, by Wikimedia Commons user \"Los Angeles\", licensed under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)." },
+    { type: "signature" },
+
+    {
+      type: "faq",
+      title: "Frequently Asked Questions About Things to Do in Sherman Oaks",
+      items: [
+        { q: "What are the best things to do in Sherman Oaks?", a: "Popular things to do in Sherman Oaks include hiking Dixie Canyon Park and Longridge Park, shopping the Saturday farmers market, mini golf at Sherman Oaks Castle Park, the pool and sports at Van Nuys Sherman Oaks Park, and dining and shopping along Ventura Boulevard." },
+        { q: "Where can you hike in Sherman Oaks?", a: "Dixie Canyon Park and Longridge Park are two short hikes in the Santa Monica Mountains on the south side of Sherman Oaks. Both offer shade, oak woodland and views of the Valley." },
+        { q: "When is the Sherman Oaks farmers market?", a: "The Sherman Oaks farmers market runs Saturdays from 8:00 a.m. to 1:00 p.m. on Sepulveda Boulevard at Camarillo Street, north of the Sherman Oaks Galleria. Hours can change, so check before you go." },
+        { q: "What parks are in Sherman Oaks?", a: "Van Nuys Sherman Oaks Park is the main recreation center, with a pool, ball fields and tennis courts. Dixie Canyon Park and Longridge Park offer trails in the hills, and the Sepulveda Basin Recreation Area is just to the north." },
+        { q: "Is Sherman Oaks a good place to live?", a: "For buyers who want a central Valley location, easy freeway access, shopping, parks and a choice between condos, flat-lot homes and hillside homes, Sherman Oaks offers a lot. The right street depends on your budget and routine." },
+      ],
+    },
+  ],
   "/blog/the-best-things-to-do-in-studio-city-before-summer-ends": [
     { type: "p", text: "Summer may be winding down, but in Studio City, there is still plenty of time to enjoy everything that makes this neighborhood such a special place to live." },
     { type: "p", text: "As a longtime Studio City local and real estate agent, one of the things I love most about living here is how much there is to do without leaving the neighborhood. You can start the morning on a hiking trail, grab coffee or matcha on Ventura Boulevard, spend a Sunday at the farmers market, wander through Tujunga Village, and finish the day with dinner at one of Studio City's newest restaurants." },

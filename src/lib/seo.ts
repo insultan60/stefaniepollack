@@ -26,14 +26,14 @@ const PAGES: Record<string, PageMeta> = {
       "Meet Stefanie Pollack — Studio City native, Compass Realtor and community connector with 20+ years helping buyers and sellers across the San Fernando Valley.",
   },
   "/buyers": {
-    title: "Buying a Home in Studio City | Stefanie Pollack",
+    title: "Buyer's Agent in Los Angeles & the Valley | Stefanie Pollack",
     description:
-      "Buying in Studio City or the San Fernando Valley? Stefanie Pollack guides you from pre-approval to closing with local market insight and off-market access.",
+      "Stefanie Pollack is a Los Angeles buyer's agent serving the San Fernando Valley. Pre-approval to closing, off-market access, and skilled negotiation.",
   },
   "/sellers": {
-    title: "Sell Your Studio City Home | Stefanie Pollack",
+    title: "Sell Your Home in Los Angeles | Stefanie Pollack",
     description:
-      "Selling your home in Studio City? Get expert pricing, Compass marketing and skilled negotiation from Stefanie Pollack to sell for top dollar.",
+      "Selling your home in Los Angeles or the San Fernando Valley? Stefanie Pollack offers expert pricing, Compass marketing, and skilled negotiation.",
   },
   "/neighborhoods": {
     title: "Los Angeles Neighborhood Guides | Stefanie Pollack",
