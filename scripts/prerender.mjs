@@ -15,6 +15,7 @@
 import { readFile, writeFile, mkdir, rm } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
+import { sellersSchema, buyersSchema, hubSchema, areaSchema } from "./schema.mjs";
 
 const root = resolve(import.meta.dirname, "..");
 const outDir = join(root, "out");
@@ -218,51 +219,23 @@ for (const { path, meta } of pages) {
       );
     }
 
-    // Neighborhood pages: a breadcrumb back to /neighborhoods and the agent
-    // tied to the area as the page's subject, built from the same data the
-    // page renders (src/mocks/areas.ts). No FAQPage here: FaqList already
-    // emits one in the page body, and Google flags a second as a duplicate.
+    // Inner pages: Sellers, Buyers, the Neighborhoods hub and each area page.
+    // Built in scripts/schema.mjs from the client's schema brief and the same
+    // data the pages render. The area pages' FAQPage is not here: FaqList
+    // already emits one in the page body, and Google flags a second as a
+    // duplicate.
+    const site = server.SITE_URL;
     const area = server.AREAS.find((a) => path === `/neighborhoods/${a.slug}`);
-    if (area) {
-      const site = server.SITE_URL;
-      const schema = {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "WebPage",
-            "@id": `${url}#webpage`,
-            url,
-            name: meta.title,
-            description: meta.description,
-            isPartOf: { "@id": `${site}/#website` },
-            about: { "@id": `${site}/#business` },
-            primaryImageOfPage: { "@type": "ImageObject", url: `${site}${area.hero.image}` },
-            breadcrumb: { "@id": `${url}#breadcrumb` },
-            inLanguage: "en-US",
-          },
-          {
-            "@type": "BreadcrumbList",
-            "@id": `${url}#breadcrumb`,
-            itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: `${site}/` },
-              { "@type": "ListItem", position: 2, name: "Neighborhoods", item: `${site}/neighborhoods` },
-              { "@type": "ListItem", position: 3, name: area.name, item: url },
-            ],
-          },
-          {
-            "@type": ["RealEstateAgent", "LocalBusiness"],
-            "@id": `${site}/#business`,
-            name: "Stefanie Pollack | Compass",
-            url: `${site}/`,
-            telephone: "+1-818-625-6171",
-            address: { "@type": "PostalAddress", addressLocality: "Studio City", addressRegion: "CA", postalCode: "91604", addressCountry: "US" },
-            areaServed: { "@type": "Place", name: `${area.name}, CA` },
-          },
-        ],
-      };
+    const inner =
+      path === "/sellers" ? sellersSchema(site, meta, server.HOMEBOT_URL)
+      : path === "/buyers" ? buyersSchema(site, meta)
+      : path === "/neighborhoods" ? hubSchema(site, meta, server.AREAS)
+      : area ? areaSchema(site, meta, area)
+      : null;
+    if (inner) {
       html = html.replace(
         "</head>",
-        `<script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script></head>`,
+        `<script type="application/ld+json">${JSON.stringify(inner).replace(/</g, "\\u003c")}</script></head>`,
       );
     }
 

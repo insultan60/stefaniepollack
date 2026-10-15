@@ -9,6 +9,7 @@ import { setListingsSeed, type ListingsData } from "./lib/listingsSeed";
 export { PRERENDER_PATHS, getPageMeta, canonicalUrl, SITE_URL } from "./lib/seo";
 export { HOME_FAQS } from "./lib/homeFaqs";
 export { areas as AREAS } from "./mocks/areas";
+export { HOMEBOT_URL } from "./lib/homebot";
 
 /** Renders one page to an HTML string at build time — see scripts/prerender.mjs. */
 export function render(url: string): string {
