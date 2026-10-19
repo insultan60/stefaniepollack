@@ -3,25 +3,19 @@ import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useLead } from "@/hooks/useLead";
-import { areas } from "@/mocks/areas";
 
 type NavLink = { label: string; href: string; children?: { label: string; href: string }[] };
 
 /* Testimonials left the menu (the About page still has them, and every area
-   page shows local reviews); Neighborhoods took its place, with each area
-   page in a dropdown. */
+   page shows local reviews); Neighborhoods took its place. It is a plain link,
+   not a dropdown of the area pages, at the client's request (October 2026):
+   the Neighborhoods page links to every area. The dropdown rendering below is
+   kept for any future menu item that sets `children`. */
 const navLinks: NavLink[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Listings", href: "/listings" },
-  {
-    label: "Neighborhoods",
-    href: "/neighborhoods",
-    children: [
-      { label: "All Neighborhoods", href: "/neighborhoods" },
-      ...areas.map((a) => ({ label: a.name, href: `/neighborhoods/${a.slug}` })),
-    ],
-  },
+  { label: "Neighborhoods", href: "/neighborhoods" },
   { label: "Blog", href: "/blog" },
   { label: "Buyers", href: "/buyers" },
   { label: "Sellers", href: "/sellers" },

@@ -241,7 +241,7 @@ export const articleContent: Record<string, ArticleBlock[]> = {
     { type: "p", text: "puts you in a position of confidence instead of uncertainty." },
 
     { type: "h2", text: "3. Watch Studio City Market Trends" },
-    { type: "p", text: "National real estate headlines do not always reflect what is happening locally. Studio City operates as its own micro-market within the wider [Los Angeles real estate market](https://andrewliberty.com/)." },
+    { type: "p", text: "National real estate headlines do not always reflect what is happening locally. Studio City operates as its own micro-market within the wider [Los Angeles real estate market](https://andrewlibertyhomes.com/)." },
     { type: "p", text: "Key indicators to monitor include:" },
     { type: "ul", items: ["Median home price in Studio City", "Average days on market", "Current inventory levels", "Price per square foot trends", "Buyer demand in specific price ranges"] },
     { type: "p", text: "Understanding local data helps you time your move strategically and position yourself competitively." },
