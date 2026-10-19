@@ -15,7 +15,9 @@ import {
   Camera,
   Copy,
   Check,
+  Maximize2,
 } from "lucide-react";
+import PhotoLightbox from "./PhotoLightbox";
 import { useIdxListings } from "@/hooks/useIdxListings";
 import type { AvailableProperty, SoldProperty } from "@/lib/idx";
 import { PHOTO_FALLBACK } from "@/lib/media";
@@ -42,6 +44,7 @@ export default function PropertyDetail() {
   const [saved, setSaved] = useState(false);
   const [shareLabel, setShareLabel] = useState("Share");
   const [activeIndex, setActiveIndex] = useState(0);
+  const [viewerOpen, setViewerOpen] = useState(false);
   const [featTab, setFeatTab] = useState<(typeof FEATURE_TABS)[number]["key"]>("interior");
   const [copied, setCopied] = useState(false);
   const { data, loading } = useIdxListings();
@@ -50,6 +53,7 @@ export default function PropertyDetail() {
 
   useEffect(() => {
     setActiveIndex(0);
+    setViewerOpen(false);
     setFeatTab("interior");
   }, [slug]);
 
@@ -154,6 +158,15 @@ export default function PropertyDetail() {
         </AnimatePresence>
         <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/10 to-black/40" />
 
+        {/* The whole photo is a button that opens it full screen. It sits
+            under every other control here, which come later in the markup. */}
+        <button
+          type="button"
+          onClick={() => setViewerOpen(true)}
+          aria-label="View photos full screen"
+          className="absolute inset-0 w-full h-full cursor-zoom-in"
+        />
+
         <a
           href="/listings"
           className="absolute top-24 md:top-28 left-6 md:left-10 lg:left-16 inline-flex items-center gap-1.5 text-sm text-white/90 hover:text-white transition-colors"
@@ -186,10 +199,22 @@ export default function PropertyDetail() {
               <ChevronRight className="w-5 h-5" strokeWidth={1.5} />
             </button>
 
-            {/* Photo counter */}
-            <div className="absolute top-24 md:top-28 right-6 md:right-10 lg:right-16 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/30 backdrop-blur-sm text-white text-xs font-medium">
-              <Camera className="w-3.5 h-3.5" strokeWidth={1.5} />
-              {activeIndex + 1} / {gallery.length}
+            {/* Photo counter, and the full-screen button beside it */}
+            <div className="absolute top-24 md:top-28 right-6 md:right-10 lg:right-16 flex items-center gap-2">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/30 backdrop-blur-sm text-white text-xs font-medium">
+                <Camera className="w-3.5 h-3.5" strokeWidth={1.5} />
+                {activeIndex + 1} / {gallery.length}
+              </div>
+              <button
+                type="button"
+                onClick={() => setViewerOpen(true)}
+                aria-label="View photos full screen"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/30 backdrop-blur-sm text-white text-xs font-medium hover:bg-black/50 transition-colors"
+              >
+                <Maximize2 className="w-3.5 h-3.5" strokeWidth={1.5} />
+                {/* Icon only on phones, where the label crowded "Back to Listings". */}
+                <span className="hidden sm:inline">View Full Screen</span>
+              </button>
             </div>
 
             {/* Thumbnail strip */}
@@ -216,6 +241,16 @@ export default function PropertyDetail() {
           </>
         )}
       </motion.div>
+
+      {viewerOpen && (
+        <PhotoLightbox
+          photos={gallery}
+          index={activeIndex}
+          onIndex={setActiveIndex}
+          onClose={() => setViewerOpen(false)}
+          title={property.address}
+        />
+      )}
 
       {/* Sub-nav */}
       <nav className="w-full border-b border-background-200 bg-background-50" aria-label="Section navigation">
