@@ -69,6 +69,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     res.status(upstream.status);
     res.setHeader("Content-Type", upstream.headers.get("content-type") || "application/json");
+    // The public listing feeds (clients/featured, clients/soldpending,
+    // clients/systemlinks) are the same for every visitor, and every listing
+    // page asks for them, so each visit used to cost a function run, an IDX
+    // call and the whole feed through Vercel's origin. Cached at the edge for
+    // an hour, served stale while it refreshes. Lead paths (sign-ups, saved
+    // searches, favorites) are per person and never cached.
+    if ((req.method || "GET") === "GET" && upstream.ok && apiPath.startsWith("clients/")) {
+      res.setHeader("Cache-Control", "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400");
+    }
     res.send(text);
   } catch (err) {
     console.error("[api/idx]", err);
