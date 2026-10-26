@@ -1,5 +1,6 @@
 import { articles } from "@/mocks/home";
 import { areas } from "@/mocks/areas";
+import { HOWL_O_WEEN } from "@/lib/events";
 
 /** Per-page <title>, description and canonical URL.
  *  Used twice: scripts/prerender.mjs bakes them into each page's static HTML
@@ -70,6 +71,8 @@ const PAGES: Record<string, PageMeta> = {
     description: "Market updates, local guides, and community stories from Stefanie Pollack in Studio City.",
   },
 };
+
+PAGES[HOWL_O_WEEN.path] = HOWL_O_WEEN.meta;
 
 for (const area of areas) {
   PAGES[`/neighborhoods/${area.slug}`] = area.meta;

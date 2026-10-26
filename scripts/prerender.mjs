@@ -15,7 +15,7 @@
 import { readFile, writeFile, mkdir, rm } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
-import { sellersSchema, buyersSchema, hubSchema, areaSchema } from "./schema.mjs";
+import { sellersSchema, buyersSchema, hubSchema, areaSchema, eventSchema } from "./schema.mjs";
 
 const root = resolve(import.meta.dirname, "..");
 const outDir = join(root, "out");
@@ -231,6 +231,7 @@ for (const { path, meta } of pages) {
       : path === "/buyers" ? buyersSchema(site, meta)
       : path === "/neighborhoods" ? hubSchema(site, meta, server.AREAS)
       : area ? areaSchema(site, meta, area)
+      : path === server.HOWL_O_WEEN.path ? eventSchema(site, meta, server.HOWL_O_WEEN)
       : null;
     if (inner) {
       html = html.replace(

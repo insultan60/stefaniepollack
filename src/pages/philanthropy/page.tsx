@@ -1,5 +1,6 @@
 import PageHero from "@/components/feature/PageHero";
 import Intro from "./components/Intro";
+import UpcomingEvent from "./components/UpcomingEvent";
 import Causes from "./components/Causes";
 import Gallery from "./components/Gallery";
 import CTASection from "../home/components/CTASection";
@@ -16,6 +17,7 @@ export default function Philanthropy() {
         imageAlt="Stefanie Pollack community event"
       />
       <Intro />
+      <UpcomingEvent />
       <Causes />
       <Gallery />
       <CTASection />

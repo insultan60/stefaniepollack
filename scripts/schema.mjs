@@ -292,3 +292,55 @@ export function hubSchema(site, meta, areas) {
     ],
   };
 }
+
+/* ------------------------------------------------------------ events */
+// A community event page (src/lib/events.ts). The organizer and performer
+// are given in full, not only by @id, because Google's Event result reads
+// them from this page alone. No offers block: the flyer names no price, and
+// "free" is not stated anywhere, so none is claimed.
+export function eventSchema(site, meta, ev) {
+  const url = `${site}${ev.path}`;
+  const stefanie = {
+    "@type": "Person",
+    "@id": `${site}/#stefanie`,
+    name: "Stefanie Pollack",
+    url: `${site}/about`,
+  };
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      webPage(site, url, meta, `${url}#event`, { src: ev.flyer, caption: ev.name }),
+      {
+        "@type": "Event",
+        "@id": `${url}#event`,
+        name: ev.name,
+        description: ev.description,
+        url,
+        startDate: ev.start,
+        endDate: ev.end,
+        eventStatus: "https://schema.org/EventScheduled",
+        eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+        image: [`${site}${ev.flyer}`, `${site}${ev.shareImage}`],
+        location: {
+          "@type": "Place",
+          name: ev.venue,
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: ev.street,
+            addressLocality: ev.city,
+            addressRegion: ev.region,
+            postalCode: ev.postalCode,
+            addressCountry: "US",
+          },
+        },
+        organizer: stefanie,
+        performer: stefanie,
+      },
+      breadcrumb(url, [
+        ["Home", `${site}/`],
+        ["Philanthropy", `${site}/philanthropy`],
+        [ev.name, url],
+      ]),
+    ],
+  };
+}

@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Stefanie Pollack//Community Events//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:howl-o-ween-2026@stefaniepollack.com
+DTSTAMP:20261026T000000Z
+DTSTART:20261030T233000Z
+DTEND:20261031T010000Z
+SUMMARY:Howl-O-Ween Dog Costume Parade
+DESCRIPTION:First annual Studio City dog costume parade presented by Stefanie Pollack. Pictures\, fun\, conversations and prizes for the best pet costumes. Pups & people welcome! https://www.stefaniepollack.com/events/howl-o-ween
+LOCATION:Christian Science Church Parking Lot\, 4032 Whitsett Ave\, Studio City\, CA 91604
+URL:https://www.stefaniepollack.com/events/howl-o-ween
+END:VEVENT
+END:VCALENDAR

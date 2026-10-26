@@ -3,19 +3,26 @@ import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useLead } from "@/hooks/useLead";
+import { areas } from "@/mocks/areas";
 
 type NavLink = { label: string; href: string; children?: { label: string; href: string }[] };
 
 /* Testimonials left the menu (the About page still has them, and every area
-   page shows local reviews); Neighborhoods took its place. It is a plain link,
-   not a dropdown of the area pages, at the client's request (October 2026):
-   the Neighborhoods page links to every area. The dropdown rendering below is
-   kept for any future menu item that sets `children`. */
+   page shows local reviews); Neighborhoods took its place. Its dropdown lists
+   every area page, built from src/mocks/areas.ts so a new area appears here
+   on its own (client request, October 2026). */
 const navLinks: NavLink[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Listings", href: "/listings" },
-  { label: "Neighborhoods", href: "/neighborhoods" },
+  {
+    label: "Neighborhoods",
+    href: "/neighborhoods",
+    children: [
+      { label: "All Neighborhoods", href: "/neighborhoods" },
+      ...areas.map((a) => ({ label: a.name, href: `/neighborhoods/${a.slug}` })),
+    ],
+  },
   { label: "Blog", href: "/blog" },
   { label: "Buyers", href: "/buyers" },
   { label: "Sellers", href: "/sellers" },
@@ -33,7 +40,8 @@ export default function Header() {
   // with no hero — keep it solid & legible from the moment it loads.
   // Also solid while the mobile menu is open: the menu is a light panel, and
   // the white logo and close icon disappeared against it.
-  const solid = scrolled || mobileOpen || pathname === "/listings";
+  // Event pages open on a light background (the flyer), so they start solid too.
+  const solid = scrolled || mobileOpen || pathname === "/listings" || pathname.startsWith("/events/");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
