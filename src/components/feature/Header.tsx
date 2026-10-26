@@ -33,7 +33,7 @@ const navLinks: NavLink[] = [
 /* The full menu outgrew the header bar, so the bar keeps only these and the
    Menu button opens a side panel with every link, the account links and
    Contact (client request, October 2026). */
-const PRIMARY = ["Listings", "Neighborhoods", "Buyers", "Sellers"];
+const PRIMARY = ["Listings", "Neighborhoods", "Blog", "Events", "Buyers", "Sellers"];
 const primaryLinks = navLinks.filter((l) => PRIMARY.includes(l.label));
 
 export default function Header() {
@@ -94,7 +94,7 @@ export default function Header() {
             </a>
 
             {/* Main links (the rest live in the side panel) */}
-            <nav className="hidden lg:flex items-center gap-8 xl:gap-10">
+            <nav className="hidden lg:flex items-center gap-6 xl:gap-10">
               {primaryLinks.map((link) => {
                 const item = (
                   <a
