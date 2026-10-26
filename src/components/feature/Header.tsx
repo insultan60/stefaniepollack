@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { useLead } from "@/hooks/useLead";
 import { areas } from "@/mocks/areas";
 
@@ -30,19 +30,24 @@ const navLinks: NavLink[] = [
   { label: "Resources", href: "/resources" },
 ];
 
+/* The full menu outgrew the header bar, so the bar keeps only these and the
+   Menu button opens a side panel with every link, the account links and
+   Contact (client request, October 2026). */
+const PRIMARY = ["Listings", "Neighborhoods", "Buyers", "Sellers"];
+const primaryLinks = navLinks.filter((l) => PRIMARY.includes(l.label));
+
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [subOpen, setSubOpen] = useState(false);
   const { leadId, requireLead, signOut } = useLead();
   const { pathname } = useLocation();
   // Almost every page opens on a full-bleed dark photo hero (PageHero, the
   // blog article hero, the listing-detail gallery) that the header overlays
   // transparently, same as the homepage. The Listings grid is the one page
   // with no hero — keep it solid & legible from the moment it loads.
-  // Also solid while the mobile menu is open: the menu is a light panel, and
-  // the white logo and close icon disappeared against it.
   // Event pages open on a light background (the flyer), so they start solid too.
-  const solid = scrolled || mobileOpen || pathname === "/listings" || pathname.startsWith("/events/");
+  const solid = scrolled || pathname === "/listings" || pathname.startsWith("/events/");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -51,16 +56,20 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [pathname]);
 
+  // Lock the page behind the open panel; Escape closes it.
   useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    if (!menuOpen) return;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setMenuOpen(false);
+    window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
     };
-  }, [mobileOpen]);
+  }, [menuOpen]);
+
+  const close = () => setMenuOpen(false);
+  const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
   return (
     <>
@@ -72,7 +81,7 @@ export default function Header() {
         }`}
       >
         <div className="w-full px-6 md:px-10 lg:px-16">
-          <div className="flex items-center justify-between h-20 md:h-24">
+          <div className="flex items-center justify-between gap-6 h-20 md:h-24">
             {/* Logo */}
             <a href="/" className="flex-shrink-0">
               <img
@@ -84,9 +93,9 @@ export default function Header() {
               />
             </a>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden xl:flex items-center gap-6 2xl:gap-10">
-              {navLinks.map((link) => {
+            {/* Main links (the rest live in the side panel) */}
+            <nav className="hidden lg:flex items-center gap-8 xl:gap-10">
+              {primaryLinks.map((link) => {
                 const item = (
                   <a
                     href={link.href}
@@ -130,42 +139,11 @@ export default function Header() {
               })}
             </nav>
 
-            {/* Desktop CTA */}
-            <div className="hidden xl:flex items-center gap-5">
-              {leadId ? (
-                <div className="flex items-center gap-4">
-                  <a
-                    href="/account"
-                    className={`text-sm font-medium tracking-wide uppercase transition-colors duration-300 whitespace-nowrap ${
-                      solid ? "text-foreground-700 hover:text-foreground-950" : "text-white/80 hover:text-white"
-                    }`}
-                  >
-                    My Account
-                  </a>
-                  <button
-                    type="button"
-                    onClick={() => signOut()}
-                    className={`text-sm font-medium tracking-wide uppercase transition-colors duration-300 whitespace-nowrap ${
-                      solid ? "text-foreground-700 hover:text-foreground-950" : "text-white/80 hover:text-white"
-                    }`}
-                  >
-                    Sign Out
-                  </button>
-                </div>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => requireLead()}
-                  className={`text-sm font-medium tracking-wide uppercase transition-colors duration-300 whitespace-nowrap ${
-                    solid ? "text-foreground-700 hover:text-foreground-950" : "text-white/80 hover:text-white"
-                  }`}
-                >
-                  Sign In
-                </button>
-              )}
+            {/* Contact + Menu button */}
+            <div className="flex items-center gap-3 md:gap-4">
               <a
                 href="/contact"
-                className={`px-5 py-2.5 text-sm font-medium tracking-wide uppercase rounded-md transition-all duration-300 whitespace-nowrap ${
+                className={`hidden md:inline-flex px-5 py-2.5 text-sm font-medium tracking-wide uppercase rounded-md transition-all duration-300 whitespace-nowrap ${
                   solid
                     ? "bg-foreground-950 text-background-50 hover:bg-foreground-800"
                     : "bg-white/10 text-white border border-white/30 hover:bg-white hover:text-foreground-950 backdrop-blur-sm"
@@ -173,118 +151,162 @@ export default function Header() {
               >
                 Contact
               </a>
+              <button
+                type="button"
+                onClick={() => setMenuOpen(true)}
+                aria-label="Open menu"
+                aria-expanded={menuOpen}
+                aria-controls="site-menu"
+                className={`inline-flex items-center gap-2 h-10 px-2 text-sm font-medium tracking-wide uppercase transition-colors duration-300 ${
+                  solid ? "text-foreground-950 hover:text-foreground-700" : "text-white hover:text-white/80"
+                }`}
+              >
+                <Menu className="w-6 h-6" strokeWidth={1.5} />
+                <span className="hidden md:inline">Menu</span>
+              </button>
             </div>
-
-            {/* Mobile Hamburger */}
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className={`xl:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 transition-colors ${
-                solid ? "text-foreground-950" : "text-white"
-              }`}
-              aria-label="Toggle menu"
-            >
-              <span
-                className={`block h-px w-6 transition-all duration-300 ${
-                  mobileOpen ? "rotate-45 translate-y-[3.5px]" : ""
-                } ${solid ? "bg-foreground-950" : "bg-white"}`}
-              />
-              <span
-                className={`block h-px w-6 transition-all duration-300 ${
-                  mobileOpen ? "opacity-0" : ""
-                } ${solid ? "bg-foreground-950" : "bg-white"}`}
-              />
-              <span
-                className={`block h-px w-6 transition-all duration-300 ${
-                  mobileOpen ? "-rotate-45 -translate-y-[3.5px]" : ""
-                } ${solid ? "bg-foreground-950" : "bg-white"}`}
-              />
-            </button>
           </div>
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
+      {/* Side panel with the full menu */}
       <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-background-50"
-          >
-            <div className="flex flex-col items-center justify-center h-full gap-6 px-6">
-              {navLinks.map((link, i) => (
-                <div key={link.label} className="flex flex-col items-center">
-                  <motion.a
-                    href={link.href}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.08, duration: 0.4 }}
-                    onClick={() => setMobileOpen(false)}
-                    className="text-2xl md:text-3xl font-heading font-medium text-foreground-950 hover:text-primary-600 transition-colors"
-                  >
-                    {link.label}
-                  </motion.a>
-                  {/* Sub-pages (the area pages) as a small row under their parent. */}
-                  {link.children && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: i * 0.08, duration: 0.4 }}
-                      className="mt-2 flex flex-wrap justify-center gap-x-5 gap-y-1"
-                    >
-                      {link.children
-                        .filter((c) => c.href !== link.href)
-                        .map((c) => (
-                          <a
-                            key={c.href}
-                            href={c.href}
-                            onClick={() => setMobileOpen(false)}
-                            className="text-xs font-medium tracking-wide uppercase text-foreground-600 hover:text-primary-600"
+        {menuOpen && (
+          <>
+            <motion.div
+              key="backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={close}
+              className="fixed inset-0 z-[60] bg-foreground-950/50 backdrop-blur-sm"
+              aria-hidden="true"
+            />
+            <motion.aside
+              key="panel"
+              id="site-menu"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Site menu"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "tween", duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="fixed top-0 right-0 bottom-0 z-[70] w-full max-w-sm bg-background-50 shadow-2xl flex flex-col"
+            >
+              <div className="flex items-center justify-between h-20 md:h-24 px-8 border-b border-background-200/60 shrink-0">
+                <a href="/" onClick={close}>
+                  <img src="/images/logo-pollack.webp" alt="Pollack Homes" className="h-9 w-auto brightness-0" />
+                </a>
+                <button
+                  type="button"
+                  onClick={close}
+                  aria-label="Close menu"
+                  autoFocus
+                  className="w-10 h-10 -mr-2 inline-flex items-center justify-center rounded-full text-foreground-950 hover:bg-background-100 transition-colors"
+                >
+                  <X className="w-6 h-6" strokeWidth={1.5} />
+                </button>
+              </div>
+
+              <nav className="flex-1 overflow-y-auto px-8 py-6">
+                <ul className="space-y-1">
+                  {navLinks.map((link) => (
+                    <li key={link.label}>
+                      {link.children ? (
+                        <>
+                          <button
+                            type="button"
+                            onClick={() => setSubOpen((o) => !o)}
+                            aria-expanded={subOpen}
+                            className={`w-full flex items-center justify-between py-3 font-heading text-2xl transition-colors ${
+                              isActive(link.href) ? "text-primary-700" : "text-foreground-950 hover:text-primary-700"
+                            }`}
                           >
-                            {c.label}
-                          </a>
-                        ))}
-                    </motion.div>
+                            {link.label}
+                            <ChevronDown
+                              className={`w-5 h-5 transition-transform duration-300 ${subOpen ? "rotate-180" : ""}`}
+                              strokeWidth={1.5}
+                            />
+                          </button>
+                          <AnimatePresence initial={false}>
+                            {subOpen && (
+                              <motion.ul
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.25 }}
+                                className="overflow-hidden pl-4 border-l border-background-200"
+                              >
+                                {link.children.map((c) => (
+                                  <li key={c.href}>
+                                    <a
+                                      href={c.href}
+                                      onClick={close}
+                                      className={`block py-2 text-sm font-medium tracking-wide uppercase transition-colors ${
+                                        pathname === c.href ? "text-primary-700" : "text-foreground-600 hover:text-primary-700"
+                                      }`}
+                                    >
+                                      {c.label}
+                                    </a>
+                                  </li>
+                                ))}
+                              </motion.ul>
+                            )}
+                          </AnimatePresence>
+                        </>
+                      ) : (
+                        <a
+                          href={link.href}
+                          onClick={close}
+                          className={`block py-3 font-heading text-2xl transition-colors ${
+                            isActive(link.href) ? "text-primary-700" : "text-foreground-950 hover:text-primary-700"
+                          }`}
+                        >
+                          {link.label}
+                        </a>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+
+              <div className="shrink-0 px-8 py-6 border-t border-background-200/60 space-y-4">
+                <div className="flex items-center gap-6 text-sm font-medium tracking-wide uppercase">
+                  {leadId ? (
+                    <>
+                      <a href="/account" onClick={close} className="text-foreground-700 hover:text-foreground-950 transition-colors">
+                        My Account
+                      </a>
+                      <button
+                        type="button"
+                        onClick={() => { close(); signOut(); }}
+                        className="text-foreground-700 hover:text-foreground-950 transition-colors uppercase"
+                      >
+                        Sign Out
+                      </button>
+                    </>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => { close(); requireLead(); }}
+                      className="text-foreground-700 hover:text-foreground-950 transition-colors uppercase"
+                    >
+                      Sign In
+                    </button>
                   )}
                 </div>
-              ))}
-              {leadId ? (
-                <motion.a
-                  href="/account"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: navLinks.length * 0.08, duration: 0.4 }}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-lg font-medium text-foreground-700 hover:text-primary-600 transition-colors"
+                <a
+                  href="/contact"
+                  onClick={close}
+                  className="block w-full text-center px-6 py-3.5 bg-foreground-950 text-background-50 text-sm font-medium tracking-wide uppercase rounded-md hover:bg-foreground-800 transition-colors"
                 >
-                  My Account
-                </motion.a>
-              ) : (
-                <motion.button
-                  type="button"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: navLinks.length * 0.08, duration: 0.4 }}
-                  onClick={() => { setMobileOpen(false); requireLead(); }}
-                  className="text-lg font-medium text-foreground-700 hover:text-primary-600 transition-colors"
-                >
-                  Sign In
-                </motion.button>
-              )}
-              <motion.a
-                href="/contact"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: (navLinks.length + 1) * 0.08, duration: 0.4 }}
-                onClick={() => setMobileOpen(false)}
-                className="mt-4 px-8 py-3 bg-foreground-950 text-background-50 text-sm font-medium tracking-wide uppercase rounded-md"
-              >
-                Contact Stefanie
-              </motion.a>
-            </div>
-          </motion.div>
+                  Contact Stefanie
+                </a>
+              </div>
+            </motion.aside>
+          </>
         )}
       </AnimatePresence>
     </>
