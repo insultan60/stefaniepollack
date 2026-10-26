@@ -1,6 +1,6 @@
 import { articles } from "@/mocks/home";
 import { areas } from "@/mocks/areas";
-import { HOWL_O_WEEN } from "@/lib/events";
+import { EVENTS_PAGE, HOWL_O_WEEN } from "@/lib/events";
 
 /** Per-page <title>, description and canonical URL.
  *  Used twice: scripts/prerender.mjs bakes them into each page's static HTML
@@ -72,6 +72,7 @@ const PAGES: Record<string, PageMeta> = {
   },
 };
 
+PAGES[EVENTS_PAGE.path] = EVENTS_PAGE.meta;
 PAGES[HOWL_O_WEEN.path] = HOWL_O_WEEN.meta;
 
 for (const area of areas) {

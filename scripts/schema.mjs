@@ -338,8 +338,35 @@ export function eventSchema(site, meta, ev) {
       },
       breadcrumb(url, [
         ["Home", `${site}/`],
-        ["Philanthropy", `${site}/philanthropy`],
+        ["Events", `${site}/events`],
         [ev.name, url],
+      ]),
+    ],
+  };
+}
+
+// The /events listing: a CollectionPage whose ItemList points at each event
+// page. The events themselves are described in full on their own pages.
+export function eventsHubSchema(site, meta, events) {
+  const url = `${site}/events`;
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      webPage(site, url, meta, `${url}#list`, null, "CollectionPage"),
+      {
+        "@type": "ItemList",
+        "@id": `${url}#list`,
+        name: "Studio City community events",
+        itemListElement: events.map((ev, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          name: ev.name,
+          url: `${site}${ev.path}`,
+        })),
+      },
+      breadcrumb(url, [
+        ["Home", `${site}/`],
+        ["Events", url],
       ]),
     ],
   };

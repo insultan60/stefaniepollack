@@ -1,12 +1,17 @@
 /* Community events with their own page. One place for the details, read by
-   the page (src/pages/events/...), the page list and meta (src/lib/seo.ts)
-   and the Event structured data (scripts/prerender.mjs). */
+   the event pages (src/pages/events/...), the /events listing, the page list
+   and meta (src/lib/seo.ts) and the Event structured data
+   (scripts/prerender.mjs). A new event is a new entry here, a page for it,
+   and a line in EVENTS. */
 
 const address = "4032 Whitsett Ave, Studio City, CA 91604";
 
 export const HOWL_O_WEEN = {
   path: "/events/howl-o-ween",
   name: "Howl-O-Ween Dog Costume Parade",
+  /** One or two lines for the event card on /events and the home page. */
+  summary:
+    "The first annual Studio City dog costume parade, with pictures, fun, and prizes for the best pet costumes. Pups and people welcome!",
   description:
     "Stefanie Pollack presents the first annual Howl-O-Ween Dog Costume Parade, a Studio City community event with pictures, fun, conversations, and prizes for the best pet costumes. Pups and people welcome.",
   // Friday, October 30, 2026 is still Pacific Daylight Time (UTC-7).
@@ -35,5 +40,18 @@ export const HOWL_O_WEEN = {
     title: "Howl-O-Ween Dog Costume Parade | Studio City | Stefanie Pollack",
     description:
       "Dog costume parade in Studio City, Fri Oct 30, 2026, 4:30–6 PM at 4032 Whitsett Ave. Pictures, fun and prizes for the best pet costumes. Pups & people welcome!",
+  },
+} as const;
+
+/** Every event, newest first. /events lists them and splits upcoming from past
+ *  by each event's end time. */
+export const EVENTS = [HOWL_O_WEEN] as const;
+
+export const EVENTS_PAGE = {
+  path: "/events",
+  meta: {
+    title: "Studio City Community Events | Stefanie Pollack",
+    description:
+      "Community events in Studio City hosted by Stefanie Pollack, REALTOR® and community connector: dates, places and details for neighbors, pups and people.",
   },
 } as const;

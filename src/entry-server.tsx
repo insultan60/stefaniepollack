@@ -10,7 +10,7 @@ export { PRERENDER_PATHS, getPageMeta, canonicalUrl, SITE_URL } from "./lib/seo"
 export { HOME_FAQS } from "./lib/homeFaqs";
 export { areas as AREAS } from "./mocks/areas";
 export { HOMEBOT_URL } from "./lib/homebot";
-export { HOWL_O_WEEN } from "./lib/events";
+export { HOWL_O_WEEN, EVENTS, EVENTS_PAGE } from "./lib/events";
 
 /** Renders one page to an HTML string at build time — see scripts/prerender.mjs. */
 export function render(url: string): string {

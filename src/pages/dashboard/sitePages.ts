@@ -28,6 +28,7 @@ export const SITE_PAGES: SitePage[] = [
   { path: "/contact", name: "Contact", group: "Core" },
   { path: "/schedule", name: "Schedule a call", group: "Core" },
   { path: "/philanthropy", name: "Philanthropy", group: "Core" },
+  { path: "/events", name: "Events", group: "Core" },
   { path: "/events/howl-o-ween", name: "Howl-O-Ween Dog Parade", group: "Core" },
 
   { path: "/buyers", name: "Buyers", group: "Services" },

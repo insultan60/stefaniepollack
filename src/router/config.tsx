@@ -8,6 +8,7 @@ import Sellers from "../pages/sellers/page";
 import Neighborhoods from "../pages/neighborhoods/page";
 import AreaPage from "../pages/neighborhoods/area/page";
 import Philanthropy from "../pages/philanthropy/page";
+import Events from "../pages/events/page";
 import HowlOWeen from "../pages/events/howl-o-ween/page";
 import Resources from "../pages/resources/page";
 import Contact from "../pages/contact/page";
@@ -49,6 +50,10 @@ const routes: RouteObject[] = [
   {
     path: "/philanthropy",
     element: <Philanthropy />,
+  },
+  {
+    path: "/events",
+    element: <Events />,
   },
   {
     path: "/events/howl-o-ween",

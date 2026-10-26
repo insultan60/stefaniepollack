@@ -24,6 +24,7 @@ const navLinks: NavLink[] = [
     ],
   },
   { label: "Blog", href: "/blog" },
+  { label: "Events", href: "/events" },
   { label: "Buyers", href: "/buyers" },
   { label: "Sellers", href: "/sellers" },
   { label: "Resources", href: "/resources" },
@@ -84,7 +85,7 @@ export default function Header() {
             </a>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-8 xl:gap-10">
+            <nav className="hidden xl:flex items-center gap-6 2xl:gap-10">
               {navLinks.map((link) => {
                 const item = (
                   <a
@@ -130,7 +131,7 @@ export default function Header() {
             </nav>
 
             {/* Desktop CTA */}
-            <div className="hidden lg:flex items-center gap-5">
+            <div className="hidden xl:flex items-center gap-5">
               {leadId ? (
                 <div className="flex items-center gap-4">
                   <a
@@ -177,7 +178,7 @@ export default function Header() {
             {/* Mobile Hamburger */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className={`lg:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 transition-colors ${
+              className={`xl:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 transition-colors ${
                 solid ? "text-foreground-950" : "text-white"
               }`}
               aria-label="Toggle menu"

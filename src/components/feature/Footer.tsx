@@ -25,6 +25,7 @@ const footerLinks = {
   explore: [
     { label: "Neighborhoods", href: "/neighborhoods" },
     { label: "Philanthropy", href: "/philanthropy" },
+    { label: "Events", href: "/events" },
     { label: "Home Valuation", href: "/sellers" },
     { label: "Sold Properties", href: "/listings?tab=sold" },
     { label: "Blog", href: "/blog" },

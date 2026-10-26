@@ -18,7 +18,7 @@ export default function Home() {
       <Hero />
       <BuyerSellerCTA />
       {/* The next community event (Howl-O-Ween, Oct 30, 2026). Remove after it. */}
-      <UpcomingEvent className="py-16 md:py-20" />
+      <UpcomingEvent large className="py-20 md:py-28 lg:py-32" />
       <About />
       <Stats />
       <FeaturedProperties />
