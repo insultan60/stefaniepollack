@@ -3,17 +3,210 @@
  *  "full article is on its way" note instead.
  *
  *  Paragraphs and list items can carry inline links written as
- *  [anchor text](url) — see renderInline in pages/blog/slug/page.tsx. */
+ *  [anchor text](url), and bold written as **text** — see renderInline in
+ *  pages/blog/slug/page.tsx. */
 
 export type ArticleBlock =
   | { type: "p"; text: string }
   | { type: "h2"; text: string }
   | { type: "h3"; text: string }
+  | { type: "h4"; text: string }
+  /** A call to action: a line of text and a button, with an optional note. */
+  | { type: "cta"; text?: string; label: string; href: string; note?: string }
   | { type: "ul"; items: string[] }
   | { type: "signature" }
   | { type: "faq"; title: string; items: { q: string; a: string }[] };
 
 export const articleContent: Record<string, ArticleBlock[]> = {
+  "/blog/pros-and-cons-of-living-in-studio-city": [
+    { type: "p", text: "The pros and cons of living in Studio City, CA come down to a trade. You get calm streets, great food, and easy trails close to Hollywood and Burbank. You pay for it with high housing costs, heavy traffic, and the need for a car." },
+
+    { type: "h2", text: "Pros" },
+    { type: "ul", items: [
+      "Fast access to Hollywood, Burbank, and Universal City",
+      "Great food and shops on Ventura Boulevard",
+      "Trails and parks close to home",
+      "A close-knit neighborhood feel",
+      "Many home types, from condos to hillside houses",
+    ] },
+    { type: "h2", text: "Cons" },
+    { type: "ul", items: [
+      "High housing costs",
+      "Heavy traffic at rush hour",
+      "You need a car for most trips",
+      "Property crime, such as car break-ins and package theft",
+      "Hot summers and some hillside risks",
+    ] },
+    { type: "p", text: "I grew up here, so I will share the good and the hard parts. You will also see how safe it feels, what it costs, and what homes look like." },
+
+    { type: "h2", text: "Pros of Living in Studio City" },
+    { type: "h3", text: "You Can Reach Work and Fun Fast" },
+    { type: "p", text: "Studio City sits right off the Ventura Freeway. Hollywood, Burbank, and Universal City are all close. Many people who work in film and TV live here for this reason." },
+    { type: "p", text: "Canyon roads give you more ways to cross the hills to the Westside." },
+    { type: "h3", text: "Ventura Boulevard Has Food and Shops" },
+    { type: "p", text: "Ventura Boulevard is the main street. Cafes, bakeries, restaurants, and small stores line it. Tujunga Village adds more local shops and coffee spots." },
+    { type: "h3", text: "Trails and Parks Are Close" },
+    { type: "p", text: "Fryman Canyon and Wilacre Park give you hiking without a long drive. Wilacre Park is popular with dog owners. The Studio City Recreation Center has fields and a pool." },
+    { type: "h3", text: "The Neighborhood Feels Like a Small Town" },
+    { type: "p", text: "Neighbors know each other here. Local shop owners know their regulars. A Sunday farmers market and local events bring people together." },
+    { type: "p", text: "I organize neighborhood events and support local businesses. I see how much that connection means to people who live here." },
+    { type: "h3", text: "You Have Many Choices of Homes" },
+    { type: "p", text: "You can find condos, townhomes, and houses. Some sit on flat streets near Ventura Boulevard. Others sit in the hills with views." },
+
+    { type: "h2", text: "Cons of Living in Studio City" },
+    { type: "h3", text: "Housing Costs a Lot" },
+    { type: "p", text: "Studio City is one of the pricier parts of the Valley. Home prices, rent, and bills all run high. I break this down in the cost section below." },
+    { type: "h3", text: "Traffic Gets Heavy" },
+    { type: "p", text: "The Ventura Freeway and Ventura Boulevard slow down in the morning and evening. Laurel Canyon and Coldwater Canyon can back up too." },
+    { type: "p", text: "Test your real commute at your real work hours before you buy." },
+    { type: "h3", text: "You Need a Car" },
+    { type: "p", text: "Buses run here, but most daily trips happen by car. Parking near busy restaurants can be tight. Some streets have parking rules, so read the signs." },
+    { type: "h3", text: "Property Crime Happens" },
+    { type: "p", text: "Car break-ins and package theft are the main worries. I cover this in the next section." },
+    { type: "h3", text: "Summers Are Hot" },
+    { type: "p", text: "The Valley runs hotter than the beach cities. Air conditioning is a must. Plan for higher power bills in summer." },
+    { type: "h3", text: "Hillside and Condo Risks" },
+    { type: "h4", text: "Hillside Homes" },
+    { type: "p", text: "Steep roads, retaining walls, and drainage need a close look. Some hillside streets sit in higher fire risk areas, and you can check any address on the [CAL FIRE Fire Hazard Severity Zone map](https://osfm.fire.ca.gov/fhsz/). Insurance can cost more or be harder to find." },
+    { type: "h4", text: "Condo and Townhome Rules" },
+    { type: "p", text: "Condos and townhomes often come with HOA dues and rules. Special fees can show up when a building needs repairs. Read the HOA papers before you make an offer." },
+    { type: "p", text: "Many people ask me one thing first. Is it safe?" },
+
+    { type: "h2", text: "Is Studio City Safe?" },
+    { type: "p", text: "Studio City feels calm to most residents, but property crime does happen. Reports of violent crime are far less common than reports of theft." },
+    { type: "h3", text: "What the Data Shows" },
+    { type: "p", text: "The [LAPD North Hollywood Area](https://www.lapdonline.org/lapd-contact/valley-bureau/north-hollywood-community-police-station/) covers Studio City. LAPD’s own weekly reports show reported crime in that area has dropped this year compared to last year." },
+    { type: "p", text: "Online safety grades often look harsher than daily life. They count crimes per resident, and busy shopping streets bring in many visitors. That can skew the score." },
+    { type: "h3", text: "What Residents Watch For" },
+    { type: "ul", items: ["Car break-ins", "Package theft", "Car theft"] },
+    { type: "h3", text: "Simple Habits That Help" },
+    { type: "ul", items: [
+      "Lock your car and keep bags out of sight.",
+      "Ask for a delivery locker or a signature on packages.",
+      "Use porch lights and a doorbell camera.",
+      "Sign up for neighborhood alerts.",
+    ] },
+    { type: "h3", text: "How to Check a Street Yourself" },
+    { type: "ul", items: [
+      "Look at the LAPD crime map for the exact address.",
+      "Visit in the day, at night, and on a weekend.",
+      "Talk with neighbors.",
+    ] },
+    { type: "p", text: "Crime changes over time, so no post can promise safety. I am happy to share what I know about each street." },
+    { type: "p", text: "Safety is only one piece. Cost is the next big one." },
+
+    { type: "h2", text: "Cost of Living in Studio City, California" },
+    { type: "p", text: "Living in Studio City costs more than the national average. It costs more than many parts of Los Angeles too. Housing is the biggest reason." },
+    { type: "h3", text: "Housing" },
+    { type: "p", text: "Price depends on home type. Condos cost the least. Townhomes sit in the middle. Houses cost the most, and hillside view homes can cost far more." },
+    { type: "p", text: "Online price numbers differ from site to site. Each one counts different homes and different dates. I pull fresh sales for my clients, so they see what homes sell for now." },
+    { type: "h3", text: "Rent" },
+    { type: "p", text: "Apartments rent for less than houses. Both cost more than in much of the Valley." },
+    { type: "h3", text: "Daily Costs" },
+    { type: "ul", items: [
+      "Gas and parking",
+      "Groceries and dining out",
+      "Power bills in hot months",
+      "Home, fire, and earthquake insurance",
+    ] },
+
+    { type: "h2", text: "Questions to Ask Before You Move" },
+    { type: "ul", items: [
+      "What monthly payment feels comfortable?",
+      "Do I pay HOA dues?",
+      "Can I get insurance for this home?",
+      "How long is my commute at rush hour?",
+      "Will I need more than one car?",
+    ] },
+
+    { type: "h2", text: "Studio City Real Estate: What to Expect" },
+    { type: "p", text: "Studio City offers condos, townhomes, and houses. Well-priced homes often draw strong interest." },
+    { type: "h3", text: "Types of Homes" },
+    { type: "ul", items: [
+      "**Condos and townhomes:** Lower price, shared walls, HOA rules",
+      "**Flat-street houses:** Yards and easy access to Ventura Boulevard",
+      "**Hillside homes:** Views and privacy, with steep roads and more upkeep",
+    ] },
+    { type: "h3", text: "Rent or Buy?" },
+    { type: "p", text: "Renting costs less up front and keeps you flexible. Buying costs more up front, but you build equity. The right choice depends on your plans, savings, and loan." },
+    { type: "p", text: "I am not a financial advisor. A lender can run your numbers." },
+    { type: "h3", text: "What Buyers Often Miss" },
+    { type: "ul", items: [
+      "HOA reserves and past repair bills",
+      "Old wiring and pipes in older homes",
+      "Permits for past remodels",
+      "Drainage on slopes",
+      "Insurance quotes before the offer",
+    ] },
+    { type: "p", text: "Want to see how these homes look in real life? [Browse my current Studio City listings](/listings)." },
+
+    { type: "h2", text: "Is Studio City Right for You?" },
+    { type: "h3", text: "Studio City May Fit If You" },
+    { type: "ul", items: [
+      "Want quiet streets close to food and trails",
+      "Work in or near Hollywood, Burbank, or Universal City",
+      "Can plan for higher housing costs",
+      "Like a neighborhood where people know each other",
+    ] },
+    { type: "h3", text: "Studio City May Not Fit If You" },
+    { type: "ul", items: [
+      "Want a short, easy commute at every hour",
+      "Want to live without a car",
+      "Need the lowest possible housing cost",
+      "Dislike hot summers",
+    ] },
+    { type: "p", text: "If most of that sounds like you, the next step is to see real homes with real prices." },
+
+    { type: "h2", text: "How Stefanie Pollack Helps You" },
+    { type: "p", text: "A local buyer's agent saves you time. A good one also helps you avoid costly surprises." },
+    { type: "h3", text: "Who I Help" },
+    { type: "ul", items: [
+      "First-time buyers",
+      "Move-up buyers",
+      "Buyers who want to downsize",
+      "Buyers moving to the area",
+      "Buyers who want off-market options",
+    ] },
+    { type: "h3", text: "Buyer Services I Offer" },
+    { type: "h4", text: "Clear Plan From Day One" },
+    { type: "p", text: "We start with a simple talk about your budget, your timing, and your must-haves. Then I map out your next steps." },
+    { type: "h4", text: "Home Search and Off-Market Access" },
+    { type: "p", text: "I search listings and off-market options in Studio City, Sherman Oaks, Valley Village, Encino, Burbank, and the wider San Fernando Valley. I show you homes that fit your daily life, not just your price range." },
+    { type: "h4", text: "Smart Offers and Strong Negotiation" },
+    { type: "p", text: "I study recent sales so you know what a fair offer looks like. Then I negotiate for you and keep you updated at every step." },
+    { type: "h4", text: "Careful Checks Before You Commit" },
+    { type: "p", text: "I look at HOA papers, hillside issues, and insurance early. I have helped clients through tricky HOA deals, so I know where problems hide." },
+    { type: "h4", text: "Support Through Closing" },
+    { type: "p", text: "I help you line up lenders, inspectors, and other pros. Then I stay with you until you get your keys." },
+    { type: "h3", text: "See Homes Now" },
+    {
+      type: "cta",
+      text: "Start with my Studio City listings. Save the ones you like, and we will tour them together.",
+      label: "Browse Studio City Homes",
+      href: "/listings",
+      note: "See current listings, save your favorites, and we will tour them together.",
+    },
+    {
+      type: "cta",
+      text: "Ready to talk? Reach out to Stefanie Pollack, a buyer real estate agent in Studio City. Tell me your budget and what matters most, and I will map your next steps.",
+      label: "Talk With Stefanie Pollack",
+      href: "/contact",
+    },
+    { type: "signature" },
+
+    {
+      type: "faq",
+      title: "Frequently Asked Questions",
+      items: [
+        { q: "Is Studio City part of Los Angeles?", a: "Yes. It is a neighborhood of the City of Los Angeles, in the San Fernando Valley." },
+        { q: "What is the difference between Studio City and Sherman Oaks?", a: "Sherman Oaks sits just west along Ventura Boulevard. Both have shops, food, and hills. Visit each at the times you would live there, and compare how they feel." },
+        { q: "Is Studio City walkable?", a: "Parts of it are. Streets near Ventura Boulevard and Tujunga Village work well for coffee and errands. Many other streets are quiet and spread out, so you will drive more." },
+        { q: "Which schools serve Studio City?", a: "Public schools follow LAUSD attendance zones, and there are charter and private options too. Zones can change, so check the district’s school finder with the exact address." },
+        { q: "Do I need a Studio City real estate agent to buy a home here?", a: "No law requires one. A local agent still helps you read HOA papers, spot hillside issues, and price your offer right." },
+      ],
+    },
+  ],
+
   "/blog/things-to-do-in-beverly-hills": [
     { type: "p", text: "Beverly Hills is only a drive over Coldwater Canyon from Studio City, where I live and work, and a lot of my clients spend time on both sides of the hills before they decide where to buy." },
     { type: "p", text: "Beyond the famous shopping, Beverly Hills is a city of parks, gardens and quiet residential streets. Whether you live here, are visiting, or are weighing Beverly Hills against the Valley, here are some of my favorite ways to spend a day." },

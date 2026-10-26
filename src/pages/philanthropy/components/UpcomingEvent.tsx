@@ -3,11 +3,12 @@ import { ArrowRight, CalendarDays, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { HOWL_O_WEEN as EVENT } from "@/lib/events";
 
-/* The next community event, linking to its page. Swap the import (or drop the
-   section) once the event has passed. */
-export default function UpcomingEvent() {
+/* The next community event, linking to its page. Used on the Philanthropy
+   page and the home page. Swap the import (or drop the section) once the
+   event has passed. `className` sets the section's spacing for each page. */
+export default function UpcomingEvent({ className = "pb-20 md:pb-24" }: { className?: string }) {
   return (
-    <section className="w-full bg-background-50 pb-20 md:pb-24">
+    <section className={`w-full bg-background-50 ${className}`}>
       <div className="w-full px-6 md:px-10 lg:px-16">
         <motion.div
           initial={{ opacity: 0, y: 24 }}

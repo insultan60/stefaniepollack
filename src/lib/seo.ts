@@ -79,7 +79,10 @@ for (const area of areas) {
 }
 
 for (const a of articles) {
-  PAGES[a.href] = { title: `${a.title} | Stefanie Pollack`, description: a.excerpt };
+  PAGES[a.href] = {
+    title: a.metaTitle ?? `${a.title} | Stefanie Pollack`,
+    description: a.metaDescription ?? a.excerpt,
+  };
 }
 
 /** Every public page that should be prerendered to static HTML. */

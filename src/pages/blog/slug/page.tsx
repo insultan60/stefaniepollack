@@ -133,14 +133,20 @@ export default function BlogArticle() {
    ("/listings") stay in the tab; other sites open in a new one. Outside links
    are deliberately left followable (no rel="nofollow"): the ones in these
    posts are editorial links the client chose to give. */
-const LINK = /\[([^\]]+)\]\(([^)\s]+)\)/g;
+const LINK = /\[([^\]]+)\]\(([^)\s]+)\)|\*\*([^*]+)\*\*/g;
 function renderInline(text: string) {
   const parts: React.ReactNode[] = [];
   let last = 0;
   for (const m of text.matchAll(LINK)) {
-    const [whole, label, href] = m;
+    const [whole, label, href, bold] = m;
     const at = m.index ?? 0;
     if (at > last) parts.push(text.slice(last, at));
+    last = at + whole.length;
+    // **text**: bold lead-ins, e.g. "**Condos and townhomes:** Lower price".
+    if (bold !== undefined) {
+      parts.push(<strong key={at} className="font-semibold text-foreground-950">{bold}</strong>);
+      continue;
+    }
     const external = /^https?:\/\//.test(href);
     parts.push(
       <a
@@ -152,7 +158,6 @@ function renderInline(text: string) {
         {label}
       </a>,
     );
-    last = at + whole.length;
   }
   if (last === 0) return text;
   if (last < text.length) parts.push(text.slice(last));
@@ -165,6 +170,22 @@ function Block({ block }: { block: ArticleBlock }) {
       return <h2 className="font-heading text-2xl md:text-3xl text-foreground-950 leading-snug pt-6">{block.text}</h2>;
     case "h3":
       return <h3 className="font-heading text-xl md:text-2xl text-foreground-950 leading-snug pt-2">{block.text}</h3>;
+    case "h4":
+      return <h4 className="text-xs font-semibold tracking-[0.15em] uppercase text-primary-700 pt-1">{block.text}</h4>;
+    case "cta":
+      return (
+        <div className="my-4 p-6 md:p-8 rounded-xl bg-accent-100 border border-background-200/60">
+          {block.text && <p className="text-base md:text-lg text-foreground-700 leading-relaxed">{renderInline(block.text)}</p>}
+          <a
+            href={block.href}
+            className={`inline-flex items-center gap-2 ${block.text ? "mt-5" : ""} px-6 py-3 rounded-full bg-foreground-950 text-white text-sm font-medium tracking-wide hover:bg-foreground-800 transition-colors`}
+          >
+            {block.label}
+            <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
+          </a>
+          {block.note && <p className="mt-3 text-sm italic text-foreground-600">{block.note}</p>}
+        </div>
+      );
     case "ul":
       return (
         <ul className="list-disc pl-6 space-y-2 text-base md:text-lg text-foreground-700 leading-relaxed marker:text-primary-600">

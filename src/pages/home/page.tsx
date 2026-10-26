@@ -10,12 +10,15 @@ import HowItWorks from "./components/HowItWorks";
 import OfficeMap from "./components/OfficeMap";
 import CTASection from "./components/CTASection";
 import Newsletter from "./components/Newsletter";
+import UpcomingEvent from "../philanthropy/components/UpcomingEvent";
 
 export default function Home() {
   return (
     <div className="w-full">
       <Hero />
       <BuyerSellerCTA />
+      {/* The next community event (Howl-O-Ween, Oct 30, 2026). Remove after it. */}
+      <UpcomingEvent className="py-16 md:py-20" />
       <About />
       <Stats />
       <FeaturedProperties />

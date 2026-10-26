@@ -333,6 +333,21 @@ export const stats = [
 
 export const articles = [
   {
+    id: 8,
+    title: "Pros and Cons of Living in Studio City",
+    excerpt: "Calm streets, great food and easy trails close to Hollywood and Burbank, traded against high housing costs, heavy traffic and the need for a car. The good and the hard parts of Studio City, plus safety and costs, from someone who grew up here.",
+    image: "/images/blog/studio-city-hillside-view.jpg",
+    href: "/blog/pros-and-cons-of-living-in-studio-city",
+    category: "Local Guide",
+    date: "Oct 2026",
+    readTime: "7 min read",
+    // Title tag and meta description from the SEO brief, where they differ
+    // from the headline and excerpt (see src/lib/seo.ts).
+    metaTitle: "Pros and Cons of Living in Studio City, CA | Local Guide",
+    metaDescription:
+      "Is Studio City a good place to live? See the pros and cons of living in Studio City, plus safety and costs, from a local buyer agent. Read before you move.",
+  },
+  {
     id: 7,
     title: "Things to Do in Beverly Hills: A Valley Local's Guide",
     excerpt: "Greystone Mansion's free gardens, the Beverly Hills sign at Beverly Gardens Park, the Sunday farmers market, Roxbury Park, The Wallis and a walk down Rodeo Drive. A guide from just over the hill.",

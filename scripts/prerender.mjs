@@ -246,6 +246,15 @@ for (const { path, meta } of pages) {
     if (path === "/" || path === "/listings" || path.startsWith("/listings/") || path.startsWith("/neighborhoods/")) {
       html = html.replace("</body>", `${listingsScriptFor(path)}</body>`);
     }
+    // Link previews (Slack, iMessage, Facebook) for the event page show the
+    // event photo instead of a blank card.
+    if (path === server.HOWL_O_WEEN.path) {
+      const img = `${server.SITE_URL}${server.HOWL_O_WEEN.shareImage}`;
+      html = html.replace(
+        "</head>",
+        `<meta property="og:image" content="${img}" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="800" /><meta name="twitter:image" content="${img}" /></head>`,
+      );
+    }
     html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeText(meta.title)}</title>`);
     html = setAttr(html, /(<meta name="description" content=")[^"]*(")/, meta.description);
     html = setAttr(html, /(<meta property="og:title" content=")[^"]*(")/, meta.title);
