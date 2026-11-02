@@ -19,7 +19,6 @@ const navLinks: NavLink[] = [
     label: "Neighborhoods",
     href: "/neighborhoods",
     children: [
-      { label: "All Neighborhoods", href: "/neighborhoods" },
       ...areas.map((a) => ({ label: a.name, href: `/neighborhoods/${a.slug}` })),
     ],
   },
