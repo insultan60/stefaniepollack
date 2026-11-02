@@ -413,6 +413,7 @@ export const areas: Area[] = [
           { kind: "p", text: "Most Encino homes are served by the Los Angeles Unified School District, and the school assigned to a home depends on its address. Charter and magnet options may also be available. Check the exact address with the district before you make an offer." },
           { kind: "h3", text: "Parks and Outdoor Time" },
           { kind: "p", text: "Los Encinos State Historic Park is a short outing with an old ranch house and a pond, and the Sepulveda Basin Recreation Area offers trails, sports fields, and open space nearby. Many residents also use the hiking routes in the hills above Ventura Boulevard. Dining and shopping along the boulevard fill in the rest of daily life." },
+          { kind: "link", label: "Read the local guide to things to do in Encino", href: "/blog/things-to-do-in-encino" },
         ],
       },
     ],

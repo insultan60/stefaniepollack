@@ -333,6 +333,19 @@ export const stats = [
 
 export const articles = [
   {
+    id: 9,
+    title: "Things to Do in Encino: A Valley Local's Guide",
+    excerpt: "Los Encinos State Historic Park's 1849 adobe, the Lake Balboa loop, the Sunday farmers market and Ventura Boulevard dining. A Valley local's guide to Encino, with ideas for kids, dogs and date night.",
+    image: "/images/blog/encino-lake-balboa.jpg",
+    href: "/blog/things-to-do-in-encino",
+    category: "Local Guide",
+    date: "Nov 2026",
+    readTime: "6 min read",
+    metaTitle: "Things to Do in Encino, CA: A Valley Local's Guide",
+    metaDescription:
+      "Parks, a historic adobe, the Sunday farmers market, and Ventura Boulevard dining. A Valley local's guide to the best things to do in Encino, CA.",
+  },
+  {
     id: 8,
     title: "Pros and Cons of Living in Studio City",
     excerpt: "Calm streets, great food and easy trails close to Hollywood and Burbank, traded against high housing costs, heavy traffic and the need for a car. The good and the hard parts of Studio City, plus safety and costs, from someone who grew up here.",
