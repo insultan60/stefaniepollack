@@ -6,6 +6,7 @@ import Stats from "./components/Stats";
 import FeaturedProperties from "./components/FeaturedProperties";
 import Neighborhoods from "./components/Neighborhoods";
 import Testimonials from "./components/Testimonials";
+import GoogleReviews from "./components/GoogleReviews";
 import HowItWorks from "./components/HowItWorks";
 import OfficeMap from "./components/OfficeMap";
 import CTASection from "./components/CTASection";
@@ -24,6 +25,7 @@ export default function Home() {
       <FeaturedProperties />
       <Neighborhoods />
       <Testimonials />
+      <GoogleReviews />
       <HowItWorks />
       <Articles />
       <OfficeMap />
