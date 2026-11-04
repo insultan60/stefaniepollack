@@ -333,6 +333,19 @@ export const stats = [
 
 export const articles = [
   {
+    id: 11,
+    title: "How to Price Your Home to Sell in Studio City",
+    excerpt: "Homes here sell for about 1% below list and go under contract in roughly seven weeks. Local sale data, a six-step pricing method, how long it takes to sell a house in LA, and the pricing mistakes to avoid.",
+    image: "/images/stefanie/lifestyle-5.jpg",
+    href: "/blog/how-to-price-your-home-to-sell-in-studio-city",
+    category: "Market Updates",
+    date: "Nov 2026",
+    readTime: "10 min read",
+    metaTitle: "How to Price Your Home to Sell in Studio City",
+    metaDescription:
+      "Learn how to price your home to sell in Studio City, with local sale data, a step-by-step method, and how long homes take to sell in LA.",
+  },
+  {
     id: 10,
     title: "Is Studio City Safe? A Local Agent's Honest Answer",
     excerpt: "Violent crime is uncommon and property crime is the main worry, and 2026 LAPD numbers are falling. The crime data, why online safety scores disagree, how Studio City compares to Sherman Oaks, Encino and North Hollywood, and what it costs to live here.",

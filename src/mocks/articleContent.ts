@@ -21,6 +21,135 @@ export type ArticleBlock =
   | { type: "faq"; title: string; items: { q: string; a: string }[] };
 
 export const articleContent: Record<string, ArticleBlock[]> = {
+  "/blog/how-to-price-your-home-to-sell-in-studio-city": [
+    { type: "p", text: "Wondering how to price your home to sell in Studio City? Start with what buyers are paying right now, not what you hope to get. Homes here sell for about 1% below list and go under contract in roughly seven weeks, so a price that matches the market matters." },
+
+    { type: "h2", text: "Why Your List Price Matters Most" },
+    { type: "p", text: "Your list price shapes everything that follows. It decides who sees your home online, how many people book a showing, and how much leverage you have when offers arrive." },
+    { type: "p", text: "The first two weeks matter most. That is when the most buyers are watching for new listings. A home that starts too high often misses that window, and buyers who skip it rarely come back at the same enthusiasm." },
+    { type: "p", text: "Pricing too low has a cost too. You may get offers quickly, but you could leave money on the table. The goal is a price that matches the market and still gives you room to negotiate." },
+
+    { type: "h2", text: "Studio City Market Snapshot" },
+    { type: "p", text: "Before you pick a number, look at how homes are actually selling. Here is how Studio City compares with the City of Los Angeles." },
+    {
+      type: "table",
+      head: ["Measure", "Studio City", "Los Angeles"],
+      rows: [
+        ["Typical time to go pending", "About 40 to 49 days", "About 57 days"],
+        ["Typical sale price vs list", "About 1% below", "About 1% below"],
+        ["Hot homes", "About 1% above list, in about 27 days", "About 2% above list, in about 30 days"],
+        ["Share of sales over list", "About 30%", "Not reported"],
+        ["Share of sales under list", "About 53%", "Not reported"],
+      ],
+      note: "Figures checked November 2026 using Redfin and Zillow data. Numbers vary by source, month and property type, so treat them as a guide.",
+    },
+    { type: "p", text: "Here is what these numbers tell me:" },
+    { type: "ul", items: [
+      "Most homes sell a little under list, so buyers expect some negotiation.",
+      "About three in ten Studio City sales close over list, which shows that well-priced homes can still win bidding.",
+      "The gap between a hot home and a typical home is mostly price and condition.",
+    ] },
+    { type: "p", text: "Median prices vary a lot by property type. Zillow shows roughly $1.64 million for all home types, while Homes.com puts single-family homes closer to $2.4 million. That is why condos and houses in the same neighborhood need very different comps." },
+
+    { type: "h2", text: "How to Price Your Home to Sell: Step by Step" },
+    { type: "p", text: "Here is the method I follow. You can use it on your own to check an agent's numbers, or as a guide when you review a pricing recommendation." },
+    { type: "h3", text: "1. Start with comparable sales" },
+    { type: "p", text: "Comparable sales, or comps, are recent sales of homes like yours. Look at homes that sold in the last three to six months, in your area, with similar size, age and style." },
+    { type: "p", text: "In Studio City, location within the neighborhood matters. A home on a flat, tree-lined street can sell very differently from a hillside property a mile away, even with the same square footage. Pools, lot size, views and updated kitchens also change value quickly." },
+    { type: "p", text: "Compare actual sold prices, not asking prices. A professional comparative market analysis, or CMA, does this work for you and also looks at days on market and list-to-sale ratio. You can browse my [recently sold Studio City listings](/listings?tab=sold) to see real examples." },
+    { type: "h3", text: "2. Study your competition" },
+    { type: "p", text: "Your home competes with the homes for sale right now, not just the ones that sold. If several similar houses sit unsold nearby, buyers may be waiting for price drops." },
+    { type: "p", text: "Zillow calls this price banding. Look at where active listings cluster, and find a price point that is less crowded. A home priced just below a cluster can stand out without selling for less than it is worth." },
+    { type: "h3", text: "3. Adjust for condition and features" },
+    { type: "p", text: "Be honest about what your home needs. Move-in ready homes often sell for more, while homes needing repairs usually sell at a discount. Buyers tend to subtract the cost of work and then add extra for the hassle." },
+    { type: "p", text: "Features that raise value in Studio City include a renovated kitchen, an updated primary bath, outdoor living space, a pool and good natural light. Aging systems like HVAC, roofing or plumbing can pull a price down. Fixing small issues before you list can protect your price during inspection negotiations." },
+    { type: "h3", text: "4. Choose your pricing strategy" },
+    { type: "p", text: "Your goals and timeline should shape the price. Here are the three common approaches." },
+    {
+      type: "table",
+      head: ["Strategy", "When it can work", "Main risk"],
+      rows: [
+        ["Slightly below market", "You want fast, strong interest and possible multiple offers", "May leave money behind if demand is weak"],
+        ["At market", "You want a balanced result and steady interest", "Needs accurate comps and a clean presentation"],
+        ["Above market", "Your home has rare features and you can wait", "Longer time on market and likely price cuts"],
+      ],
+    },
+    { type: "p", text: "Redfin's economist says that buyers today have more options, so sellers who list too high often end up cutting later. Pricing at or just below market value tends to draw more interest early. If you need to sell by a certain date, price toward the lower end of your range." },
+    { type: "h3", text: "5. Use buyer search ranges and clean numbers" },
+    { type: "p", text: "Most buyers set a maximum price in their online search. If a buyer caps their search at $1.9 million, a home listed at $1,925,000 will not appear." },
+    { type: "p", text: "Pricing at $1,899,000 shows up for both that buyer and buyers searching up to $2 million. Round, clean prices also look more confident than odd numbers like $1,923,456. Zillow and Redfin both recommend checking where your price falls in common search brackets." },
+    { type: "h3", text: "6. Check online estimates and appraisal risk" },
+    { type: "p", text: "Automated estimates from sites like Zillow and Redfin are fine as a starting point. They use public records and recent sales, but they cannot see your finishes, your view or the quality of your remodel. Treat them as a rough range, not a list price." },
+    { type: "p", text: "Appraisals matter too. If a buyer uses a loan, the lender orders an appraisal, and a value below the contract price can force a renegotiation. A realistic price from the start lowers that risk." },
+
+    { type: "h2", text: "How Long Does It Take to Sell a House in LA?" },
+    { type: "p", text: "Timing questions come up in almost every listing meeting. The answer depends on which part of the process you count, which is why sources give very different numbers." },
+    { type: "p", text: "Think of it as three clocks:" },
+    {
+      type: "table",
+      head: ["Clock", "What it covers", "Typical time"],
+      rows: [
+        ["Preparation", "Repairs, cleaning, staging and photos", "Varies by home, often a few weeks"],
+        ["Listing to accepted offer", "Days on market until you are under contract", "About 40 to 49 days in Studio City, about 57 in LA"],
+        ["Escrow", "Accepted offer to closing", "About 30 days"],
+      ],
+    },
+    { type: "p", text: "Add the last two clocks and you get roughly 70 to 80 days from listing to closing in Studio City. Clever's LA estimate is 79 days, made of 49 days on market and 30 days to close. Other sources quote shorter numbers because they stop counting when the offer is accepted." },
+    { type: "p", text: "Well-priced homes often move faster. Redfin shows that hot homes in Studio City go pending in about 27 days. A home that sits past the typical range is often waiting on a price adjustment." },
+    { type: "p", text: "If timing matters to you, my post on [whether January is a good time to buy or sell in Studio City](/blog/is-january-a-good-time-to-buy-or-sell-a-home-in-studio-city) covers how the season can affect demand." },
+
+    { type: "h2", text: "Signs Your Price Is Off, and When to Cut" },
+    { type: "p", text: "The market tells you quickly if the price is wrong. Watch these signals during the first two weeks:" },
+    { type: "ul", items: [
+      "Few online views, saves or showing requests",
+      "Agents telling me buyers think it is high compared with nearby homes",
+      "Similar homes selling while yours sits",
+      "Positive feedback about the home but no offers",
+    ] },
+    { type: "p", text: "Price cuts are common. Listing data from Altos shows that anywhere from about one in five to nearly one in two Studio City houses carried a price reduction at different points this year. A cut is not a failure, but timing matters." },
+    { type: "p", text: "If you decide to cut, make one clear adjustment instead of several small ones. Zillow advises the same, since older listings lose appeal and tiny trims are easy for buyers to ignore. Talk with your agent about which price bracket the new number reaches." },
+
+    { type: "h2", text: "Pricing Rules Specific to LA Sellers" },
+    { type: "p", text: "Studio City sits inside the City of Los Angeles, so city transfer taxes apply to your sale. For most homes, this will not change how you price." },
+    { type: "p", text: "The exception is the top of the market. Under Measure ULA, sales above $5.4 million face a 4% tax, and sales at $10.9 million or more face 5.5%, for closings after June 30, 2026. The rate applies to the full price, so a small price difference near the threshold can change your costs a lot." },
+    { type: "p", text: "Rules and thresholds can change, so confirm the current numbers with your escrow officer or tax professional before you set a price near these levels. I am not a financial or tax advisor." },
+
+    { type: "h2", text: "Common Pricing Mistakes" },
+    { type: "p", text: "Here are the mistakes I see most often:" },
+    { type: "ul", items: [
+      "Setting a price from a Zestimate alone",
+      "Using comps that are too old or too far away",
+      "Pricing based on what you paid or what you spent on renovations",
+      "Listing high to leave room to negotiate",
+      "Ignoring active listings that compete with yours",
+      "Letting emotion decide the number",
+    ] },
+    { type: "p", text: "Buyers focus on the market, not on your memories or your remodel receipts. A strong agent will help you set the price based on data, then explain the reasoning clearly." },
+
+    { type: "h2", text: "Ready to Price Your Home to Sell?" },
+    { type: "p", text: "To price your home to sell in Studio City, combine recent comps, current competition and an honest view of your home's condition. Then match your strategy to your timeline. The right number gives you leverage in the first two weeks and fewer surprises in escrow." },
+    {
+      type: "cta",
+      text: "I would be glad to help you build that number. I grew up in Studio City, and I have helped more than 800 families buy and sell here. You can request a [home valuation](/sellers), [schedule a meeting](/schedule), or [get in touch](/contact) with any questions.",
+      label: "Schedule a Meeting",
+      href: "/schedule",
+      note: "If you are also curious about the neighborhood, read my [pros and cons of living in Studio City](/blog/pros-and-cons-of-living-in-studio-city) or visit the [Studio City neighborhood page](/neighborhoods/studio-city).",
+    },
+    { type: "signature" },
+
+    {
+      type: "faq",
+      title: "Frequently Asked Questions",
+      items: [
+        { q: "What if my home appraises below the asking price?", a: "You have a few options. You can lower the price to match the appraisal, ask the buyer to cover the difference, challenge the appraisal with extra comps, or cancel if your contract allows it. A realistic price at the start makes this less likely." },
+        { q: "How accurate are Zestimates for Studio City homes?", a: "They work as a rough starting range, but they do not see your finishes, lot, view or condition. Two homes with the same size can differ by hundreds of thousands of dollars. A CMA from a local agent gives a much better number." },
+        { q: "Should I price low to start a bidding war?", a: "It can work when demand is strong, and about three in ten Studio City sales close over list. The risk is that a high offer may not appraise, which can delay or cancel the deal. Talk through the plan with your agent before you choose it." },
+        { q: "Should I make repairs before listing?", a: "Fix items that buyers will use to negotiate, such as leaks, electrical problems or aging systems. Cosmetic work like paint, lighting and landscaping can also help your home show better. Skip large remodels unless your agent shows that comparable homes sell for enough more to cover the cost." },
+        { q: "Does staging and photography change what price I can ask?", a: "They do not change your home's value, but they change how many buyers take it seriously. A home that photographs well and feels move-in ready attracts more showings in the first two weeks. That can support a stronger final price." },
+      ],
+    },
+  ],
+
   "/blog/is-studio-city-safe": [
     { type: "p", text: "Is Studio City safe? For most residents, yes: violent crime is uncommon, and the main worries are property crimes like car break-ins and burglary. LAPD numbers for 2026 show those reported crimes falling across this part of the Valley. I grew up here, so I will show you the data and what it feels like on the street." },
 
@@ -38,7 +167,7 @@ export const articleContent: Record<string, ArticleBlock[]> = {
         ["Robbery", "200", "242", "-17.4%"],
         ["Aggravated assault", "485", "467", "+3.9%"],
       ],
-      note: "Source: [LAPD CompStat](https://www.lapdonline.org/current-crime-statistics/), North Hollywood Area Profile, prepared November 3, 2026. Figures are preliminary.",
+      note: "Source: LAPD CompStat, North Hollywood Area Profile, prepared November 3, 2026. Figures are preliminary.",
     },
     { type: "p", text: "Here is what those numbers mean in plain terms:" },
     { type: "ul", items: [
@@ -96,7 +225,7 @@ export const articleContent: Record<string, ArticleBlock[]> = {
     { type: "p", text: "The trade-off is that Studio City is a busy, central place. Ventura Boulevard draws crowds, parking can be tight, and the streets near restaurants need the usual city habits. I would not call it a place where you can ignore locks and lights, but most residents tell me they feel comfortable here." },
 
     { type: "h2", text: "Hillside, Fire and Insurance Safety" },
-    { type: "p", text: "For many buyers, \"safe\" also means insurable. Some hillside streets sit in higher fire risk zones, and you can check any address on the [CAL FIRE Fire Hazard Severity Zone map](https://osfm.fire.ca.gov/what-we-do/community-wildfire-preparedness-and-mitigation/fire-hazard-severity-zones)." },
+    { type: "p", text: "For many buyers, \"safe\" also means insurable. Some hillside streets sit in higher fire risk zones, and you can check any address on the [CAL FIRE Fire Hazard Severity Zone map](https://osfm.fire.ca.gov/fhsz/)." },
     { type: "p", text: "Steep roads, retaining walls and drainage deserve a close look on hillside homes. Insurance can cost more or be harder to find in higher risk areas, and California homes do not include earthquake coverage by default. Ask for an insurance quote before you write an offer, not after." },
 
     { type: "h2", text: "Studio City Cost of Living: What a Safe Neighborhood Costs" },
@@ -115,17 +244,17 @@ export const articleContent: Record<string, ArticleBlock[]> = {
     ] },
     { type: "p", text: "To check a specific street, follow these steps:" },
     { type: "ul", items: [
-      "Look up the address in the LAPD crime data on the [City of Los Angeles open data portal](https://data.lacity.org/browse?category=Public+Safety).",
+      "Look up the address in the [LAPD crime data on the City of Los Angeles open data portal](https://data.lacity.org/Public-Safety/Crime-Data-from-2020-to-Present/2nrs-mtv8/about_data).",
       "Visit in the daytime, at night and on a weekend.",
       "Talk with neighbors about what they see.",
-      "Contact your LAPD Senior Lead Officer. The [Studio City Residents Association public safety page](https://www.studiocityresidents.org/public-safety) lists the contact and neighborhood watch information.",
+      "Contact your LAPD Senior Lead Officer. The [Studio City Residents Association public safety page](https://studiocityresidents.org/public-safety) lists the contact and neighborhood watch information.",
     ] },
 
     { type: "h2", text: "Thinking About Buying in Studio City?" },
     { type: "p", text: "So, is Studio City safe? Violent crime is uncommon, property crime is the main concern, and 2026 LAPD numbers are moving in the right direction. The best answer for you depends on the street, the home and your daily routine." },
     {
       type: "cta",
-      text: "I am happy to share what I know about each block. [Browse my Studio City listings](/listings), read about the [Studio City neighborhood](/neighborhoods/studio-city), or schedule a meeting to talk through your budget and timeline.",
+      text: "I am happy to share what I know about each block. Browse my [Studio City listings](/listings), read about the [Studio City neighborhood](/neighborhoods/studio-city), or [schedule a meeting](/schedule) to talk through your budget and timeline.",
       label: "Schedule a Meeting",
       href: "/schedule",
       note: "You can also [get in touch](/contact) with any questions.",
@@ -707,7 +836,7 @@ export const articleContent: Record<string, ArticleBlock[]> = {
         "Strong pricing potential: Well-prepared homes in Studio City often perform very well even in winter months.",
       ],
     },
-    { type: "p", text: "If you’re thinking about selling a home in Studio City, January can be a powerful time—especially with the right pricing and marketing strategy." },
+    { type: "p", text: "If you’re thinking about selling a home in Studio City, January can be a powerful time—especially with the right pricing and marketing strategy. For a step-by-step method, read [how to price your home to sell in Studio City](/blog/how-to-price-your-home-to-sell-in-studio-city)." },
 
     { type: "h2", text: "How the Studio City Real Estate Market Performs in January" },
     { type: "p", text: "Studio City’s real estate market remains resilient year-round thanks to:" },
