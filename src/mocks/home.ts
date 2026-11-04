@@ -333,6 +333,19 @@ export const stats = [
 
 export const articles = [
   {
+    id: 10,
+    title: "Is Studio City Safe? A Local Agent's Honest Answer",
+    excerpt: "Violent crime is uncommon and property crime is the main worry, and 2026 LAPD numbers are falling. The crime data, why online safety scores disagree, how Studio City compares to Sherman Oaks, Encino and North Hollywood, and what it costs to live here.",
+    image: "/images/stefanie/lifestyle-4.jpg",
+    href: "/blog/is-studio-city-safe",
+    category: "Local Guide",
+    date: "Nov 2026",
+    readTime: "9 min read",
+    metaTitle: "Is Studio City Safe? Crime Stats and Local Tips",
+    metaDescription:
+      "Is Studio City safe? See 2026 LAPD crime data, how it compares to nearby areas, and what costs to expect, from a local agent who grew up here.",
+  },
+  {
     id: 9,
     title: "Things to Do in Encino: A Valley Local's Guide",
     excerpt: "Los Encinos State Historic Park's 1849 adobe, the Lake Balboa loop, the Sunday farmers market and Ventura Boulevard dining. A Valley local's guide to Encino, with ideas for kids, dogs and date night.",

@@ -14,10 +14,137 @@ export type ArticleBlock =
   /** A call to action: a line of text and a button, with an optional note. */
   | { type: "cta"; text?: string; label: string; href: string; note?: string }
   | { type: "ul"; items: string[] }
+  /** A data table. Cells accept the same inline links and bold as paragraphs;
+   *  `note` is a small source line under the table. */
+  | { type: "table"; caption?: string; head: string[]; rows: string[][]; note?: string }
   | { type: "signature" }
   | { type: "faq"; title: string; items: { q: string; a: string }[] };
 
 export const articleContent: Record<string, ArticleBlock[]> = {
+  "/blog/is-studio-city-safe": [
+    { type: "p", text: "Is Studio City safe? For most residents, yes: violent crime is uncommon, and the main worries are property crimes like car break-ins and burglary. LAPD numbers for 2026 show those reported crimes falling across this part of the Valley. I grew up here, so I will show you the data and what it feels like on the street." },
+
+    { type: "h2", text: "Studio City Safety at a Glance" },
+    { type: "p", text: "Here is the short version, using LAPD's North Hollywood Area report. That report covers Studio City along with neighboring communities such as North Hollywood, so it shows the wider area and not Studio City alone." },
+    {
+      type: "table",
+      caption: "Reported crime, Jan 1 to Oct 31",
+      head: ["Crime", "2026", "2025", "Change"],
+      rows: [
+        ["All person and property crimes", "4,246", "5,034", "-15.7%"],
+        ["Burglary", "408", "738", "-44.7%"],
+        ["Motor vehicle theft", "580", "926", "-37.4%"],
+        ["Theft from vehicles", "1,149", "1,275", "-9.9%"],
+        ["Robbery", "200", "242", "-17.4%"],
+        ["Aggravated assault", "485", "467", "+3.9%"],
+      ],
+      note: "Source: [LAPD CompStat](https://www.lapdonline.org/current-crime-statistics/), North Hollywood Area Profile, prepared November 3, 2026. Figures are preliminary.",
+    },
+    { type: "p", text: "Here is what those numbers mean in plain terms:" },
+    { type: "ul", items: [
+      "Property crime makes up most reports, and it is the main thing to plan for.",
+      "Burglaries and car thefts have dropped sharply this year.",
+      "Violent crime is the smaller share, though not zero.",
+      "No post can promise safety, so use this as a starting point and check the exact street.",
+    ] },
+
+    { type: "h2", text: "Studio City Crime Rate: What the Data Shows" },
+    { type: "p", text: "LAPD is the best source because it counts reports directly. Online sites often rely on estimates, which I explain in the next section." },
+    { type: "h3", text: "Violent crime" },
+    { type: "p", text: "Violent crime is the smaller part of the picture. Person crimes, which include homicide, rape, robbery and aggravated assault, totaled 737 across the whole area this year. That is 2.4% lower than the same period in 2025." },
+    { type: "p", text: "Robbery fell about 17%, but aggravated assaults rose about 4%. Because the count covers several neighborhoods, it overstates what any one street sees. NabeWise breaks LAPD reports down by neighborhood and counts about 2.5 violent incidents per 1,000 Studio City residents, compared with about 24 property incidents." },
+    { type: "h3", text: "Property crime" },
+    { type: "p", text: "Property crime is where most reports come from. Thefts from cars are the biggest single category, with 1,149 reports this year, and car break-ins are what I hear about most from neighbors. Burglary dropped from 738 to 408, and vehicle theft dropped from 926 to 580." },
+    { type: "p", text: "Other thefts, such as package theft and shoplifting, are not falling. That category rose 2.4%." },
+    { type: "h3", text: "Is crime going up or down?" },
+    { type: "p", text: "Overall, reported person and property crimes in the area are down 15.7% from last year. LAPD's citywide report shows a smaller drop of roughly 9% through early October." },
+    { type: "p", text: "Keep one limit in mind. These numbers only count crimes people report, and LAPD marks them as preliminary. Many people skip reporting small thefts, so the true number of incidents is likely higher." },
+
+    { type: "h2", text: "Why Online Safety Scores Don't Agree" },
+    { type: "p", text: "If you search for \"is Studio City safe,\" you will see very different answers. Here is how some well-known sites rate it:" },
+    { type: "ul", items: [
+      "**CrimeGrade:** a D- overall, in the 15th percentile of cities.",
+      "**NabeWise:** a safety score of 29, compared with 50 for its Los Angeles set.",
+      "**Safemap:** 66 out of 100, rated \"Safe,\" and ranked 39th of 114 LA neighborhoods.",
+      "**Lucid Rents:** a B, \"moderately safe.\"",
+      "**AreaVibes:** violent crime about 18% below the national average.",
+    ] },
+    { type: "p", text: "Why such a spread? There are four main reasons." },
+    { type: "p", text: "First, the data differs. AreaVibes says the FBI does not report crime by neighborhood, so it uses estimates. Safemap's charts include older data, while LAPD's own report is current through October." },
+    { type: "p", text: "Second, the boundaries differ. NabeWise counts about 41,000 Studio City residents, and CrimeGrade counts about 31,000. A different population changes every per-person rate." },
+    { type: "p", text: "Third, visitors count in the math. Ventura Boulevard, Tujunga Village and the studio lots bring in thousands of people who do not live here. Crime reported near busy shops gets divided by residents only, which makes the rate look higher than daily life feels." },
+    { type: "p", text: "Fourth, sites weigh crime types differently. A site that counts every theft heavily will grade Studio City lower than one that focuses on violent crime. My advice is to treat the scores as rough, then use LAPD data and a visit to get the real picture." },
+
+    { type: "h2", text: "Studio City vs Sherman Oaks, Encino and North Hollywood" },
+    { type: "p", text: "Buyers often compare these Valley neighborhoods side by side. Here is how they stack up." },
+    {
+      type: "table",
+      head: ["Neighborhood", "Crime pattern", "NabeWise safety score (higher is safer)", "Local note"],
+      rows: [
+        ["Studio City", "Low violent crime, property-heavy", "29", "Busy Ventura Boulevard and studio traffic raise per-resident rates"],
+        ["Sherman Oaks", "Similar Valley pattern", "67", "Next door along Ventura Boulevard, with a flatter layout"],
+        ["Encino", "Below-average violent crime, above-average property crime", "Not scored in that set", "Larger lots and more car-dependent"],
+        ["North Hollywood", "Higher overall reports", "48", "Lower prices and Metro Red Line access"],
+      ],
+    },
+    { type: "p", text: "NabeWise scores Sherman Oaks higher than Studio City on safety, and I think that is fair to share. Part of the gap comes from how many visitors Studio City draws. The Valley as a whole deals with the same mix of low violent crime and steady property crime, so the differences are smaller on the street than on a chart." },
+    { type: "p", text: "If you are weighing these areas, read my guides to [things to do in Sherman Oaks](/blog/things-to-do-in-sherman-oaks) and [things to do in Encino](/blog/things-to-do-in-encino). They show what daily life looks like in each place." },
+
+    { type: "h2", text: "What Safety Looks Like in Daily Life" },
+    { type: "p", text: "Numbers only tell part of the story. I grew up in Studio City, I am raising my family here, and I organize neighborhood events like the [Howl-O-Ween dog costume parade](/events/howl-o-ween). That gives me a close view of how people use the neighborhood." },
+    { type: "p", text: "Most evenings, you will see neighbors out with dogs and strollers around Tujunga Village and the quieter side streets. The Sunday farmers market and local events give people a reason to know each other, and that kind of familiarity helps. Neighbors who recognize each other notice when something looks wrong." },
+    { type: "p", text: "The trade-off is that Studio City is a busy, central place. Ventura Boulevard draws crowds, parking can be tight, and the streets near restaurants need the usual city habits. I would not call it a place where you can ignore locks and lights, but most residents tell me they feel comfortable here." },
+
+    { type: "h2", text: "Hillside, Fire and Insurance Safety" },
+    { type: "p", text: "For many buyers, \"safe\" also means insurable. Some hillside streets sit in higher fire risk zones, and you can check any address on the [CAL FIRE Fire Hazard Severity Zone map](https://osfm.fire.ca.gov/what-we-do/community-wildfire-preparedness-and-mitigation/fire-hazard-severity-zones)." },
+    { type: "p", text: "Steep roads, retaining walls and drainage deserve a close look on hillside homes. Insurance can cost more or be harder to find in higher risk areas, and California homes do not include earthquake coverage by default. Ask for an insurance quote before you write an offer, not after." },
+
+    { type: "h2", text: "Studio City Cost of Living: What a Safe Neighborhood Costs" },
+    { type: "p", text: "Studio City costs more than most of Los Angeles. AreaVibes puts its cost of living about 22% above the Los Angeles average, and housing drives most of that gap." },
+    { type: "p", text: "Census-based figures from NabeWise show a median rent of $2,438 and a median household income of about $133,000. About 57% of households rent. The same source puts the median home value near $1.54 million, while Safemap's estimate is closer to $1.29 million. Sources count different homes and dates, so use these as a range." },
+    { type: "p", text: "Current asking prices run higher for single-family homes. At the time of writing, a few Studio City houses on my [listings page](/listings) are priced around $1.9 million." },
+    { type: "p", text: "Safety adds a few smaller costs. Many residents pay for doorbell cameras, outdoor lighting and covered parking, and insurance can be a real line item in the monthly budget. I am not a financial advisor, so ask a lender to run your numbers. For the full cost breakdown, read my [pros and cons of living in Studio City](/blog/pros-and-cons-of-living-in-studio-city)." },
+
+    { type: "h2", text: "Simple Ways to Stay Safe and Check a Street Yourself" },
+    { type: "p", text: "A few habits cut your risk, because thefts from cars and homes are the main issue." },
+    { type: "ul", items: [
+      "Lock your car and keep every bag out of sight.",
+      "Make sure doorbell cameras and porch lights work.",
+      "Ask for a signature or use a delivery locker for packages.",
+      "Get to know your neighbors and join a Neighborhood Watch.",
+    ] },
+    { type: "p", text: "To check a specific street, follow these steps:" },
+    { type: "ul", items: [
+      "Look up the address in the LAPD crime data on the [City of Los Angeles open data portal](https://data.lacity.org/browse?category=Public+Safety).",
+      "Visit in the daytime, at night and on a weekend.",
+      "Talk with neighbors about what they see.",
+      "Contact your LAPD Senior Lead Officer. The [Studio City Residents Association public safety page](https://www.studiocityresidents.org/public-safety) lists the contact and neighborhood watch information.",
+    ] },
+
+    { type: "h2", text: "Thinking About Buying in Studio City?" },
+    { type: "p", text: "So, is Studio City safe? Violent crime is uncommon, property crime is the main concern, and 2026 LAPD numbers are moving in the right direction. The best answer for you depends on the street, the home and your daily routine." },
+    {
+      type: "cta",
+      text: "I am happy to share what I know about each block. [Browse my Studio City listings](/listings), read about the [Studio City neighborhood](/neighborhoods/studio-city), or schedule a meeting to talk through your budget and timeline.",
+      label: "Schedule a Meeting",
+      href: "/schedule",
+      note: "You can also [get in touch](/contact) with any questions.",
+    },
+    { type: "signature" },
+
+    {
+      type: "faq",
+      title: "Frequently Asked Questions",
+      items: [
+        { q: "Is Studio City safe to walk at night?", a: "Many streets near Ventura Boulevard and Tujunga Village have people out in the evening, and that foot traffic helps. Older incident data from Safemap shows activity peaks late in the evening and drops in the early morning. Stick to lit streets, stay aware of your surroundings and keep your phone handy, as you would in any big city." },
+        { q: "Is Studio City safe for families?", a: "Many families live here for the parks, schools and neighborhood feel. Public schools follow LAUSD attendance zones, which can change, so check the district's school finder with the exact address. For young kids, I would also visit the street at different times of day." },
+        { q: "Is Studio City safe for renters in apartments?", a: "Renters face the same property crime risks as homeowners, especially car break-ins. One tip I hear often is to choose a building with gated or secured parking. Ask the landlord about lighting, cameras and past break-ins before you sign a lease." },
+        { q: "How do I report a crime or join Neighborhood Watch?", a: "Call 911 for emergencies. For non-emergencies, call (877) ASK-LAPD, which is (877) 275-5273. Your LAPD Senior Lead Officer can also help you start or join a Neighborhood Watch, and the Studio City Residents Association page lists contact details." },
+        { q: "Is homelessness a concern in Studio City?", a: "Some residents raise it, and it shows up in city service requests. NabeWise's snapshot of 311 requests from September 2026 shows about 100 homeless encampment reports in a two-week span, out of nearly 800 total requests. Homelessness and crime are not the same thing, so the best step is to visit the specific street you are considering." },
+      ],
+    },
+  ],
+
   "/blog/pros-and-cons-of-living-in-studio-city": [
     { type: "p", text: "The pros and cons of living in Studio City, CA come down to a trade. You get calm streets, great food, and easy trails close to Hollywood and Burbank. You pay for it with high housing costs, heavy traffic, and the need for a car." },
 
@@ -92,7 +219,7 @@ export const articleContent: Record<string, ArticleBlock[]> = {
       "Visit in the day, at night, and on a weekend.",
       "Talk with neighbors.",
     ] },
-    { type: "p", text: "Crime changes over time, so no post can promise safety. I am happy to share what I know about each street." },
+    { type: "p", text: "Crime changes over time, so no post can promise safety. I am happy to share what I know about each street. For the full 2026 LAPD numbers, read [is Studio City safe?](/blog/is-studio-city-safe)" },
     { type: "p", text: "Safety is only one piece. Cost is the next big one." },
 
     { type: "h2", text: "Cost of Living in Studio City, California" },

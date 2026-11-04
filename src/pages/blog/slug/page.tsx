@@ -183,7 +183,7 @@ function Block({ block }: { block: ArticleBlock }) {
             {block.label}
             <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
           </a>
-          {block.note && <p className="mt-3 text-sm italic text-foreground-600">{block.note}</p>}
+          {block.note && <p className="mt-3 text-sm italic text-foreground-600">{renderInline(block.note)}</p>}
         </div>
       );
     case "ul":
@@ -193,6 +193,48 @@ function Block({ block }: { block: ArticleBlock }) {
             <li key={i}>{renderInline(item)}</li>
           ))}
         </ul>
+      );
+    case "table":
+      return (
+        <figure className="my-2">
+          {/* Scrolls sideways on narrow phones instead of squeezing the columns. */}
+          <div className="overflow-x-auto rounded-xl border border-background-200">
+            <table className="w-full min-w-[480px] text-left text-sm md:text-base">
+              {block.caption && (
+                <caption className="caption-top px-4 pt-4 pb-2 text-left text-xs font-semibold tracking-[0.15em] uppercase text-primary-700">
+                  {block.caption}
+                </caption>
+              )}
+              <thead className="bg-accent-100">
+                <tr>
+                  {block.head.map((cell) => (
+                    <th key={cell} scope="col" className="px-4 py-3 font-semibold text-foreground-950">
+                      {cell}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-background-200">
+                {block.rows.map((row, r) => (
+                  <tr key={r}>
+                    {row.map((cell, c) =>
+                      c === 0 ? (
+                        <th key={c} scope="row" className="px-4 py-3 font-medium text-foreground-950">
+                          {renderInline(cell)}
+                        </th>
+                      ) : (
+                        <td key={c} className="px-4 py-3 text-foreground-700">
+                          {renderInline(cell)}
+                        </td>
+                      ),
+                    )}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {block.note && <figcaption className="mt-3 text-sm italic text-foreground-600">{renderInline(block.note)}</figcaption>}
+        </figure>
       );
     case "signature":
       return (
