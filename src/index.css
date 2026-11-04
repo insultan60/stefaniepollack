@@ -248,21 +248,3 @@ body {
   opacity: 1 !important;
   transform: none !important;
 }
-
-/* Elfsight Google Reviews badge: bottom-right corner, 80% size.
-   Elfsight positions the badge inside its own full-screen layer, so this
-   shrinks that layer to a badge-sized box pinned to the corner; the transform
-   makes the box the layer's frame and scales everything in it. Elfsight
-   resets this element with `all: initial !important`, hence the extra
-   specificity and !important here. */
-html body > .es-portal-root.eapps-google-reviews-28b0f6e2-e366-45b2-ae0a-30ecbcfdd07b-custom-css-root {
-  position: fixed !important;
-  right: 0 !important;
-  bottom: 64px !important; /* clears the hero's DRE / Compass tags */
-  width: 230px !important;
-  height: 180px !important;
-  z-index: 40 !important;
-  transform: scale(0.8) !important;
-  transform-origin: bottom right !important;
-  pointer-events: none !important;
-}
