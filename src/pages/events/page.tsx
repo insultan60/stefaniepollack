@@ -24,8 +24,8 @@ function EventCard({ ev, past, i }: { ev: Ev; past: boolean; i: number }) {
         <img
           src={ev.flyer}
           alt={`${ev.name} flyer`}
-          width={1545}
-          height={1999}
+          width={ev.flyerWidth}
+          height={ev.flyerHeight}
           loading="lazy"
           className={`w-full max-w-[240px] mx-auto h-auto rounded-xl shadow-md ${past ? "grayscale-[35%]" : ""}`}
         />
@@ -55,12 +55,20 @@ function EventCard({ ev, past, i }: { ev: Ev; past: boolean; i: number }) {
           </li>
           <li className="flex items-start gap-2">
             <MapPin className="w-4 h-4 text-primary-600 shrink-0 mt-0.5" aria-hidden="true" />
-            <span>
-              {ev.venue}, {ev.street}, {ev.city}
-            </span>
+            <span>{ev.place}</span>
           </li>
         </ul>
         <div className="mt-7 flex flex-wrap gap-3">
+          {!past && "reserveUrl" in ev && (
+            <a
+              href={ev.reserveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary-600 text-white text-sm font-medium tracking-wide hover:bg-primary-700 transition-colors"
+            >
+              Reserve Your Free Pie
+            </a>
+          )}
           <a
             href={ev.path}
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-foreground-950 text-white text-sm font-medium tracking-wide hover:bg-foreground-800 transition-colors"

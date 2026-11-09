@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { ArrowRight, CalendarDays, CalendarPlus, MapPin } from "lucide-react";
+import { ArrowRight, CalendarDays, ClipboardCheck, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
-import { HOWL_O_WEEN as EVENT } from "@/lib/events";
+import { PIE_GIVEAWAY as EVENT } from "@/lib/events";
 import { useIsPast } from "@/hooks/useNow";
 
 /* The next community event, linking to its page. Used on the Philanthropy
@@ -35,9 +35,9 @@ export default function UpcomingEvent({
           <Link to={EVENT.path} className="block">
             <img
               src={EVENT.flyer}
-              alt="Howl-O-Ween Dog Costume Parade flyer"
-              width={1545}
-              height={1999}
+              alt={`${EVENT.name} flyer`}
+              width={EVENT.flyerWidth}
+              height={EVENT.flyerHeight}
               loading="lazy"
               className={`w-full mx-auto h-auto rounded-xl ${large ? "max-w-[420px] shadow-[0_30px_60px_-30px_rgba(0,0,0,0.35)]" : "max-w-[220px] shadow-md"}`}
             />
@@ -59,7 +59,7 @@ export default function UpcomingEvent({
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className={`${large ? "w-5 h-5 mt-0.5" : "w-4 h-4"} text-primary-600 shrink-0`} aria-hidden="true" />
-                {large ? `${EVENT.venue}, ${EVENT.street}, ${EVENT.city}` : `${EVENT.street}, ${EVENT.city}`}
+                {large ? EVENT.place : `${EVENT.street}, ${EVENT.city}`}
               </li>
             </ul>
             <div className={`flex flex-wrap items-center gap-x-5 gap-y-3 ${large ? "mt-9" : "mt-6"}`}>
@@ -69,17 +69,15 @@ export default function UpcomingEvent({
               >
                 Event Details <ArrowRight className="w-4 h-4" aria-hidden="true" />
               </Link>
-              {large && (
-                <a
-                  href={EVENT.googleCalendarUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-foreground-950/20 text-foreground-950 text-base font-medium tracking-wide hover:bg-foreground-950 hover:text-white transition-colors"
-                >
-                  <CalendarPlus className="w-4 h-4" aria-hidden="true" />
-                  Add to Calendar
-                </a>
-              )}
+              <a
+                href={EVENT.reserveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center gap-2 rounded-full border border-foreground-950/20 text-foreground-950 font-medium tracking-wide hover:bg-foreground-950 hover:text-white transition-colors ${large ? "px-8 py-4 text-base" : "px-6 py-3 text-sm"}`}
+              >
+                <ClipboardCheck className="w-4 h-4" aria-hidden="true" />
+                Reserve Your Free Pie
+              </a>
               <Link
                 to="/events"
                 className="inline-flex items-center gap-1 text-sm font-medium text-primary-700 hover:text-primary-800 transition-colors"

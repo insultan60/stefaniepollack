@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Stefanie Pollack//Community Events//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:pie-giveaway-2026@stefaniepollack.com
+DTSTAMP:20261110T000000Z
+DTSTART:20261121T180000Z
+DTEND:20261121T200000Z
+SUMMARY:Thanksgiving Pie Giveaway: pick up your pie
+DESCRIPTION:Pick up your reserved free Thanksgiving pie (apple or pumpkin) from Stefanie Pollack. Reservations close Monday\, November 16. One per household\, while supplies last. https://www.stefaniepollack.com/events/thanksgiving-pie-giveaway
+LOCATION:4321 Vantage Ave\, Studio City\, CA 91604
+URL:https://www.stefaniepollack.com/events/thanksgiving-pie-giveaway
+END:VEVENT
+END:VCALENDAR

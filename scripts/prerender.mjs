@@ -226,12 +226,13 @@ for (const { path, meta } of pages) {
     // duplicate.
     const site = server.SITE_URL;
     const area = server.AREAS.find((a) => path === `/neighborhoods/${a.slug}`);
+    const event = server.EVENTS.find((ev) => ev.path === path);
     const inner =
       path === "/sellers" ? sellersSchema(site, meta, server.HOMEBOT_URL)
       : path === "/buyers" ? buyersSchema(site, meta)
       : path === "/neighborhoods" ? hubSchema(site, meta, server.AREAS)
       : area ? areaSchema(site, meta, area)
-      : path === server.HOWL_O_WEEN.path ? eventSchema(site, meta, server.HOWL_O_WEEN)
+      : event ? eventSchema(site, meta, event)
       : path === server.EVENTS_PAGE.path ? eventsHubSchema(site, meta, server.EVENTS)
       : null;
     if (inner) {
@@ -249,8 +250,8 @@ for (const { path, meta } of pages) {
     }
     // Link previews (Slack, iMessage, Facebook) for the event page show the
     // event photo instead of a blank card.
-    if (path === server.HOWL_O_WEEN.path) {
-      const img = `${server.SITE_URL}${server.HOWL_O_WEEN.shareImage}`;
+    if (event) {
+      const img = `${server.SITE_URL}${event.shareImage}`;
       html = html.replace(
         "</head>",
         `<meta property="og:image" content="${img}" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="800" /><meta name="twitter:image" content="${img}" /></head>`,

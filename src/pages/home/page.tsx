@@ -18,7 +18,8 @@ export default function Home() {
     <div className="w-full">
       <Hero />
       <BuyerSellerCTA />
-      {/* The next community event (Howl-O-Ween, Oct 30, 2026). Remove after it. */}
+      {/* The next community event (Thanksgiving Pie Giveaway, Nov 21, 2026). It hides
+          itself after the pickup; point UpcomingEvent at the next event then. */}
       <UpcomingEvent large className="py-20 md:py-28 lg:py-32" />
       <About />
       <Stats />
