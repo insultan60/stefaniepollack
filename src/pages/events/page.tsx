@@ -59,16 +59,6 @@ function EventCard({ ev, past, i }: { ev: Ev; past: boolean; i: number }) {
           </li>
         </ul>
         <div className="mt-7 flex flex-wrap gap-3">
-          {!past && "reserveUrl" in ev && (
-            <a
-              href={ev.reserveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary-600 text-white text-sm font-medium tracking-wide hover:bg-primary-700 transition-colors"
-            >
-              Reserve Your Free Pie
-            </a>
-          )}
           <a
             href={ev.path}
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-foreground-950 text-white text-sm font-medium tracking-wide hover:bg-foreground-800 transition-colors"

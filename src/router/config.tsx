@@ -10,7 +10,6 @@ import AreaPage from "../pages/neighborhoods/area/page";
 import Philanthropy from "../pages/philanthropy/page";
 import Events from "../pages/events/page";
 import HowlOWeen from "../pages/events/howl-o-ween/page";
-import PieGiveaway from "../pages/events/thanksgiving-pie-giveaway/page";
 import Resources from "../pages/resources/page";
 import Contact from "../pages/contact/page";
 import Schedule from "../pages/schedule/page";
@@ -59,10 +58,6 @@ const routes: RouteObject[] = [
   {
     path: "/events/howl-o-ween",
     element: <HowlOWeen />,
-  },
-  {
-    path: "/events/thanksgiving-pie-giveaway",
-    element: <PieGiveaway />,
   },
   {
     path: "/resources",
