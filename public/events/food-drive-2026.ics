@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Stefanie Pollack//Community Events//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:food-drive-2026@stefaniepollack.com
+DTSTAMP:20261110T000000Z
+DTSTART:20261115T160000Z
+DTEND:20261115T220000Z
+SUMMARY:13th Annual Studio City Food Drive
+DESCRIPTION:Donation pickup day for the 13th Annual Studio City Food Drive\, benefiting the North Hollywood Interfaith Food Pantry. Drop off donations 8 AM–2 PM at 4321 Vantage Ave.\, Studio City. https://www.stefaniepollack.com/events/studio-city-food-drive
+LOCATION:4321 Vantage Ave\, Studio City\, CA 91604
+URL:https://www.stefaniepollack.com/events/studio-city-food-drive
+END:VEVENT
+END:VCALENDAR

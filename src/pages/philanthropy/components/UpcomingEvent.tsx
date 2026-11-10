@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, CalendarDays, CalendarPlus, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
-import { HOWL_O_WEEN as EVENT } from "@/lib/events";
+import { FOOD_DRIVE as EVENT } from "@/lib/events";
 import { useIsPast } from "@/hooks/useNow";
 
 /* The next community event, linking to its page. Used on the Philanthropy
