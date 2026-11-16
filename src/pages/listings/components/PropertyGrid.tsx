@@ -403,13 +403,13 @@ export default function PropertyGrid() {
               </datalist>
             </div>
 
-            <FilterDropdown label={mode === "rent" ? "For rent" : "For sale"} active={mode === "rent"}>
+            <FilterDropdown label={mode === "rent" ? "Rent" : "Buy"} active={mode === "rent"}>
               {(close) => (
                 <div className="flex flex-col gap-0.5">
                   {(["sale", "rent"] as const).map((m) => (
                     <DropdownOption
                       key={m}
-                      label={m === "rent" ? "For rent" : "For sale"}
+                      label={m === "rent" ? "Rent" : "Buy"}
                       selected={m === mode}
                       onClick={() => {
                         if (m !== mode) setPriceIdx(0);
