@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ExternalLink, X } from "lucide-react";
+import { ExternalLink, Search, X } from "lucide-react";
 import { useLead } from "@/hooks/useLead";
 
 const ACK_KEY = "idx-full-mls-notice-seen";
@@ -65,9 +65,10 @@ export default function FullMlsLink({ url }: { url: string }) {
         target="_blank"
         rel="noopener noreferrer"
         onClick={onClick}
-        className="flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium text-foreground-700 border border-background-300 rounded-full hover:border-foreground-400 transition-colors whitespace-nowrap"
+        className="flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium bg-foreground-950 text-background-50 rounded-full hover:bg-foreground-800 transition-colors whitespace-nowrap"
       >
-        Search the full MLS
+        <Search className="w-3.5 h-3.5" strokeWidth={1.5} />
+        Search all MLS homes
       </a>
 
       {open && (

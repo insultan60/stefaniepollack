@@ -2,7 +2,8 @@ import { lazy, useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BedDouble, Bath, Ruler, Search, LayoutGrid, Map as MapIcon, ChevronDown, Heart, User, LogOut, Bookmark, X } from "lucide-react";
 import { useIdxListings } from "@/hooks/useIdxListings";
-import { fetchSystemLinks, type AvailableProperty, type SoldProperty } from "@/lib/idx";
+import { type AvailableProperty, type SoldProperty } from "@/lib/idx";
+import { buildMlsSearchUrl, MLS_CITIES, type HomeType, type ListingMode } from "@/lib/mlsSearch";
 import { PHOTO_FALLBACK } from "@/lib/media";
 import { useLead } from "@/hooks/useLead";
 import { addFavorite, removeFavorite } from "@/lib/favorites";
@@ -21,15 +22,23 @@ function numericPrice(property: ListedProperty, isSold: boolean) {
   return Number(raw.replace(/[^0-9]/g, ""));
 }
 
-const PRICE_OPTIONS = [
+const SALE_PRICE_OPTIONS = [
   { label: "Any price", min: 0, max: Infinity },
-  { label: "Under $2M", min: 0, max: 2_000_000 },
+  { label: "Under $1M", min: 0, max: 1_000_000 },
+  { label: "$1M – $2M", min: 1_000_000, max: 2_000_000 },
   { label: "$2M – $3M", min: 2_000_000, max: 3_000_000 },
-  { label: "$3M – $4M", min: 3_000_000, max: 4_000_000 },
-  { label: "$4M+", min: 4_000_000, max: Infinity },
+  { label: "$3M – $5M", min: 3_000_000, max: 5_000_000 },
+  { label: "$5M+", min: 5_000_000, max: Infinity },
+];
+const RENT_PRICE_OPTIONS = [
+  { label: "Any rent", min: 0, max: Infinity },
+  { label: "Under $3,000/mo", min: 0, max: 3_000 },
+  { label: "$3,000 – $5,000/mo", min: 3_000, max: 5_000 },
+  { label: "$5,000 – $10,000/mo", min: 5_000, max: 10_000 },
+  { label: "$10,000+/mo", min: 10_000, max: Infinity },
 ];
 const BED_BATH_OPTIONS = [0, 2, 3, 4, 5];
-const TYPE_OPTIONS = ["Any type", "House", "Condo", "Townhouse", "Multi-Family", "Land"];
+const TYPE_OPTIONS: HomeType[] = ["Any type", "House", "Condo", "Townhouse", "Multi-Family", "Land"];
 const SORT_OPTIONS = [
   { value: "newest", label: "Newest" },
   { value: "price-desc", label: "Price (high to low)" },
@@ -317,6 +326,10 @@ export default function PropertyGrid() {
   const [minBeds, setMinBeds] = useState(0);
   const [minBaths, setMinBaths] = useState(0);
   const [typeIdx, setTypeIdx] = useState(0);
+  // Buy vs rent applies to the full-MLS search; Stefanie's own listings are
+  // all for sale.
+  const [mode, setMode] = useState<ListingMode>("sale");
+  const PRICE_OPTIONS = mode === "rent" ? RENT_PRICE_OPTIONS : SALE_PRICE_OPTIONS;
 
   // /listings?tab=sold (the footer's "Sold Properties") opens on the Sold tab.
   // Read after mount rather than in the initial state, so the first render
@@ -325,18 +338,17 @@ export default function PropertyGrid() {
     if (new URLSearchParams(window.location.search).get("tab") === "sold") setActiveTab("sold");
   }, []);
   const [sort, setSort] = useState(SORT_OPTIONS[0].value);
-  const [fullSearchUrl, setFullSearchUrl] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetchSystemLinks()
-      .then((links) => {
-        const search = links.find((l) => l.name === "Map Search") || links.find((l) => l.category === "search");
-        if (search) setFullSearchUrl(search.url);
-      })
-      .catch(() => {
-        // full-MLS-search link is a nice-to-have — silently skip if it fails
-      });
-  }, []);
+  // Same filters, run against the whole MLS on Stefanie's IDX search site.
+  const fullSearchUrl = buildMlsSearchUrl({
+    location: query,
+    mode,
+    minPrice: PRICE_OPTIONS[priceIdx].min,
+    maxPrice: PRICE_OPTIONS[priceIdx].max,
+    beds: minBeds,
+    baths: minBaths,
+    type: TYPE_OPTIONS[typeIdx],
+  });
 
   const { data, loading } = useIdxListings();
   const fetchedSavedMls = useSavedFavorites();
@@ -346,6 +358,7 @@ export default function PropertyGrid() {
   const isSold = activeTab === "sold";
 
   const properties = useMemo(() => {
+    if (mode === "rent") return [];
     const base: ListedProperty[] = isSold ? data?.sold ?? [] : data?.available ?? [];
     const q = query.trim().toLowerCase();
     const { min, max } = PRICE_OPTIONS[priceIdx];
@@ -364,7 +377,7 @@ export default function PropertyGrid() {
     else if (sort === "price-asc") sorted.sort((a, b) => numericPrice(a, isSold) - numericPrice(b, isSold));
     else if (sort === "beds-desc") sorted.sort((a, b) => b.beds - a.beds);
     return sorted;
-  }, [data, query, priceIdx, minBeds, minBaths, typeIdx, sort, isSold]);
+  }, [data, query, priceIdx, minBeds, minBaths, typeIdx, sort, isSold, mode, PRICE_OPTIONS]);
 
   return (
     <section className="w-full bg-background-50 py-16 md:py-20 lg:py-24">
@@ -378,11 +391,36 @@ export default function PropertyGrid() {
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="City, neighborhood, address, or MLS #…"
+                list="mls-cities"
+                placeholder="City, neighborhood, ZIP, address, or MLS #…"
                 aria-label="Search listings by city, neighborhood, or address"
                 className="w-full pl-11 pr-4 py-2.5 bg-background-100 border border-background-300 rounded-full text-sm text-foreground-900 placeholder:text-foreground-400 focus:outline-none focus:border-primary-500 transition-colors"
               />
+              <datalist id="mls-cities">
+                {Object.keys(MLS_CITIES).map((c) => (
+                  <option key={c} value={c} />
+                ))}
+              </datalist>
             </div>
+
+            <FilterDropdown label={mode === "rent" ? "For rent" : "For sale"} active={mode === "rent"}>
+              {(close) => (
+                <div className="flex flex-col gap-0.5">
+                  {(["sale", "rent"] as const).map((m) => (
+                    <DropdownOption
+                      key={m}
+                      label={m === "rent" ? "For rent" : "For sale"}
+                      selected={m === mode}
+                      onClick={() => {
+                        if (m !== mode) setPriceIdx(0);
+                        setMode(m);
+                        close();
+                      }}
+                    />
+                  ))}
+                </div>
+              )}
+            </FilterDropdown>
 
             <div className="inline-flex p-1 bg-background-200 rounded-full">
               <button
@@ -506,15 +544,16 @@ export default function PropertyGrid() {
           <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
             <div>
               <h2 className="font-heading text-2xl md:text-3xl text-foreground-950">
-                {isSold ? "Recently Sold" : "Available Properties"}
+                {isSold ? "Stefanie's Recently Sold" : "Stefanie's Listings"}
               </h2>
               <p className="text-sm text-foreground-500 mt-1">
                 <span className="font-medium text-foreground-900">{properties.length}</span>{" "}
-                result{properties.length === 1 ? "" : "s"}
+                result{properties.length === 1 ? "" : "s"} &middot; use{" "}
+                <span className="font-medium text-foreground-900">Search all MLS homes</span> for every home on the market
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3">
-              {fullSearchUrl && <FullMlsLink url={fullSearchUrl} />}
+              <FullMlsLink url={fullSearchUrl} />
               <AccountMenu />
               <SaveSearchButton
                 searchName={`${isSold ? "Sold" : "Available"} homes${minBeds ? `, ${minBeds}+ beds` : ""}${
@@ -582,8 +621,15 @@ export default function PropertyGrid() {
                 </AnimatePresence>
               ) : (
                 <div className="py-20 text-center">
-                  <p className="text-foreground-700 font-medium mb-1">No listings match those filters</p>
-                  <p className="text-sm text-foreground-500">Try widening your price range or clearing a filter.</p>
+                  <p className="text-foreground-700 font-medium mb-1">
+                    {mode === "rent" ? "Stefanie's own listings are all for sale" : "None of Stefanie's own listings match those filters"}
+                  </p>
+                  <p className="text-sm text-foreground-500 mb-5">
+                    Search every MLS home with the same filters instead.
+                  </p>
+                  <div className="inline-block">
+                    <FullMlsLink url={fullSearchUrl} />
+                  </div>
                 </div>
               )}
             </div>
