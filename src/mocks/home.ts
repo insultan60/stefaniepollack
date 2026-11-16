@@ -333,6 +333,19 @@ export const stats = [
 
 export const articles = [
   {
+    id: 12,
+    title: "First-Time Home Buyer Guide for Los Angeles",
+    excerpt: "The seven steps, the income you need at today's 7.11% rate, the down payment help open right now, and what a first-time budget can realistically buy in Studio City.",
+    image: "/images/stefanie/lifestyle-6.jpg",
+    href: "/blog/first-time-home-buyer-guide-los-angeles",
+    category: "Buying",
+    date: "Nov 2026",
+    readTime: "12 min read",
+    metaTitle: "First-Time Home Buyer Guide for Los Angeles (2026)",
+    metaDescription:
+      "A first-time home buyer guide for Los Angeles from a Studio City agent: steps, income needed, down payment help and which homes fit your budget.",
+  },
+  {
     id: 11,
     title: "How to Price Your Home to Sell in Studio City",
     excerpt: "Homes here sell for about 1% below list and go under contract in roughly seven weeks. Local sale data, a six-step pricing method, how long it takes to sell a house in LA, and the pricing mistakes to avoid.",
