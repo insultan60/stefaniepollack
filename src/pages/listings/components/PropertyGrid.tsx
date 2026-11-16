@@ -23,7 +23,7 @@ function numericPrice(property: ListedProperty, isSold: boolean) {
 }
 
 const SALE_PRICE_OPTIONS = [
-  { label: "Any price", min: 0, max: Infinity },
+  { label: "Price", min: 0, max: Infinity },
   { label: "Under $1M", min: 0, max: 1_000_000 },
   { label: "$1M – $2M", min: 1_000_000, max: 2_000_000 },
   { label: "$2M – $3M", min: 2_000_000, max: 3_000_000 },
@@ -31,7 +31,7 @@ const SALE_PRICE_OPTIONS = [
   { label: "$5M+", min: 5_000_000, max: Infinity },
 ];
 const RENT_PRICE_OPTIONS = [
-  { label: "Any rent", min: 0, max: Infinity },
+  { label: "Rent price", min: 0, max: Infinity },
   { label: "Under $3,000/mo", min: 0, max: 3_000 },
   { label: "$3,000 – $5,000/mo", min: 3_000, max: 5_000 },
   { label: "$5,000 – $10,000/mo", min: 5_000, max: 10_000 },
@@ -459,7 +459,7 @@ export default function PropertyGrid() {
               )}
             </FilterDropdown>
 
-            <FilterDropdown label={minBeds ? `${minBeds}+ beds` : "All beds"} active={minBeds !== 0}>
+            <FilterDropdown label={minBeds ? `${minBeds}+ beds` : "Beds"} active={minBeds !== 0}>
               {(close) => (
                 <div className="flex flex-col gap-0.5">
                   {BED_BATH_OPTIONS.map((n) => (
@@ -477,7 +477,7 @@ export default function PropertyGrid() {
               )}
             </FilterDropdown>
 
-            <FilterDropdown label={minBaths ? `${minBaths}+ baths` : "All baths"} active={minBaths !== 0}>
+            <FilterDropdown label={minBaths ? `${minBaths}+ baths` : "Baths"} active={minBaths !== 0}>
               {(close) => (
                 <div className="flex flex-col gap-0.5">
                   {BED_BATH_OPTIONS.map((n) => (
@@ -495,7 +495,7 @@ export default function PropertyGrid() {
               )}
             </FilterDropdown>
 
-            <FilterDropdown label={TYPE_OPTIONS[typeIdx]} active={typeIdx !== 0}>
+            <FilterDropdown label={typeIdx ? TYPE_OPTIONS[typeIdx] : "Type"} active={typeIdx !== 0}>
               {(close) => (
                 <div className="flex flex-col gap-0.5">
                   {TYPE_OPTIONS.map((t, i) => (
@@ -617,6 +617,14 @@ export default function PropertyGrid() {
                         }}
                       />
                     ))}
+                    {/* End of the list: carry the same filters to the full MLS. */}
+                    <div className="sm:col-span-2 rounded-2xl bg-foreground-950 p-6 text-center lg:p-8">
+                      <p className="text-background-50 font-medium mb-1">That's all of Stefanie's listings</p>
+                      <p className="text-sm text-background-200 mb-5">See every MLS home that matches your filters.</p>
+                      <div className="inline-block">
+                        <FullMlsLink url={fullSearchUrl} />
+                      </div>
+                    </div>
                   </motion.div>
                 </AnimatePresence>
               ) : (
