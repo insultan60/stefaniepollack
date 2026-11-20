@@ -1,5 +1,6 @@
 import { useState, FormEvent } from "react";
 import { motion } from "framer-motion";
+import { emailLead } from "@/lib/leadEmail";
 
 export default function Newsletter() {
   const [email, setEmail] = useState("");
@@ -13,6 +14,7 @@ export default function Newsletter() {
       setMessage("Please enter a valid email address.");
       return;
     }
+    void emailLead({ source: "Newsletter sign-up", email });
     setStatus("success");
     setMessage("Thank you for subscribing! You will receive exclusive off-market listings.");
     setEmail("");

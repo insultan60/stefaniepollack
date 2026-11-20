@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
 import { createLead } from "@/lib/idx";
+import { emailLead } from "@/lib/leadEmail";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
@@ -24,7 +25,13 @@ export default function ContactForm() {
     setStatus("sending");
     const [firstName, ...rest] = name.split(" ");
     try {
-      await createLead({ firstName: firstName || name, lastName: rest.join(" "), email, phone, comments });
+      // Email Stefanie and add to IDX in parallel; either one landing counts.
+      const [mailed, idx] = await Promise.allSettled([
+        emailLead({ source: "Contact page", name, email, phone, message: comments }),
+        createLead({ firstName: firstName || name, lastName: rest.join(" "), email, phone, comments }),
+      ]);
+      const ok = (mailed.status === "fulfilled" && mailed.value) || idx.status === "fulfilled";
+      if (!ok) throw new Error("lead failed");
       setStatus("success");
       setMessage("Thanks for reaching out — Stefanie will be in touch shortly.");
       form.reset();
