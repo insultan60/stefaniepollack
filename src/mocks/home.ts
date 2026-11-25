@@ -333,6 +333,32 @@ export const stats = [
 
 export const articles = [
   {
+    id: 14,
+    title: "Cost to Sell a House in California: What Sellers Pay",
+    excerpt: "Commission, escrow, title, LA transfer taxes, Measure ULA, prep and concessions: what selling really costs in California, with a Studio City condo vs. house net sheet and the extra HOA items condo sellers face.",
+    image: "/images/stefanie/lifestyle-7.jpg",
+    href: "/blog/cost-to-sell-a-house-in-california",
+    category: "Selling",
+    date: "Nov 2026",
+    readTime: "11 min read",
+    metaTitle: "Cost to Sell a House in California: LA Agent Breakdown",
+    metaDescription:
+      "What does it cost to sell a house in California? A Studio City agent breaks down commission, taxes, closing costs and condo HOA fees, with LA examples.",
+  },
+  {
+    id: 13,
+    title: "Should You Renovate or Stage Before Selling?",
+    excerpt: "Fix, refresh, stage or renovate: what each path costs in Los Angeles, what the Cost vs. Value and NAR staging data say, and a side-by-side example for a $1.9 million Studio City house.",
+    image: "/images/stefanie/lifestyle-3.jpg",
+    href: "/blog/should-i-renovate-before-selling",
+    category: "Selling",
+    date: "Nov 2026",
+    readTime: "9 min read",
+    metaTitle: "Should I Renovate Before Selling? Renovate vs. Stage Guide",
+    metaDescription:
+      "Should I renovate before selling? A Studio City agent compares renovating, staging and light repairs, with LA staging costs and what buyers pay for.",
+  },
+  {
     id: 12,
     title: "First-Time Home Buyer Guide for Los Angeles",
     excerpt: "The seven steps, the income you need at today's 7.11% rate, the down payment help open right now, and what a first-time budget can realistically buy in Studio City.",
