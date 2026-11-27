@@ -333,6 +333,32 @@ export const stats = [
 
 export const articles = [
   {
+    id: 16,
+    title: "Living in Valley Village: A Local's Guide",
+    excerpt: "Tree-lined streets, a central Valley location and prices below Studio City: Valley Village real estate costs, home types, schools, safety and the honest trade-offs, from a Studio City agent.",
+    image: "/images/stefanie/lifestyle-5.jpg",
+    href: "/blog/living-in-valley-village",
+    category: "Local Guide",
+    date: "Nov 2026",
+    readTime: "9 min read",
+    metaTitle: "Living in Valley Village: Real Estate & Local Guide",
+    metaDescription:
+      "Thinking about living in Valley Village? A Studio City agent covers Valley Village real estate prices, home types, schools, safety and the honest trade-offs.",
+  },
+  {
+    id: 15,
+    title: "Studio City Schools: What to Know Before You Buy",
+    excerpt: "Carpenter, Rio Vista, Walter Reed, North Hollywood High and nearby private schools, why online ratings disagree, LAUSD Choices dates, and how to verify a home's school before you offer.",
+    image: "/images/stefanie/lifestyle-1.jpg",
+    href: "/blog/studio-city-schools",
+    category: "Local Guide",
+    date: "Nov 2026",
+    readTime: "10 min read",
+    metaTitle: "Studio City Schools: A Local Agent's Guide for Buyers",
+    metaDescription:
+      "Which Studio City schools serve your address? A local agent explains Carpenter, Walter Reed, private schools, and how to verify boundaries before you buy.",
+  },
+  {
     id: 14,
     title: "Cost to Sell a House in California: What Sellers Pay",
     excerpt: "Commission, escrow, title, LA transfer taxes, Measure ULA, prep and concessions: what selling really costs in California, with a Studio City condo vs. house net sheet and the extra HOA items condo sellers face.",
